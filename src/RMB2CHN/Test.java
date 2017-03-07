@@ -6,7 +6,7 @@
  * 修改时间：2016年11月13日
  * 修改内容：新增
  */
-package RMB2CHN;
+package rmb2CHN;
 
 /**
  * TODO 添加类的一句话简单描述.
@@ -21,7 +21,7 @@ package RMB2CHN;
  */
 public class Test {
 
-    public static void main(String[] args) {
-        System.out.println(RMB2CHN.rmb2CHN("548465.55"));
+    public static void main(String[] args) throws Exception {
+        System.out.println("金额：" + RMB2CHN.rmb2CHN("5s48465.55"));
     }
 }

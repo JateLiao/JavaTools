@@ -6,7 +6,7 @@
  * 修改时间：2016年9月10日
  * 修改内容：新增
  */
-package DeleteDownloadedMoviesExtraString;
+package deleteDownloadedMoviesExtraString;
 
 import java.io.File;
 import java.util.LinkedList;
