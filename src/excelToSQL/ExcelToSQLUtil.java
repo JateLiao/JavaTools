@@ -34,12 +34,14 @@ public class ExcelToSQLUtil {
      * @param path
      * @return
      */
+    @SuppressWarnings("unused")
     public static String toInsertSql(String path) {
         path = "D:/Test/华住托管SQL导表.xlsx";
         String fileName = "D:/Test/insert_sql.txt";
         FileInputStream in = null;
         Workbook book = null;
-        List<String> vals = new ArrayList<>(5000);
+        List<String> vals = new ArrayList<>(5000);  
+        
         try {
             in = new FileInputStream(new File(path));
             try {
