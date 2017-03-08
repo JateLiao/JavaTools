@@ -11,7 +11,9 @@ package excelToSQL;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -43,6 +45,7 @@ public class ExcelToSQLUtil {
         FileInputStream in = null;
         Workbook book = null;
         List<String> vals = new ArrayList<>(5000);  
+        Map<String, String> fieldTypeMap = new HashMap<>(50); // 字段对应类型map
         
         try {
             in = new FileInputStream(new File(path));
@@ -57,10 +60,21 @@ public class ExcelToSQLUtil {
             int sheets = book.getNumberOfSheets();
             for (int i = 0; i < sheets; i++) {
                 Sheet sheet = book.getSheetAt(i);
-                Row firstRow = sheet.getRow(0); // 首行字段
-                Row secondRow = sheet.getRow(1); // 次行类型
+                Row firstRow = null; // 首行字段
+                Row secondRow = null; //sheet.getRow(1); // 次行类型
                 int rows = sheet.getPhysicalNumberOfRows(); // 获取所有行数
-                int columns = firstRow.getPhysicalNumberOfCells();
+                for (int j = 0; j < rows; j++) {
+                    Row row = sheet.getRow(j);
+                    if (row != null && firstRow != null) { // 第一个非空行作为首行
+                        firstRow = row;
+                        secondRow = sheet.getRow(j + 1);
+                        handleFieldType(firstRow, secondRow, fieldTypeMap);
+                        continue;
+                    }
+                    if (row != null) {
+                        int columns = firstRow.getPhysicalNumberOfCells(); // 总列数
+                    }
+                }
                 
                 
             }
@@ -71,6 +85,13 @@ public class ExcelToSQLUtil {
         return "true";
     }
     
+    /** TODO 获取字段和对应类型的map，如keyid字段对应varchar.
+     */
+    private static void handleFieldType(Row firstRow, Row secondRow, Map<String, String> fieldTypeMap) {
+        // TODO Auto-generated method stub
+        
+    }
+
     public static void main(String[] args) {
         toInsertSql("");
     }
