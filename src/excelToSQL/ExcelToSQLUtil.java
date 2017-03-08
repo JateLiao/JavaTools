@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -54,12 +56,19 @@ public class ExcelToSQLUtil {
             
             int sheets = book.getNumberOfSheets();
             for (int i = 0; i < sheets; i++) {
+                Sheet sheet = book.getSheetAt(i);
+                Row firstRow = sheet.getRow(0); // 首行字段
+                Row secondRow = sheet.getRow(1); // 次行类型
+                int rows = sheet.getPhysicalNumberOfRows(); // 获取所有行数
+                int columns = firstRow.getPhysicalNumberOfCells();
+                
                 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        
+        return "true";
     }
     
     public static void main(String[] args) {
