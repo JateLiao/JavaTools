@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -30,6 +31,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelToSQLUtil {
 
+    public static void main(String[] args) {
+        toInsertSql("");
+    }
+
     /**
      * TODO 导出insert文本.
      * 
@@ -40,12 +45,13 @@ public class ExcelToSQLUtil {
      */
     @SuppressWarnings("unused")
     public static String toInsertSql(String path) {
-        path = "D:/Test/华住托管SQL导表.xlsx";
-        String fileName = "D:/Test/insert_sql.txt";
+        path = "D:/Test/华住托管SQL导表 - 副本.xlsx"; // 华住托管SQL导表    差旅壹号 华住托管SQL导表 - 副本
+        String fileName = "D:/Test/insert/insert_sql.txt";
         FileInputStream in = null;
         Workbook book = null;
         List<String> vals = new ArrayList<>(5000);  
         Map<String, String> fieldTypeMap = new HashMap<>(50); // 字段对应类型map
+        Map<Integer, String> fieldIndexMap = new HashMap<>(50); // 字段对应在第一行的列位置map
         
         try {
             in = new FileInputStream(new File(path));
@@ -59,21 +65,38 @@ public class ExcelToSQLUtil {
             
             int sheets = book.getNumberOfSheets();
             for (int i = 0; i < sheets; i++) {
-                Sheet sheet = book.getSheetAt(i);
+                Sheet sheet = book.getSheetAt(i); // 表格
                 Row firstRow = null; // 首行字段
                 Row secondRow = null; //sheet.getRow(1); // 次行类型
                 int rows = sheet.getPhysicalNumberOfRows(); // 获取所有行数
+                int tmp = 0;
+                int index = 0;
                 for (int j = 0; j < rows; j++) {
-                    Row row = sheet.getRow(j);
-                    if (row != null && firstRow != null) { // 第一个非空行作为首行
-                        firstRow = row;
-                        secondRow = sheet.getRow(j + 1);
-                        handleFieldType(firstRow, secondRow, fieldTypeMap);
-                        continue;
-                    }
+                    Row row = sheet.getRow(j); // 行
                     if (row != null) {
+                        if (firstRow == null) { // 第一个非空行作为首行
+                            firstRow = row;
+                            secondRow = sheet.getRow(j + 1);
+                            index = handleFieldMaps(firstRow, secondRow, fieldTypeMap, fieldIndexMap);
+                            tmp++;
+                            continue;
+                        }
+                        if (tmp++ < 2) {
+                            continue;
+                        }
+                        
                         int columns = firstRow.getPhysicalNumberOfCells(); // 总列数
+                        for (int k = index; k < columns; k++) {
+                            Cell cell = row.getCell(k); // 单元格
+
+
+                            System.out.println(cell.getStringCellValue());
+                            
+                        }
                     }
+                    
+                    fieldIndexMap.clear();
+                    fieldTypeMap.clear();
                 }
                 
                 
@@ -85,14 +108,24 @@ public class ExcelToSQLUtil {
         return "true";
     }
     
-    /** TODO 获取字段和对应类型的map，如keyid字段对应varchar.
+    /** TODO 获取字段和对应类型的map，如keyid字段对应varchar；
+     *       获取字段对应的列位置.
+     * @return 第一个字段出现的列.
      */
-    private static void handleFieldType(Row firstRow, Row secondRow, Map<String, String> fieldTypeMap) {
-        // TODO Auto-generated method stub
+    private static int handleFieldMaps(Row firstRow, Row secondRow, Map<String, String> fieldTypeMap, Map<Integer, String> fieldIndexMap) {
+        int cells = firstRow.getPhysicalNumberOfCells();
+        int index = 0;
+        for (int i = 0; i < cells; i++) {
+            Cell fieldCell = firstRow.getCell(i);
+            if (fieldCell == null) {
+                index++;
+                continue;
+            }
+            Cell typeCell = secondRow.getCell(i);
+            fieldIndexMap.put(i, fieldCell.getStringCellValue());
+            fieldTypeMap.put(fieldCell.getStringCellValue(), typeCell.getStringCellValue());
+        }
         
-    }
-
-    public static void main(String[] args) {
-        toInsertSql("");
+        return index;
     }
 }
