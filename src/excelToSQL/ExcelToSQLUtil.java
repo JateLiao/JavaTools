@@ -14,23 +14,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -191,12 +184,16 @@ public class ExcelToSQLUtil {
     private static int handleFieldMaps(Row firstRow, Row secondRow, Map<String, String> fieldTypeMap, Map<Integer, String> fieldIndexMap, StringBuffer sb) {
         int cells = firstRow.getPhysicalNumberOfCells();
         int index = 0;
+        boolean overFirst = false;
         for (int i = 0; i < cells + 1; i++) {
             Cell fieldCell = firstRow.getCell(i);
-            if (fieldCell == null) {
+            if (fieldCell == null && !overFirst) {
                 index++;
                 continue;
+            } else if (fieldCell == null && overFirst) {
+                break;
             }
+            overFirst = true;
             Cell typeCell = secondRow.getCell(i);
             fieldIndexMap.put(i, fieldCell.getStringCellValue());
             fieldTypeMap.put(fieldCell.getStringCellValue(), typeCell.getStringCellValue());
