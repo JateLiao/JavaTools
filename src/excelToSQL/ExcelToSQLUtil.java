@@ -8,8 +8,13 @@
  */
 package excelToSQL;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,8 +51,9 @@ public class ExcelToSQLUtil {
     @SuppressWarnings("unused")
     public static String toInsertSql(String path) {
         path = "D:/Test/华住托管SQL导表 - 副本.xlsx"; // 华住托管SQL导表    差旅壹号 华住托管SQL导表 - 副本
-        String fileName = "D:/Test/insert/insert_sql.txt";
+        String basePathName = "D:/Test/insert/";
         FileInputStream in = null;
+        BufferedWriter out = null;
         Workbook book = null;
         List<String> vals = new ArrayList<>(5000);  
         Map<String, String> fieldTypeMap = new HashMap<>(50); // 字段对应类型map
@@ -66,43 +72,60 @@ public class ExcelToSQLUtil {
             int sheets = book.getNumberOfSheets();
             for (int i = 0; i < sheets; i++) {
                 Sheet sheet = book.getSheetAt(i); // 表格
+                String tableName = sheet.getSheetName(); // 表格名作为插表名
+                String baseInsert = "";
+                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(basePathName + tableName + ".txt", true)));
                 Row firstRow = null; // 首行字段
                 Row secondRow = null; //sheet.getRow(1); // 次行类型
                 int rows = sheet.getPhysicalNumberOfRows(); // 获取所有行数
                 int tmp = 0;
                 int index = 0;
+                StringBuffer sb = new StringBuffer("INSERT INTO " + tableName + "(");
                 for (int j = 0; j < rows; j++) {
                     Row row = sheet.getRow(j); // 行
                     if (row != null) {
                         if (firstRow == null) { // 第一个非空行作为首行
                             firstRow = row;
                             secondRow = sheet.getRow(j + 1);
-                            index = handleFieldMaps(firstRow, secondRow, fieldTypeMap, fieldIndexMap);
+                            index = handleFieldMaps(firstRow, secondRow, fieldTypeMap, fieldIndexMap, sb);
+                            baseInsert = sb.toString();
+                            sb.setLength(0);
                             tmp++;
                             continue;
                         }
                         if (tmp++ < 2) {
                             continue;
                         }
-                        
+                        sb.append(baseInsert);
                         int columns = firstRow.getPhysicalNumberOfCells(); // 总列数
                         for (int k = index; k < columns; k++) {
                             Cell cell = row.getCell(k); // 单元格
-
-
-                            System.out.println(cell.getStringCellValue());
+                            
+                            
+                            // System.out.println(cell.getStringCellValue());
                             
                         }
+                        out.write(sb.append("\r\n").toString());
+                        sb.setLength(0);
                     }
-                    
-                    fieldIndexMap.clear();
-                    fieldTypeMap.clear();
                 }
-                
-                
+                fieldIndexMap.clear();
+                fieldTypeMap.clear();
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            // IO流关闭处理
+            try {
+                if (null != in) {
+                    in.close();
+                }
+                if (null != out) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         
         return "true";
@@ -112,7 +135,7 @@ public class ExcelToSQLUtil {
      *       获取字段对应的列位置.
      * @return 第一个字段出现的列.
      */
-    private static int handleFieldMaps(Row firstRow, Row secondRow, Map<String, String> fieldTypeMap, Map<Integer, String> fieldIndexMap) {
+    private static int handleFieldMaps(Row firstRow, Row secondRow, Map<String, String> fieldTypeMap, Map<Integer, String> fieldIndexMap, StringBuffer sb) {
         int cells = firstRow.getPhysicalNumberOfCells();
         int index = 0;
         for (int i = 0; i < cells; i++) {
@@ -124,8 +147,12 @@ public class ExcelToSQLUtil {
             Cell typeCell = secondRow.getCell(i);
             fieldIndexMap.put(i, fieldCell.getStringCellValue());
             fieldTypeMap.put(fieldCell.getStringCellValue(), typeCell.getStringCellValue());
+            sb.append(fieldCell.getStringCellValue()).append(",");
         }
-        
+        if (sb.toString().endsWith(",")) {
+            sb.setLength(sb.length() - 1);
+        }
+        sb.append(") VALUES(");
         return index;
     }
 }
