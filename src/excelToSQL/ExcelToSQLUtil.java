@@ -52,6 +52,8 @@ public class ExcelToSQLUtil {
     public static String toInsertSql(String path) {
         path = "D:/Test/华住托管SQL导表 - 副本.xlsx"; // 华住托管SQL导表    差旅壹号 华住托管SQL导表 - 副本
         String basePathName = "D:/Test/insert/";
+        String targetSheet = "Hotel"; // 要处理的表格，该变量指定值之后就只处理该表格
+        
         FileInputStream in = null;
         BufferedWriter out = null;
         Workbook book = null;
@@ -75,6 +77,9 @@ public class ExcelToSQLUtil {
                 int tmp = 0;
                 Sheet sheet = book.getSheetAt(i); // 表格
                 String tableName = sheet.getSheetName(); // 表格名作为插表名
+                if ((null != targetSheet && !"".equals(targetSheet)) && !targetSheet.equals(tableName)) {
+                    continue;
+                }
                 System.out.println("当前处理Sheet: " + tableName);
                 String baseInsert = "";
                 out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(basePathName + tableName + ".txt", false)));
