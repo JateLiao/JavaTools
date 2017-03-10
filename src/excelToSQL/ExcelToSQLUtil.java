@@ -74,7 +74,7 @@ public class ExcelToSQLUtil {
                 Sheet sheet = book.getSheetAt(i); // 表格
                 String tableName = sheet.getSheetName(); // 表格名作为插表名
                 String baseInsert = "";
-                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(basePathName + tableName + ".txt", true)));
+                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(basePathName + tableName + ".txt", false)));
                 Row firstRow = null; // 首行字段
                 Row secondRow = null; //sheet.getRow(1); // 次行类型
                 int rows = sheet.getPhysicalNumberOfRows(); // 获取所有行数
@@ -156,7 +156,7 @@ public class ExcelToSQLUtil {
                 fieldIndexMap.clear();
                 fieldTypeMap.clear();
                 
-                break;
+                // break;
             }
         } catch (Exception e) {
             e.printStackTrace();
