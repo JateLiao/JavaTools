@@ -37,7 +37,7 @@ public class ExcelToSQLUtil {
 
     public static void main(String[] args) {
         toInsertSql("");
-        System.err.println("玩儿");
+        System.out.println("\nDone!");
     }
 
     /**
@@ -71,14 +71,16 @@ public class ExcelToSQLUtil {
             
             int sheets = book.getNumberOfSheets();
             for (int i = 0; i < sheets; i++) {
+                int allCount = 0;
+                int tmp = 0;
                 Sheet sheet = book.getSheetAt(i); // 表格
                 String tableName = sheet.getSheetName(); // 表格名作为插表名
+                System.out.println("当前处理Sheet: " + tableName);
                 String baseInsert = "";
                 out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(basePathName + tableName + ".txt", false)));
                 Row firstRow = null; // 首行字段
                 Row secondRow = null; //sheet.getRow(1); // 次行类型
                 int rows = sheet.getPhysicalNumberOfRows(); // 获取所有行数
-                int tmp = 0;
                 int index = 0;
                 StringBuffer sb = new StringBuffer("INSERT INTO " + tableName + "(");
                 for (int j = 0; j < rows; j++) {
@@ -96,6 +98,7 @@ public class ExcelToSQLUtil {
                         if (tmp++ < 2) {
                             continue;
                         }
+                        allCount++;
                         sb.append(baseInsert);
                         int columns = firstRow.getPhysicalNumberOfCells(); // 总列数
                         for (int k = index; k < columns + index; k++) {
@@ -103,6 +106,7 @@ public class ExcelToSQLUtil {
                             if (null == cell) {
                                 continue;
                             }
+                            // System.out.println("\t\t单元格值: " + cell.getStringCellValue());
                             String type = fieldTypeMap.get(fieldIndexMap.get(k)).toLowerCase();
                             boolean isCharType = false;
                             if (type.contains("char") || type.contains("text") || type.contains("date") || type.contains("time")) { // 常用类型
@@ -115,35 +119,15 @@ public class ExcelToSQLUtil {
                             }
                             // System.out.println(cell.getStringCellValue());
                             
-                            // switch (cell.getCellType()) {
-                            // case HSSFCell.CELL_TYPE_NUMERIC:
-                            // short format = cell.getCellStyle().getDataFormat();
-                            // if(format == 14 || format == 31 || format == 57 || format == 58){ //excel中的时间格式
-                            // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            // double value = cell.getNumericCellValue();
-                            // Date date = DateUtil.getJavaDate(value);
-                            // sb.append("'" + sdf.format(date) + "',");
-                            // } else if (HSSFDateUtil.isCellDateFormatted(cell)) { // 判断当前的cell是否为Date
-                            // //先注释日期类型的转换，在实际测试中发现HSSFDateUtil.isCellDateFormatted(cell)只识别2014/02/02这种格式。
-                            // // 如果是Date类型则，取得该Cell的Date值
-                            // // 对2014-02-02格式识别不出是日期格式
-                            // Date date = cell.getDateCellValue();
-                            // DateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            // sb.append("'" + formater.format(date) + "',");
-                            // } else { // 如果是纯数字
-                            // // 取得当前Cell的数值
-                            // sb.append(NumberToTextConverter.toText(cell.getNumericCellValue()) + ",");
-                            // }
-                            // break;
-                            // case HSSFCell.CELL_TYPE_STRING:
-                            // sb.append("'" + cell.getStringCellValue() + "',");
-                            // break;
-                            // case HSSFCell.CELL_TYPE_BLANK:
-                            // sb.append(isCharType ? "''," : "0,"); // 数字类型默认0，char类类型默认''
-                            // break;
-                            // default:
-                            // break;
-                            // }
+                            /*
+                             * switch (cell.getCellType()) { case HSSFCell.CELL_TYPE_NUMERIC: short format = cell.getCellStyle().getDataFormat(); if(format == 14 || format == 31 || format == 57 ||
+                             * format == 58){ //excel中的时间格式 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); double value = cell.getNumericCellValue(); Date date =
+                             * DateUtil.getJavaDate(value); sb.append("'" + sdf.format(date) + "',"); } else if (HSSFDateUtil.isCellDateFormatted(cell)) { //判断当前的cell是否为Date
+                             * //先注释日期类型的转换，在实际测试中发现HSSFDateUtil.isCellDateFormatted(cell)只识别2014/02/02这种格式。 // 如果是Date类型则，取得该Cell的Date值 // 对2014-02-02格式识别不出是日期格式 Date date = cell.getDateCellValue();
+                             * DateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); sb.append("'" + formater.format(date) + "',"); } else { ///如果是纯数字 //取得当前Cell的数值
+                             * sb.append(NumberToTextConverter.toText(cell.getNumericCellValue()) + ","); } break; case HSSFCell.CELL_TYPE_STRING: sb.append("'" + cell.getStringCellValue() + "',");
+                             * break; case HSSFCell.CELL_TYPE_BLANK: sb.append(isCharType ? "''," : "0,");// 数字类型默认0，char类类型默认'' break; default: break; }
+                             */
                             
                         }
                         if (sb.toString().endsWith(",")) {
@@ -155,7 +139,7 @@ public class ExcelToSQLUtil {
                 }
                 fieldIndexMap.clear();
                 fieldTypeMap.clear();
-                
+                System.err.println("表格" + tableName + "共生成INSERT SQL条数：" + allCount);
                 // break;
             }
         } catch (Exception e) {
@@ -185,7 +169,7 @@ public class ExcelToSQLUtil {
         int cells = firstRow.getPhysicalNumberOfCells();
         int index = 0;
         boolean overFirst = false;
-        for (int i = 0; i < cells + 1; i++) {
+        for (int i = 0; i < cells + index; i++) {
             Cell fieldCell = firstRow.getCell(i);
             if (fieldCell == null && !overFirst) {
                 index++;
