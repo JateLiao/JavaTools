@@ -12,7 +12,8 @@ import java.io.File;
 import java.util.LinkedList;
 
 /**
- * TODO 把下载的电影的多余的前缀去掉，类似[电影天堂www.dy2018.com]彗星来的那一夜BD中英双字.rmvb 则 去掉[电影天堂www.dy2018.com] 和 BD中英双字，
+ * TODO 把下载的电影的多余的前缀去掉，类似[电影天堂www.dy2018.com]彗星来的那一夜BD中英双字.rmvb 则 去掉"[电影天堂www.dy2018.com]" 和 "BD中英双字"，
+ * 
  * 
  * 彗星来的那一夜.rmvb.
  * 
@@ -25,6 +26,15 @@ public class DeleteDownloadedMoviesExtraString {
      * @param args
      */
     public static void main(String[] args) {
+        deleteDownloadedMoviesExtraString();
+    }
+
+    /**
+     * TODO 添加方法注释.
+     * 
+     */
+    private static void deleteDownloadedMoviesExtraString() {
+
         Integer count = 0;
 
         try {
