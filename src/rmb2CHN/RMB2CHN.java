@@ -31,12 +31,9 @@ public class RMB2CHN {
      * 壹贰叁肆伍陆柒捌玖拾零，亿，万，佰，元，角，分，厘
      */
     public static String rmb2CHN(String rmb) throws Exception {
-        if (!rmb.matches("^\\d+(\\.\\d+)?$")) {
-            throw new Exception("金额格式输入错误！");
-        }
         StringBuffer res = new StringBuffer();
 
-        // validMoney(rmb); // 验证金钱输入正误，这个日后再说
+        validMoney(rmb); // 验证金钱输入正误，这个日后再说
 
         String[] moneyArr = rmb.split("\\.");
 
@@ -44,6 +41,18 @@ public class RMB2CHN {
         res.append(constructMoneyRight(moneyArr[1]));
 
         return res.toString();
+    }
+
+    /**
+     * TODO 添加方法注释.
+     * 
+     * @param rmb
+     * @throws Exception 
+     */
+    private static void validMoney(String rmb) throws Exception {
+        if (!rmb.matches("^\\d+(\\.\\d+)?$")) {
+            throw new Exception("金额格式输入错误！");
+        }
     }
 
     /**
