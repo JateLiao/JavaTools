@@ -44,6 +44,7 @@ public class ExcelToSQLUtil {
      * TODO 导出insert文本.
      * 
      * excel格式，首行字段，第二行类型，第三行开始是数据(见模板).
+     * excel单元格格式需要设置为文本
      * 
      * @param path
      * @return
