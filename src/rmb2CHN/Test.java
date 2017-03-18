@@ -9,14 +9,6 @@
 package rmb2CHN;
 
 /**
- * TODO 添加类的一句话简单描述.
- * <p>
- * TODO 详细描述
- * <p>
- * TODO 示例代码
- * <pre>
- * </pre>
- * 
  * @author     KOBE
  */
 public class Test {
