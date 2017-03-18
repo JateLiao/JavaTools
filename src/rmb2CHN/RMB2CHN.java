@@ -33,7 +33,7 @@ public class RMB2CHN {
     public static String rmb2CHN(String rmb) throws Exception {
         StringBuffer res = new StringBuffer();
 
-        validMoney(rmb); // 验证金钱输入正误，这个日后再说
+        validMoney(rmb); // 验证金钱输入正误
 
         String[] moneyArr = rmb.split("\\.");
 
