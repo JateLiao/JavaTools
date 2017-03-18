@@ -14,6 +14,6 @@ package rmb2CHN;
 public class Test {
 
     public static void main(String[] args) throws Exception {
-        System.out.println("金额：" + RMB2CHN.rmb2CHN("5s48465.55"));
+        System.out.println("金额：" + RMB2CHN.rmb2CHN("54448465.55"));
     }
 }
