@@ -57,6 +57,9 @@ public class RMB2CHN {
 
     /**
      * TODO 构造小数点左边整数部分.
+     * 
+     * 每个四位中间出现了0，则在结果里会出现“零”；
+     * 下一个四位以0开头，结果会出现0；
      */
     private static String constructMoneyLeft(String strLeft) {
         StringBuffer sb = new StringBuffer();
@@ -79,10 +82,61 @@ public class RMB2CHN {
         sb.setLength(0);
 
         for (int i = 0; i < mArr.length; i++) {
-            
+            String m = mArr[i];
+            int mLen = m.length();
+            sb.append(getRMBCapital(m));
         }
 
         return sb.toString();
+    }
+
+    /**
+     * TODO 添加方法注释.
+     * @param m 
+     * 
+     * @return
+     */
+    private static String getRMBCapital(String str) {
+        String val = null;
+        switch (str) {
+            case "0":
+                val = "零";
+                break;
+            case "1":
+                val = "壹";
+                break;
+            case "2":
+                val = "贰";
+                break;
+            case "3":
+                val = "叁";
+                break;
+            case "4":
+                val = "肆";
+                break;
+            case "5":
+                val = "伍";
+                break;
+            case "6":
+                val = "陆";
+                break;
+            case "7":
+                val = "柒";
+                break;
+            case "8":
+                val = "捌";
+                break;
+            case "9":
+                val = "玖";
+                break;
+            case "10":
+                val = "拾";
+                break;
+
+            default:
+                break;
+        }
+        return val;
     }
 
     /**
