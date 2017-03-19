@@ -21,7 +21,7 @@ public class RMB2CHN {
         System.err.println("转换后：" + rmb2CHN(monry));
     }
 
-    private static String[] unitArr = {"万", "亿"};
+    private static String[] unitArr = {"万亿", "亿", "万"};
 
     /**
      * 金钱转汉字大写，比如10240.521 --> 壹万零贰佰肆拾圆伍角贰分壹厘
@@ -99,7 +99,7 @@ public class RMB2CHN {
             for (int j = 0; j < mLen; j++) {
                 sb.append(getRMBCapital(String.valueOf(m.charAt(j))));
             }
-            sb.append(unitArr[i]);
+            sb.append(unitArr[mArr.length - i - 1]);
         }
 
         return sb.toString();
