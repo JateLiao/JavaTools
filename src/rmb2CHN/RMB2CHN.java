@@ -16,7 +16,7 @@ package rmb2CHN;
 public class RMB2CHN {
 
     public static void main(String[] args) throws Exception {
-        System.out.println(rmb2CHN("10200501.201"));
+        System.out.println(rmb2CHN("000010200501.201"));
     }
 
     private static String[] unitArr = {"", "", "", ""};
@@ -31,9 +31,9 @@ public class RMB2CHN {
      * 壹贰叁肆伍陆柒捌玖拾零，亿，万，佰，元，角，分，厘
      */
     public static String rmb2CHN(String rmb) throws Exception {
-        StringBuffer res = new StringBuffer();
-
+        rmb = removeZeroHead(rmb);
         validMoney(rmb); // 验证金钱输入正误
+        StringBuffer res = new StringBuffer();
 
         String[] moneyArr = rmb.split("\\.");
 
@@ -41,6 +41,16 @@ public class RMB2CHN {
         res.append(constructMoneyRight(moneyArr[1]));
 
         return res.toString();
+    }
+
+    /**
+     * TODO 去掉头部的0，比如：0000514556555去掉后514556555.
+     */
+    private static String removeZeroHead(String rmb) {
+        while (rmb.startsWith("0")) {
+            rmb = rmb.substring(1, rmb.length());
+        }
+        return rmb;
     }
 
     /**
@@ -84,7 +94,9 @@ public class RMB2CHN {
         for (int i = 0; i < mArr.length; i++) {
             String m = mArr[i];
             int mLen = m.length();
-            sb.append(getRMBCapital(m));
+            for (int j = 0; j < mLen; j++) {
+                sb.append(getRMBCapital(m));
+            }
         }
 
         return sb.toString();
