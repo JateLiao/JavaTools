@@ -16,10 +16,12 @@ package rmb2CHN;
 public class RMB2CHN {
 
     public static void main(String[] args) throws Exception {
-        System.out.println(rmb2CHN("000010200501.201"));
+        String monry = "000010200501.201";
+        System.out.println("转换前：" + monry);
+        System.err.println("转换后：" + rmb2CHN(monry));
     }
 
-    private static String[] unitArr = {"", "", "", ""};
+    private static String[] unitArr = {"万", "亿"};
 
     /**
      * 金钱转汉字大写，比如10240.521 --> 壹万零贰佰肆拾圆伍角贰分壹厘
@@ -95,8 +97,9 @@ public class RMB2CHN {
             String m = mArr[i];
             int mLen = m.length();
             for (int j = 0; j < mLen; j++) {
-                sb.append(getRMBCapital(m));
+                sb.append(getRMBCapital(String.valueOf(m.charAt(j))));
             }
+            sb.append(unitArr[i]);
         }
 
         return sb.toString();
