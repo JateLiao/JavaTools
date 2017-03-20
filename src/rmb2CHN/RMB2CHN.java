@@ -24,6 +24,7 @@ public class RMB2CHN {
     }
 
     private static String[] unitArr = {"万", "亿", "万亿", "亿亿"};
+    private static String[] singleArr = {"拾", "佰", "仟"};
 
     /**
      * 金钱转汉字大写，比如10240.521 --> 壹万零贰佰肆拾圆伍角贰分壹厘
@@ -79,14 +80,21 @@ public class RMB2CHN {
             int mLen = m.length();
             for (int j = 0; j < mLen; j++) {
                 sb.append(getRMBCapital(String.valueOf(m.charAt(j))));
+                if (sb.toString().lastIndexOf("零") == sb.length() - 1) {
+                    continue;
+                }
+                sb.append((j < mLen - 1) ? singleArr[mLen - j - 2] : "");
             }
             
+            if (sb.toString().lastIndexOf("零") == sb.length() - 1) {
+                sb.setLength(sb.length() - 1);
+            }
             int idx = unitArrTmp.length - i - 1;
             if (idx >= 0 ) {
                 sb.append(unitArrTmp[idx]);
             }
         }
-
+        sb.append("圆");
         return sb.toString();
     }
 
