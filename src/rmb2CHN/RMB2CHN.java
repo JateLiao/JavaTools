@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class RMB2CHN {
 
     public static void main(String[] args) throws Exception {
-        String monry = "32510200501.201";
+        String monry = "32810200501.201";
         System.out.println("转换前：" + monry);
         System.err.println("转换后：" + rmb2CHN(monry));
     }
@@ -88,7 +88,7 @@ public class RMB2CHN {
                 index++;
                 sb.setLength(0);
             } else if (i >= len / 4 * 4) { // 
-                mArr[index] = strLeft.substring(0, len - i);
+                mArr[0] = strLeft.substring(0, len - i);
                 sb.setLength(0);
                 break;
             }
@@ -102,7 +102,11 @@ public class RMB2CHN {
             for (int j = 0; j < mLen; j++) {
                 sb.append(getRMBCapital(String.valueOf(m.charAt(j))));
             }
-            sb.append(unitArr[mArr.length - i - 1]);
+            
+            int idx = unitArrTmp.length - i - 1;
+            if (idx >= 0 ) {
+                sb.append(unitArrTmp[idx]);
+            }
         }
 
         return sb.toString();
