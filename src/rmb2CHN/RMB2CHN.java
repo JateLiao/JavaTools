@@ -8,6 +8,8 @@
  */
 package rmb2CHN;
 
+import java.util.Arrays;
+
 /**
  * 金额转汉字大写，没错，我就希望我满身铜臭味。。。
  * 
@@ -16,12 +18,12 @@ package rmb2CHN;
 public class RMB2CHN {
 
     public static void main(String[] args) throws Exception {
-        String monry = "10200501.201";
+        String monry = "32510200501.201";
         System.out.println("转换前：" + monry);
         System.err.println("转换后：" + rmb2CHN(monry));
     }
 
-    private static String[] unitArr = {"万亿", "亿", "万"};
+    private static String[] unitArr = {"万", "亿", "万亿", "亿亿"};
 
     /**
      * 金钱转汉字大写，比如10240.521 --> 壹万零贰佰肆拾圆伍角贰分壹厘
@@ -93,6 +95,7 @@ public class RMB2CHN {
         }
         sb.setLength(0);
 
+        String[] unitArrTmp = Arrays.copyOfRange(unitArr, 0, mArr.length - 1);
         for (int i = 0; i < mArr.length; i++) {
             String m = mArr[i];
             int mLen = m.length();
