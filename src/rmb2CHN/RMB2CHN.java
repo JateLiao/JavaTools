@@ -48,28 +48,6 @@ public class RMB2CHN {
     }
 
     /**
-     * TODO 去掉头部的0，比如：0000514556555去掉后514556555.
-     */
-    private static String removeZeroHead(String rmb) {
-        while (rmb.startsWith("0")) {
-            rmb = rmb.substring(1, rmb.length());
-        }
-        return rmb;
-    }
-
-    /**
-     * TODO 添加方法注释.
-     * 
-     * @param rmb
-     * @throws Exception 
-     */
-    private static void validMoney(String rmb) throws Exception {
-        if (!rmb.matches("^\\d+(\\.\\d+)?$")) {
-            throw new Exception("金额格式输入错误！");
-        }
-    }
-
-    /**
      * TODO 构造小数点左边整数部分.
      * 
      * 每个四位中间出现了0，则在结果里会出现“零”；
@@ -159,6 +137,28 @@ public class RMB2CHN {
                 break;
         }
         return val;
+    }
+
+    /**
+     * TODO 去掉头部的0，比如：0000514556555去掉后514556555.
+     */
+    private static String removeZeroHead(String rmb) {
+        while (rmb.startsWith("0")) {
+            rmb = rmb.substring(1, rmb.length());
+        }
+        return rmb;
+    }
+
+    /**
+     * TODO 添加方法注释.
+     * 
+     * @param rmb
+     * @throws Exception 
+     */
+    private static void validMoney(String rmb) throws Exception {
+        if (!rmb.matches("^\\d+(\\.\\d+)?$")) {
+            throw new Exception("金额格式输入错误！");
+        }
     }
 
     /**
