@@ -25,7 +25,7 @@ public class RMB2CHN {
 
     private static String[] unitArr = {"万", "亿", "万亿", "亿亿"};
     private static String[] singleArr = {"拾", "佰", "仟"};
-    private static String[] numCapitalArr = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖", "拾"};
+    private static String[] numCapitalArr = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
 
     /**
      * 金钱转汉字大写，比如10240.521 --> 壹万零贰佰肆拾圆伍角贰分壹厘
