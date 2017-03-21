@@ -8,6 +8,7 @@
  */
 package rmb2CHN;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 /**
@@ -105,7 +106,9 @@ public class RMB2CHN {
      */
     private static String constructMoneyRight(String strRight) {
         StringBuffer sb = new StringBuffer();
-
+        // 小数点最多保留三位且四舍五入
+        BigDecimal value = new BigDecimal( "0." + strRight);
+        
         return sb.toString();
     }
 
