@@ -18,13 +18,14 @@ import java.util.Arrays;
 public class RMB2CHN {
 
     public static void main(String[] args) throws Exception {
-        String monry = "32810200501.201";
+        String monry = "32810000501.201";
         System.out.println("转换前：" + monry);
         System.err.println("转换后：" + rmb2CHN(monry));
     }
 
     private static String[] unitArr = {"万", "亿", "万亿", "亿亿"};
     private static String[] singleArr = {"拾", "佰", "仟"};
+    private static String[] numCapitalArr = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖", "拾"};
 
     /**
      * 金钱转汉字大写，比如10240.521 --> 壹万零贰佰肆拾圆伍角贰分壹厘
@@ -95,6 +96,16 @@ public class RMB2CHN {
             }
         }
         sb.append("圆");
+        
+        return removeZeroCapital(sb.toString());
+    }
+
+    /**
+     * TODO 构造小数点右边零头部分.
+     */
+    private static String constructMoneyRight(String strRight) {
+        StringBuffer sb = new StringBuffer();
+
         return sb.toString();
     }
 
@@ -105,46 +116,7 @@ public class RMB2CHN {
      * @return
      */
     private static String getRMBCapital(String str) {
-        String val = null;
-        switch (str) {
-            case "0":
-                val = "零";
-                break;
-            case "1":
-                val = "壹";
-                break;
-            case "2":
-                val = "贰";
-                break;
-            case "3":
-                val = "叁";
-                break;
-            case "4":
-                val = "肆";
-                break;
-            case "5":
-                val = "伍";
-                break;
-            case "6":
-                val = "陆";
-                break;
-            case "7":
-                val = "柒";
-                break;
-            case "8":
-                val = "捌";
-                break;
-            case "9":
-                val = "玖";
-                break;
-            case "10":
-                val = "拾";
-                break;
-
-            default:
-                break;
-        }
-        return val;
+        return numCapitalArr[Integer.valueOf(str)];
     }
 
     /**
@@ -158,23 +130,29 @@ public class RMB2CHN {
     }
 
     /**
-     * TODO 添加方法注释.
-     * 
-     * @param rmb
-     * @throws Exception 
+     * TODO 去掉多余的 “零”.
+     */
+    private static String removeZeroCapital(String str) {
+        str = str.replaceAll("零{1,}", "零");
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < str.toCharArray().length; i++) {
+            char c = str.charAt(i);
+            if (c == '零') {
+                if ("亿万仟佰拾".contains(String.valueOf(str.charAt(i + 1)))) {
+                    continue;
+                }
+            }
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * TODO 金额格式.
      */
     private static void validMoney(String rmb) throws Exception {
         if (!rmb.matches("^\\d+(\\.\\d+)?$")) {
             throw new Exception("金额格式输入错误！");
         }
-    }
-
-    /**
-     * TODO 构造小数点右边零头部分.
-     */
-    private static String constructMoneyRight(String strRight) {
-        StringBuffer sb = new StringBuffer();
-
-        return sb.toString();
     }
 }
