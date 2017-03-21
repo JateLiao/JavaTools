@@ -19,14 +19,16 @@ import java.util.Arrays;
 public class RMB2CHN {
 
     public static void main(String[] args) throws Exception {
-        String monry = "32810000501.201";
+        String monry = "32810000501.21";
         System.out.println("转换前：" + monry);
         System.err.println("转换后：" + rmb2CHN(monry));
     }
 
     private static String[] unitArr = {"万", "亿", "万亿", "亿亿"};
     private static String[] singleArr = {"拾", "佰", "仟"};
+    private static String[] singleRightArr = {"角", "分", "厘"};
     private static String[] numCapitalArr = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
+    private static String unitStr = "亿万仟佰拾角分厘";
 
     /**
      * 金钱转汉字大写，比如10240.521 --> 壹万零贰佰肆拾圆伍角贰分壹厘
@@ -47,7 +49,7 @@ public class RMB2CHN {
         res.append(constructMoneyLeft(moneyArr[0]));
         res.append(constructMoneyRight(moneyArr[1]));
 
-        return res.toString();
+        return removeZeroCapital(res.toString());
     }
 
     /**
@@ -96,9 +98,7 @@ public class RMB2CHN {
                 sb.append(unitArrTmp[idx]);
             }
         }
-        sb.append("圆");
-        
-        return removeZeroCapital(sb.toString());
+        return sb.append("圆").toString(); // removeZeroCapital(sb.toString());
     }
 
     /**
@@ -107,9 +107,14 @@ public class RMB2CHN {
     private static String constructMoneyRight(String strRight) {
         StringBuffer sb = new StringBuffer();
         // 小数点最多保留三位且四舍五入
-        BigDecimal value = new BigDecimal( "0." + strRight);
-        
-        return sb.toString();
+        BigDecimal value = new BigDecimal( "0." + strRight).setScale(3, BigDecimal.ROUND_UP);
+        String[] rightArr = value.toString().split("\\.");
+        for (int i = 0; i < rightArr[1].toCharArray().length; i++) {
+            char c = rightArr[1].charAt(i);
+            sb.append(getRMBCapital(String.valueOf(c)));
+            sb.append(singleRightArr[i]);
+        }
+        return sb.toString(); //  removeZeroCapital(sb.toString());
     }
 
     /**
@@ -141,9 +146,12 @@ public class RMB2CHN {
         for (int i = 0; i < str.toCharArray().length; i++) {
             char c = str.charAt(i);
             if (c == '零') {
-                if ("亿万仟佰拾".contains(String.valueOf(str.charAt(i + 1)))) {
+                if (unitStr.contains(String.valueOf(str.charAt(i + 1)))) {
                     continue;
                 }
+            }
+            if (str.charAt(Math.max(i, 1) - 1) == '零' && i == str.toCharArray().length - 1) {
+                continue;
             }
             sb.append(c);
         }
