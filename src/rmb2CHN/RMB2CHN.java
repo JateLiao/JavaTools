@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class RMB2CHN {
 
     public static void main(String[] args) throws Exception {
-        String monry = "32810000501.001";
+        String monry = "123456789.102";
         System.out.println("转换前：" + monry);
         System.err.println("转换后：" + rmb2CHN(monry));
     }
@@ -45,7 +45,6 @@ public class RMB2CHN {
         StringBuffer res = new StringBuffer();
 
         String[] moneyArr = rmb.split("\\.");
-
         res.append(constructMoneyLeft(moneyArr[0]));
         res.append(constructMoneyRight(moneyArr[1]));
 
@@ -98,6 +97,9 @@ public class RMB2CHN {
                 sb.append(unitArrTmp[idx]);
             }
         }
+        while (sb.toString().lastIndexOf("零") == sb.length() - 1) {
+            sb.setLength(sb.length() - 1);
+        }
         return sb.append("圆").toString(); // removeZeroCapital(sb.toString());
     }
 
@@ -111,10 +113,35 @@ public class RMB2CHN {
         String[] rightArr = value.toString().split("\\.");
         for (int i = 0; i < rightArr[1].toCharArray().length; i++) {
             char c = rightArr[1].charAt(i);
+            if (c == '0') {
+                continue;
+            }
             sb.append(getRMBCapital(String.valueOf(c)));
             sb.append(singleRightArr[i]);
         }
         return sb.toString(); //  removeZeroCapital(sb.toString());
+    }
+
+    /**
+     * TODO 去掉多余的 “零”.
+     */
+    private static String removeZeroCapital(String str) {
+        str = str.replaceAll("零{1,}", "零");
+        StringBuffer sb = new StringBuffer();
+        int idx = str.indexOf("圆");
+        for (int i = 0; i < str.toCharArray().length; i++) {
+            char c = str.charAt(i);
+            if (c == '零') {
+                if (unitStr.contains(String.valueOf(str.charAt(i + 1)))) {
+                    continue;
+                }
+            }
+            if (str.charAt(Math.max(i, 1) - 1) == '零' && i == str.toCharArray().length - 1) {
+                continue;
+            }
+            sb.append(c);
+        }
+        return sb.toString();
     }
 
     /**
@@ -132,27 +159,6 @@ public class RMB2CHN {
             rmb = rmb.substring(1, rmb.length());
         }
         return rmb;
-    }
-
-    /**
-     * TODO 去掉多余的 “零”.
-     */
-    private static String removeZeroCapital(String str) {
-        str = str.replaceAll("零{1,}", "零");
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < str.toCharArray().length; i++) {
-            char c = str.charAt(i);
-            if (c == '零') {
-                if (unitStr.contains(String.valueOf(str.charAt(i + 1)))) {
-                    continue;
-                }
-            }
-            if (str.charAt(Math.max(i, 1) - 1) == '零' && i == str.toCharArray().length - 1) {
-                continue;
-            }
-            sb.append(c);
-        }
-        return sb.toString();
     }
 
     /**
