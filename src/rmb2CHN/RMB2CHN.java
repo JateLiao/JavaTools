@@ -128,7 +128,6 @@ public class RMB2CHN {
     private static String removeZeroCapital(String str) {
         str = str.replaceAll("零{1,}", "零");
         StringBuffer sb = new StringBuffer();
-        int idx = str.indexOf("圆");
         for (int i = 0; i < str.toCharArray().length; i++) {
             char c = str.charAt(i);
             if (c == '零') {
