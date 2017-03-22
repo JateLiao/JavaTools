@@ -118,10 +118,7 @@ public class RMB2CHN {
     }
 
     /**
-     * TODO 添加方法注释.
-     * @param m 
-     * 
-     * @return
+     * TODO 数字转大写.
      */
     private static String getRMBCapital(String str) {
         return numCapitalArr[Integer.valueOf(str)];
