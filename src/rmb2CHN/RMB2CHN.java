@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class RMB2CHN {
 
     public static void main(String[] args) throws Exception {
-        String monry = "32810000501.201";
+        String monry = "32810000501.001";
         System.out.println("转换前：" + monry);
         System.err.println("转换后：" + rmb2CHN(monry));
     }
