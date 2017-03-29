@@ -8,6 +8,10 @@
  */
 package travelDataExtract;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,12 +27,13 @@ import java.util.Map;
  * @author     tianzhong
  */
 public class TravelDataExtract {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         travelDataExtract();
     }
 
-    public static void travelDataExtract(){
-        Map<String, ?> allMap = extractAllData();
+    public static void travelDataExtract() throws Exception {
+        Map<String, String> allMap = extractAllData();
+        
     }
 
     /**
@@ -36,9 +41,16 @@ public class TravelDataExtract {
      * 
      * @return
      */
-    private static Map<String, ?> extractAllData() {
-        Map<String, ?> map = new HashMap<>();
-        
+    private static Map<String, String> extractAllData() throws Exception {
+        Map<String, String> map = new HashMap<>();
+        File file = new File("D:/Test/insert/Hotel.txt");
+        BufferedReader read = new BufferedReader(new FileReader(file));
+        String line = null;
+        while ((line = read.readLine()) != null) {
+            String[] val = line.split("\\|");
+            map.put(val[0] + "-" + val[1] + "-" + val[2], val[3]);
+        }
+        read.close();
         return map;
     }
 }
