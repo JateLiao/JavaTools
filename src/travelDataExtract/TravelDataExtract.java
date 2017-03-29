@@ -10,7 +10,6 @@ package travelDataExtract;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +32,7 @@ public class TravelDataExtract {
 
     public static void travelDataExtract() throws Exception {
         Map<String, String> allMap = extractAllData();
-        
+        System.out.println(allMap.size());
     }
 
     /**
