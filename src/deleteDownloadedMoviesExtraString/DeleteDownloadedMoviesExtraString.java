@@ -104,10 +104,8 @@ public class DeleteDownloadedMoviesExtraString {
     /**
      * TODO getExtName.
      * 
-     * @param s
-     *            .
-     * @param split
-     *            .
+     * @param s .
+     * @param split .
      * @return .
      */
     private static String getExtName(String fileName) {
