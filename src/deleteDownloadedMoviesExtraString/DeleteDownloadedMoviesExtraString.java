@@ -14,7 +14,6 @@ import java.util.LinkedList;
 /**
  * TODO 把下载的电影的多余的前缀去掉，类似[电影天堂www.dy2018.com]彗星来的那一夜BD中英双字.rmvb 则 去掉"[电影天堂www.dy2018.com]" 和 "BD中英双字"，
  * 
- * 
  * 彗星来的那一夜.rmvb.
  * 
  * @author KOBE
