@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
  * 
  * 以后接手的C#项目会越来越多，写个工具实现一键转换的必要性也就相当高了。
  * 
- * 支持标准格式的C# model
+ * 支持标准格式的C# model 
  * 
  * @author yunhai
  */
