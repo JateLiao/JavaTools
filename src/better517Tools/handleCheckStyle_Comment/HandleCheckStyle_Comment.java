@@ -41,6 +41,10 @@ public class HandleCheckStyle_Comment {
             
             String line = null;
             while ((line = reader.readLine()) != null) {
+                if (line.startsWith("@")) {
+                    priorLines.add(line);
+                }
+                
                 if (line.startsWith("protected") || line.startsWith("private")) {
                     /**
                      * 添加字段注释.
