@@ -52,6 +52,10 @@ public class HandleCheckStyle_Comment {
                 if (line.startsWith("/**") || line.startsWith(" *")) {
                     continue;
                 }
+                if (line.startsWith("import")) {
+                    sb.append(line).append("\r\n");
+                    continue;
+                }
                 if (line.startsWith("@")) {
                     isAnnotation = true;
                 }
@@ -61,19 +65,16 @@ public class HandleCheckStyle_Comment {
 
                 if (line.startsWith("protected") || line.startsWith("private")) {
                     isAnnotation = false;
-                    
-                    // 添加默认字段注释
-                    sb.append("/**").append("\r\n").append("     * 添加字段注释.");
-                    sb.append("\r\n").append("     */").append("\r\n");
-                } else if (line.startsWith("public")) {
-                    // 类名上的注释
-                    
                 }
                 
                 if (isAnnotation) {
                     annotations.add(line);
                     continue;
                 } else {
+                    // 添加默认字段注释
+                    sb.append("/**").append("\r\n").append("     * 添加字段注释.");
+                    sb.append("\r\n").append("     */").append("\r\n");
+                    
                     handleAnnotations(annotations, sb);
                 }
                 
@@ -81,6 +82,8 @@ public class HandleCheckStyle_Comment {
             }
             writeBackToFile(f, sb);
             reader.close();
+            
+            System.out.println(f.getName() + "处理完成！");
         }
     }
 
@@ -105,8 +108,10 @@ public class HandleCheckStyle_Comment {
      * @param sb
      */
     private static void handleAnnotations(List<String> priorLines, StringBuffer sb) {
-        for (String str : priorLines) {
-            sb.append(str).append("\r\n");
+        if (!priorLines.isEmpty()) {
+            for (String str : priorLines) {
+                sb.append(str).append("\r\n");
+            }
         }
         priorLines.clear();}
 
