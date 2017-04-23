@@ -15,11 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO 添加类的一句话简单描述.
- * <p>
- * TODO 详细描述
- * <p>
- * TODO 示例代码
+ * TODO 某些特殊的C#model转javamodel时，CheckStyle不符合的修正.
  * <pre>
  * </pre>
  * 
@@ -59,9 +55,20 @@ public class HandleCheckStyle_Comment {
                     sb.append(".").append("\r\n");
                 }
             }
-            
+            writeBackToFile(file, sb);
             reader.close();
         }
+    }
+
+    /**
+     * TODO 新内容写入源文件.
+     * 
+     * @param file
+     * @param sb
+     */
+    private static void writeBackToFile(File file, StringBuffer sb) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
