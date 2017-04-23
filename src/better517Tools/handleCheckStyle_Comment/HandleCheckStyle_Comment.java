@@ -9,24 +9,30 @@
 package better517Tools.handleCheckStyle_Comment;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * TODO 某些特殊的C#model转javamodel时，CheckStyle不符合的修正.
+ * 
+ * 比如同目录下的 CabinInfo.java文件
+ * 
  * <pre>
  * </pre>
  * 
- * @author     tianzhong
+ * @author tianzhong
  */
 public class HandleCheckStyle_Comment {
-    
+
     public static void main(String[] args) throws Exception {
         handleCheckStyle_Comment("D://Test//ticket");
     }
-    
+
     public static void handleCheckStyle_Comment(String path) throws Exception {
         File file = new File(path);
         File[] files = file.listFiles();
@@ -34,13 +40,13 @@ public class HandleCheckStyle_Comment {
             BufferedReader reader = new BufferedReader(new FileReader(f));
             StringBuffer sb = new StringBuffer();
             List<String> priorLines = new ArrayList<>();
-            
+
             String line = null;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("@")) {
                     priorLines.add(line);
                 }
-                
+
                 if (line.startsWith("protected") || line.startsWith("private")) {
                     /**
                      * 添加字段注释.
@@ -67,8 +73,22 @@ public class HandleCheckStyle_Comment {
      * @param sb
      */
     private static void writeBackToFile(File file, StringBuffer sb) {
-        // TODO Auto-generated method stub
-        
+        BufferedWriter out = null;
+
+        try {
+            out = new BufferedWriter(new FileWriter(file));
+            out.write(sb.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != out) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
