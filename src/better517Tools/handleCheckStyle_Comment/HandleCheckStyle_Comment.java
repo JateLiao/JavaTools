@@ -47,13 +47,19 @@ public class HandleCheckStyle_Comment {
             createHeadComment(f, sb); // 头部注释
             
             String line = null;
-            boolean isAnnotation = false;
+            boolean isAnnotation = false; // 是否是注解行
+            boolean isPublciDone = false; // public class XXX之前是否处理完毕
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("/**") || line.startsWith(" *")) {
-                    continue;
+                if (line.startsWith("public class " + f.getName().split("\\.")[0])) {
+                    isPublciDone = true;
                 }
-                if (line.startsWith("import")) {
-                    sb.append(line).append("\r\n");
+                if (!isPublciDone) {
+                    if (line.startsWith("import")) {
+                        sb.append(line).append("\r\n");
+                        continue;
+                    }
+                }
+                if (line.startsWith("/**") || line.startsWith(" *")) {
                     continue;
                 }
                 if (line.startsWith("@")) {
