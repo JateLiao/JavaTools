@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.DateUtil;
+
 /**
  * TODO 某些特殊的C#model转javamodel时，CheckStyle不符合的修正.
  * 
@@ -39,32 +41,76 @@ public class HandleCheckStyle_Comment {
         for (File f : files) {
             BufferedReader reader = new BufferedReader(new FileReader(f));
             StringBuffer sb = new StringBuffer();
-            List<String> priorLines = new ArrayList<>();
+            List<String> annotations = new ArrayList<>();
 
+            createHeadComment(f, sb); // 头部注释
+            
             String line = null;
+            boolean isAnnotation = false;
             while ((line = reader.readLine()) != null) {
+                if (line.startsWith("/**") || line.startsWith(" *")) {
+                    continue;
+                }
                 if (line.startsWith("@")) {
-                    priorLines.add(line);
+                    isAnnotation = true;
+                }
+                if (line.startsWith("public")) {
+                    isAnnotation = false;
                 }
 
                 if (line.startsWith("protected") || line.startsWith("private")) {
+                    isAnnotation = false;
                     /**
                      * 添加字段注释.
                      */
-                    for (String prior : priorLines) {
-                        sb.append(prior).append("\r\n");
-                    }
-                    sb.append(line).append("\r\n");
+                    sb.append("/**").append("\r\n").append("     * 添加字段注释.").append("\r\n").append("     */").append("\r\n");
                 }
+                
+                if (isAnnotation) {
+                    annotations.add(line);
+                    continue;
+                } else {
+                    handleAnnotations(annotations, sb);
+                }
+                
                 sb.append(line).append("\r\n");
-                if (line.equals("/**")) {
-                    sb.append(".").append("\r\n");
-                }
             }
-            writeBackToFile(file, sb);
+            writeBackToFile(f, sb);
             reader.close();
         }
     }
+
+    /**
+     * TODO 头部注释.
+     * @param f 
+     * @param sb
+     */
+    private static void createHeadComment(File f, StringBuffer sb) {
+        /*
+         * 文件名：HandleCheckStyle_Comment.java
+         * 版权：Copyright 2007-2017 517na Tech. Co. Ltd. All Rights Reserved. 
+         * 描述： HandleCheckStyle_Comment.java
+         * 修改人：tianzhong
+         * 修改时间：2017年4月17日
+         * 修改内容：新增
+         */
+         sb.append("/*\r\n * 文件名：").append(f.getName()).append("\r\n");
+         sb.append(" * 版权：Copyright 2007-2017 517na Tech. Co. Ltd. All Rights Reserved. ").append("\r\n");
+         sb.append(" * 描述： ").append(f.getName()).append("\r\n");
+         sb.append(" * 修改人：tianzhong").append("\r\n").append("* 修改时间：2017年4月17日").append("");
+    }
+
+    /**
+     * TODO 处理注解.
+     * 
+     * @param priorLines
+     * @param sb
+     */
+    private static void handleAnnotations(List<String> priorLines, StringBuffer sb) {
+        for (String str : priorLines) {
+            sb.append(str).append("\r\n");
+        }
+        priorLines.clear();}
 
     /**
      * TODO 新内容写入源文件.
