@@ -15,9 +15,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.DateUtil;
+import util.DateUtils;
 
 /**
  * TODO 某些特殊的C#model转javamodel时，CheckStyle不符合的修正.
@@ -60,10 +61,13 @@ public class HandleCheckStyle_Comment {
 
                 if (line.startsWith("protected") || line.startsWith("private")) {
                     isAnnotation = false;
-                    /**
-                     * 添加字段注释.
-                     */
-                    sb.append("/**").append("\r\n").append("     * 添加字段注释.").append("\r\n").append("     */").append("\r\n");
+                    
+                    // 添加默认字段注释
+                    sb.append("/**").append("\r\n").append("     * 添加字段注释.");
+                    sb.append("\r\n").append("     */").append("\r\n");
+                } else if (line.startsWith("public")) {
+                    // 类名上的注释
+                    
                 }
                 
                 if (isAnnotation) {
@@ -86,18 +90,12 @@ public class HandleCheckStyle_Comment {
      * @param sb
      */
     private static void createHeadComment(File f, StringBuffer sb) {
-        /*
-         * 文件名：HandleCheckStyle_Comment.java
-         * 版权：Copyright 2007-2017 517na Tech. Co. Ltd. All Rights Reserved. 
-         * 描述： HandleCheckStyle_Comment.java
-         * 修改人：tianzhong
-         * 修改时间：2017年4月17日
-         * 修改内容：新增
-         */
          sb.append("/*\r\n * 文件名：").append(f.getName()).append("\r\n");
          sb.append(" * 版权：Copyright 2007-2017 517na Tech. Co. Ltd. All Rights Reserved. ").append("\r\n");
          sb.append(" * 描述： ").append(f.getName()).append("\r\n");
-         sb.append(" * 修改人：tianzhong").append("\r\n").append("* 修改时间：2017年4月17日").append("");
+         sb.append(" * 修改人：tianzhong").append("\r\n");
+         sb.append(" * 修改时间：").append(DateUtils.format(new Date(), "yyyy年MM月dd日")).append("\r\n");
+         sb.append(" * 修改内容：新增\r\n */\r\n");
     }
 
     /**
