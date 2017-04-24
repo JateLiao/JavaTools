@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import util.DateUtils;
 
@@ -50,27 +52,27 @@ public class HandleCheckStyle_Comment {
             boolean isAnnotation = false; // 是否是注解行
             boolean isPublciDone = false; // public class XXX之前是否处理完毕
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("\\s*public class " + f.getName().split("\\.")[0])) {
-                    isPublciDone = true;
-                }
-                if (!isPublciDone) {
-                    if (line.startsWith("import") || line.startsWith("package")) {
-                        sb.append(line).append("\r\n");
-                        continue;
-                    }
-                }
                 if ("".equals(line)) {
                     sb.append(line).append("\r\n");
                     continue;
                 }
-                if (line.startsWith("/**") || line.startsWith(" *")) {
-                    continue;
+                if (isPublicClassLine(line, f)) { // public class XXX
+                    isPublciDone = true;
                 }
-                if (line.startsWith("\\s+?\\@")) { // 匹配多个空格和一个@符号的开头
+                if (!isPublciDone) {
+                    if (isImportOrPackageLine(line)) { // import package
+                        sb.append(line).append("\r\n");
+                        continue;
+                    } 
+                }
+                if (isCommentLine(line)) { // 注释行
+                    continue;   
+                }
+                if (isAnnotationLine(line)) { // 注解行
                     isAnnotation = true;
                 }
 
-                if (line.startsWith("\\s+protected") || line.startsWith("\\s+private") || line.startsWith("\\s*public")) {
+                if (isFiledOrFunc(line)) { // 字段行或者方法行
                     isAnnotation = false;
                 }
                 
@@ -92,6 +94,89 @@ public class HandleCheckStyle_Comment {
             
             System.out.println(f.getName() + "处理完成！");
         }
+    }
+
+    /**
+     * TODO 注释行匹配.
+     * 
+     * @param line
+     * @return
+     */
+    private static boolean isCommentLine(String line) {
+        Pattern p = Pattern.compile("^\\s*/\\*\\*|^\\s*\\*|^\\s*\\*\\/");
+        Matcher match = p.matcher(line);
+        if (match.find()) {
+            return true;
+        }
+        
+        return false;
+    
+    }
+
+    /**
+     * TODO 添加方法注释.
+     * 
+     * @param line
+     * @return
+     */
+    private static boolean isFiledOrFunc(String line) {
+        Pattern p = Pattern.compile("^\\s*private|^\\s*protected|^\\s*public");
+        Matcher match = p.matcher(line);
+        if (match.find()) {
+            return true;
+        }
+        
+        return false;
+    
+    }
+
+    /**
+     * TODO 注解行.
+     * 
+     * @param line
+     * @return
+     */
+    private static boolean isAnnotationLine(String line) {
+        Pattern p = Pattern.compile("^\\s+?@");
+        Matcher match = p.matcher(line);
+        if (match.find()) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
+     * TODO 是否是import行或者package行.
+     * 
+     * @param line
+     * @return
+     */
+    private static boolean isImportOrPackageLine(String line) {
+        Pattern p = Pattern.compile("^\\s*import|^\\s*package");
+        Matcher match = p.matcher(line);
+        if (match.find()) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
+     * TODO 是否是public class行.
+     * 
+     * @param line
+     * @param f 
+     * @return
+     */
+    private static boolean isPublicClassLine(String line, File f) {
+        Pattern p = Pattern.compile("\\s*public class " + f.getName().split("\\.")[0]);
+        Matcher match = p.matcher(line);
+        if (match.find()) {
+            return true;
+        }
+        
+        return false;
     }
 
     /**
