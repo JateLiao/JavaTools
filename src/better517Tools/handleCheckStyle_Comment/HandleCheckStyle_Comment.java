@@ -54,22 +54,23 @@ public class HandleCheckStyle_Comment {
                     isPublciDone = true;
                 }
                 if (!isPublciDone) {
-                    if (line.startsWith("import")) {
+                    if (line.startsWith("import") || line.startsWith("package")) {
                         sb.append(line).append("\r\n");
                         continue;
                     }
                 }
+                if ("".equals(line)) {
+                    sb.append(line).append("\r\n");
+                    continue;
+                }
                 if (line.startsWith("/**") || line.startsWith(" *")) {
                     continue;
                 }
-                if (line.startsWith("@")) {
+                if (line.startsWith("\\s+\\@")) { // 匹配多个空格和一个@符号的开头
                     isAnnotation = true;
                 }
-                if (line.startsWith("public")) {
-                    isAnnotation = false;
-                }
 
-                if (line.startsWith("protected") || line.startsWith("private")) {
+                if (line.startsWith("\\s+protected") || line.startsWith("\\s+private") || line.startsWith("\\s*public")) {
                     isAnnotation = false;
                 }
                 
