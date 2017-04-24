@@ -50,7 +50,7 @@ public class HandleCheckStyle_Comment {
             boolean isAnnotation = false; // 是否是注解行
             boolean isPublciDone = false; // public class XXX之前是否处理完毕
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("public class " + f.getName().split("\\.")[0])) {
+                if (line.startsWith("\\s*public class " + f.getName().split("\\.")[0])) {
                     isPublciDone = true;
                 }
                 if (!isPublciDone) {
@@ -66,7 +66,7 @@ public class HandleCheckStyle_Comment {
                 if (line.startsWith("/**") || line.startsWith(" *")) {
                     continue;
                 }
-                if (line.startsWith("\\s+\\@")) { // 匹配多个空格和一个@符号的开头
+                if (line.startsWith("\\s+?\\@")) { // 匹配多个空格和一个@符号的开头
                     isAnnotation = true;
                 }
 
