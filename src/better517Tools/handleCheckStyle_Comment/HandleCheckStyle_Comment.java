@@ -58,6 +58,10 @@ public class HandleCheckStyle_Comment {
                 }
                 if (isPublicClassLine(line, f)) { // public class XXX
                     isPublciDone = true;
+                    isAnnotation = false;
+                    sb.append("/**\r\n * @author tianzhong\r\n *\r\n */\r\n");
+                    handleAnnotations(annotations, sb);
+                    continue;
                 }
                 if (!isPublciDone) {
                     if (isImportOrPackageLine(line)) { // import package
@@ -72,7 +76,7 @@ public class HandleCheckStyle_Comment {
                     isAnnotation = true;
                 }
 
-                if (isFiledOrFunc(line)) { // 字段行或者方法行
+                if (isFiledOrFunc(line) && isPublciDone) { // 字段行或者方法行
                     isAnnotation = false;
                 }
                 
@@ -80,10 +84,7 @@ public class HandleCheckStyle_Comment {
                     annotations.add(line);
                     continue;
                 } else {
-                    // 添加默认字段注释
-                    sb.append("/**").append("\r\n").append("     * 添加字段注释.");
-                    sb.append("\r\n").append("     */").append("\r\n");
-                    
+                    handleFieldComment(line, sb);
                     handleAnnotations(annotations, sb);
                 }
                 
@@ -93,6 +94,26 @@ public class HandleCheckStyle_Comment {
             reader.close();
             
             System.out.println(f.getName() + "处理完成！");
+        }
+    }
+
+    /**
+     * TODO 处理字段注释.
+     * 
+     * @param line
+     * @param sb
+     */
+    private static void handleFieldComment(String line, StringBuffer sb) {
+        // 添加默认字段注释
+        sb.append("    /**").append("\r\n").append("     * ");
+        sb.append("\r\n").append("     */").append("\r\n");
+        
+        Pattern p = Pattern.compile("\\s{1}\\S+;");
+        Matcher m = p.matcher(line);
+        if (m.find()) {
+            sb.append(m.group(0).substring(1, m.group(0).length() - 1) + ".");
+        } else {
+            sb.append("添加字段注释.");
         }
     }
 
@@ -137,7 +158,7 @@ public class HandleCheckStyle_Comment {
      * @return
      */
     private static boolean isAnnotationLine(String line) {
-        Pattern p = Pattern.compile("^\\s+?@");
+        Pattern p = Pattern.compile("^\\s*@");
         Matcher match = p.matcher(line);
         if (match.find()) {
             return true;
