@@ -44,9 +44,10 @@ public class HandleCheckStyle_Comment {
         for (File f : files) {
             BufferedReader reader = new BufferedReader(new FileReader(f));
             StringBuffer sb = new StringBuffer();
+            StringBuffer funcSb = new StringBuffer();
             List<String> annotations = new ArrayList<>();
 
-            createHeadComment(f, sb); // 头部注释
+            handleHeadComment(f, sb); // 头部注释
             
             String line = null;
             boolean isAnnotation = false; // 是否是注解行
@@ -59,7 +60,7 @@ public class HandleCheckStyle_Comment {
                 if (isPublicClassLine(line, f)) { // public class XXX
                     isPublciDone = true;
                     isAnnotation = false;
-                    sb.append("/**\r\n * @author tianzhong\r\n *\r\n */\r\n");
+                    sb.append("/**\r\n * @author tianzhong\r\n */\r\n");
                     handleAnnotations(annotations, sb);
                     continue;
                 }
@@ -85,16 +86,31 @@ public class HandleCheckStyle_Comment {
                     continue;
                 } else {
                     handleFieldComment(line, sb);
+                    handleGetterAndSetter(line, funcSb);
                     handleAnnotations(annotations, sb);
                 }
                 
                 sb.append(line).append("\r\n");
             }
+            sb.append(funcSb); // 字段和方法合并
             writeBackToFile(f, sb);
             reader.close();
             
             System.out.println(f.getName() + "处理完成！");
         }
+    }
+
+    /**
+     * TODO getter setter 处理.
+     * 
+     * @param line
+     * @param funcSb
+     */
+    private static void handleGetterAndSetter(String line, StringBuffer funcSb) {
+        // protected String cabin;
+        line = line.trim();
+        String[] arr = line.split(" ");
+        funcSb.append("");
     }
 
     /**
@@ -106,7 +122,6 @@ public class HandleCheckStyle_Comment {
     private static void handleFieldComment(String line, StringBuffer sb) {
         // 添加默认字段注释
         sb.append("    /**").append("\r\n").append("     * ");
-        sb.append("\r\n").append("     */").append("\r\n");
         
         Pattern p = Pattern.compile("\\s{1}\\S+;");
         Matcher m = p.matcher(line);
@@ -115,6 +130,8 @@ public class HandleCheckStyle_Comment {
         } else {
             sb.append("添加字段注释.");
         }
+
+        sb.append("\r\n").append("     */").append("\r\n");
     }
 
     /**
@@ -205,9 +222,9 @@ public class HandleCheckStyle_Comment {
      * @param f 
      * @param sb
      */
-    private static void createHeadComment(File f, StringBuffer sb) {
+    private static void handleHeadComment(File f, StringBuffer sb) {
          sb.append("/*\r\n * 文件名：").append(f.getName()).append("\r\n");
-         sb.append(" * 版权：Copyright 2007-2017 517na Tech. Co. Ltd. All Rights Reserved. ").append("\r\n");
+         sb.append(" * 版权：Copyright 2007-").append(DateUtils.format(new Date(), "yyyy")).append(" 517na Tech. Co. Ltd. All Rights Reserved. ").append("\r\n");
          sb.append(" * 描述： ").append(f.getName()).append("\r\n");
          sb.append(" * 修改人：tianzhong").append("\r\n");
          sb.append(" * 修改时间：").append(DateUtils.format(new Date(), "yyyy年MM月dd日")).append("\r\n");
