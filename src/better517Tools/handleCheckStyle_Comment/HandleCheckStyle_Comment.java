@@ -114,6 +114,7 @@ public class HandleCheckStyle_Comment {
         // getter
         funcSb.append("    /**\r\n").append("     * ").append(arr[2]).append(".\r\n").append("     *\r\n").append("     * ");
         funcSb.append("@return 返回").append(arr[2]).append(".\r\n").append("     */");
+        funcSb.append("    public ").append(arr[1]).append(" get");
         
         // setter
         
