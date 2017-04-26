@@ -21,6 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import util.DateUtils;
+import util.StringUtil;
 
 /**
  * TODO 某些特殊的C#model转javamodel时，CheckStyle不符合的修正.
@@ -110,14 +111,19 @@ public class HandleCheckStyle_Comment {
         // protected String cabin;
         line = line.trim();
         String[] arr = line.split(" ");
+        arr[2] = arr[2].substring(0, arr[2].length() - 1);
         
         // getter
         funcSb.append("    /**\r\n").append("     * ").append(arr[2]).append(".\r\n").append("     *\r\n").append("     * ");
         funcSb.append("@return 返回").append(arr[2]).append(".\r\n").append("     */");
-        funcSb.append("    public ").append(arr[1]).append(" get");
+        funcSb.append("    public ").append(arr[1]).append(" get").append(StringUtil.firstCharToUpper(arr[2])).append(" () {\r\n");
+        funcSb.append("        return ").append(arr[2]).append(";\r\n").append("    }\r\n\r\n");
         
         // setter
-        
+        funcSb.append("    /**\r\n     * 设置").append(arr[2]).append(".\r\n     *\r\n     * @param ").append(arr[2]).append(" 要设置的");
+        funcSb.append(arr[2]).append(".\r\n").append("     */\r\n");
+        funcSb.append("    public void set").append(StringUtil.firstCharToUpper(arr[2])).append("(").append(arr[1]).append(" ").append(arr[2]).append(") {\r\n");
+        funcSb.append("        this.").append(arr[2]).append(" = ").append(arr[2]).append(";\r\n    }\r\n");
     }
 
     /**
@@ -250,7 +256,8 @@ public class HandleCheckStyle_Comment {
                 sb.append(str).append("\r\n");
             }
         }
-        priorLines.clear();}
+        priorLines.clear();
+    }
 
     /**
      * TODO 新内容写入源文件.
