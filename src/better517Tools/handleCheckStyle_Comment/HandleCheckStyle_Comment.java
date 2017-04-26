@@ -126,7 +126,7 @@ public class HandleCheckStyle_Comment {
         funcSb.append("    /**\r\n     * 设置").append(arr[2]).append(".\r\n     *\r\n     * @param ").append(arr[2]).append(" 要设置的");
         funcSb.append(arr[2]).append(".\r\n").append("     */\r\n");
         funcSb.append("    public void set").append(StringUtil.firstCharToUpper(arr[2])).append("(").append(arr[1]).append(" ").append(arr[2]).append(") {\r\n");
-        funcSb.append("        this.").append(arr[2]).append(" = ").append(arr[2]).append(";\r\n    }\r\n");
+        funcSb.append("        this.").append(arr[2]).append(" = ").append(arr[2]).append(";\r\n    }\r\n\r\n");
     }
 
     /**
