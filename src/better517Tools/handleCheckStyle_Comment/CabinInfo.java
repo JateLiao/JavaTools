@@ -1,3 +1,11 @@
+/*
+ * 鏂囦欢鍚嶏細CabinInfo.java
+ * 鐗堟潈锛欳opyright 2007-2017 517na Tech. Co. Ltd. All Rights Reserved. 
+ * 鎻忚堪锛?CabinInfo.java
+ * 淇敼浜猴細tianzhong
+ * 淇敼鏃堕棿锛?017骞?4鏈?6鏃?
+ * 淇敼鍐呭锛氭柊澧?
+ */
 package better517Tools.handleCheckStyle_Comment;
 
 import java.util.HashMap;
@@ -9,569 +17,457 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * <p>
- * CabinInfo complex type�� Java �ࡣ.
- * 
- * <p>
- * ����ģʽƬ��ָ�����ڴ����е�Ԥ�����ݡ�
- * 
- * <pre>
- * &lt;complexType name="CabinInfo"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="cabin" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="baseCabin" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="cabinGrade" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="seating" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="discount" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="changePolicy" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="backPolicy" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="signPolicy" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="airRemark" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="patFlag" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="standardPrice" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="initTicketPrice" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="protocolTicketPrice" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="finallyPrice" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="childChangePolicy" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="childBackPolicy" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="childSignPolicy" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="babyChangePolicy" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="babyBackPolicy" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="babySignPolicy" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="extInfo" type="{http://op.bee2c.com/DapFlightCabinSearchSrv/}MapString" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
- * 
- * 
+ * @author tianzhong
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CabinInfo", propOrder = {"cabin", "baseCabin", "cabinGrade", "seating", "discount", "changePolicy", "backPolicy", "signPolicy", "airRemark", "patFlag", "standardPrice",
         "initTicketPrice", "protocolTicketPrice", "finallyPrice", "childChangePolicy", "childBackPolicy", "childSignPolicy", "babyChangePolicy", "babyBackPolicy", "babySignPolicy", "extInfo"})
 public class CabinInfo {
 
+    /**
+     * cabin.
+     */
     @XmlElement(required = true)
     protected String cabin;
 
+    /**
+     * baseCabin.
+     */
     @XmlElement(required = true)
     protected String baseCabin;
 
+    /**
+     * cabinGrade.
+     */
     @XmlElement(required = true, nillable = true)
     protected String cabinGrade;
 
+    /**
+     * seating.
+     */
     @XmlElement(required = true)
     protected String seating;
 
+    /**
+     * discount.
+     */
     @XmlElement(required = true)
     protected String discount;
 
+    /**
+     * changePolicy.
+     */
     @XmlElement(required = true)
     protected String changePolicy;
 
+    /**
+     * backPolicy.
+     */
     @XmlElement(required = true)
     protected String backPolicy;
 
+    /**
+     * signPolicy.
+     */
     @XmlElement(required = true)
     protected String signPolicy;
 
+    /**
+     * airRemark.
+     */
     @XmlElement(required = true, nillable = true)
     protected String airRemark;
 
+    /**
+     * patFlag.
+     */
     @XmlElement(required = true)
     protected String patFlag;
 
+    /**
+     * standardPrice.
+     */
     @XmlElement(required = true)
     protected String standardPrice;
 
+    /**
+     * initTicketPrice.
+     */
     @XmlElement(required = true)
     protected String initTicketPrice;
 
+    /**
+     * protocolTicketPrice.
+     */
     @XmlElement(required = true)
     protected String protocolTicketPrice;
 
+    /**
+     * finallyPrice.
+     */
     @XmlElement(required = true)
     protected String finallyPrice;
 
+    /**
+     * childChangePolicy.
+     */
     @XmlElement(required = true, nillable = true)
     protected String childChangePolicy;
 
+    /**
+     * childBackPolicy.
+     */
     @XmlElement(required = true, nillable = true)
     protected String childBackPolicy;
 
+    /**
+     * childSignPolicy.
+     */
     @XmlElement(required = true, nillable = true)
     protected String childSignPolicy;
 
+    /**
+     * babyChangePolicy.
+     */
     @XmlElement(required = true, nillable = true)
     protected String babyChangePolicy;
 
+    /**
+     * babyBackPolicy.
+     */
     @XmlElement(required = true, nillable = true)
     protected String babyBackPolicy;
 
+    /**
+     * babySignPolicy.
+     */
     @XmlElement(required = true, nillable = true)
     protected String babySignPolicy;
 
+    /**
+     * extInfo.
+     */
     protected Map<String, String> extInfo;
 
     /**
-     * ��ȡcabin���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getCabin() {
+     * cabin.
+     *
+     * @return 杩斿洖cabin.
+     */    public String getcabin () {
         return cabin;
     }
 
     /**
-     * ����cabin���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆cabin.
+     *
+     * @param cabin 瑕佽缃殑cabin.
      */
-    public void setCabin(String value) {
-        this.cabin = value;
+    public void setcabin(String cabin) {
+        this.cabin = cabin;
     }
-
     /**
-     * ��ȡbaseCabin���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getBaseCabin() {
+     * baseCabin.
+     *
+     * @return 杩斿洖baseCabin.
+     */    public String getbaseCabin () {
         return baseCabin;
     }
 
     /**
-     * ����baseCabin���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆baseCabin.
+     *
+     * @param baseCabin 瑕佽缃殑baseCabin.
      */
-    public void setBaseCabin(String value) {
-        this.baseCabin = value;
+    public void setbaseCabin(String baseCabin) {
+        this.baseCabin = baseCabin;
     }
-
     /**
-     * ��ȡcabinGrade���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getCabinGrade() {
+     * cabinGrade.
+     *
+     * @return 杩斿洖cabinGrade.
+     */    public String getcabinGrade () {
         return cabinGrade;
     }
 
     /**
-     * ����cabinGrade���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆cabinGrade.
+     *
+     * @param cabinGrade 瑕佽缃殑cabinGrade.
      */
-    public void setCabinGrade(String value) {
-        this.cabinGrade = value;
+    public void setcabinGrade(String cabinGrade) {
+        this.cabinGrade = cabinGrade;
     }
-
     /**
-     * ��ȡseating���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getSeating() {
+     * seating.
+     *
+     * @return 杩斿洖seating.
+     */    public String getseating () {
         return seating;
     }
 
     /**
-     * ����seating���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆seating.
+     *
+     * @param seating 瑕佽缃殑seating.
      */
-    public void setSeating(String value) {
-        this.seating = value;
+    public void setseating(String seating) {
+        this.seating = seating;
     }
-
     /**
-     * ��ȡdiscount���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getDiscount() {
+     * discount.
+     *
+     * @return 杩斿洖discount.
+     */    public String getdiscount () {
         return discount;
     }
 
     /**
-     * ����discount���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆discount.
+     *
+     * @param discount 瑕佽缃殑discount.
      */
-    public void setDiscount(String value) {
-        this.discount = value;
+    public void setdiscount(String discount) {
+        this.discount = discount;
     }
-
     /**
-     * ��ȡchangePolicy���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getChangePolicy() {
+     * changePolicy.
+     *
+     * @return 杩斿洖changePolicy.
+     */    public String getchangePolicy () {
         return changePolicy;
     }
 
     /**
-     * ����changePolicy���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆changePolicy.
+     *
+     * @param changePolicy 瑕佽缃殑changePolicy.
      */
-    public void setChangePolicy(String value) {
-        this.changePolicy = value;
+    public void setchangePolicy(String changePolicy) {
+        this.changePolicy = changePolicy;
     }
-
     /**
-     * ��ȡbackPolicy���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getBackPolicy() {
+     * backPolicy.
+     *
+     * @return 杩斿洖backPolicy.
+     */    public String getbackPolicy () {
         return backPolicy;
     }
 
     /**
-     * ����backPolicy���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆backPolicy.
+     *
+     * @param backPolicy 瑕佽缃殑backPolicy.
      */
-    public void setBackPolicy(String value) {
-        this.backPolicy = value;
+    public void setbackPolicy(String backPolicy) {
+        this.backPolicy = backPolicy;
     }
-
     /**
-     * ��ȡsignPolicy���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getSignPolicy() {
+     * signPolicy.
+     *
+     * @return 杩斿洖signPolicy.
+     */    public String getsignPolicy () {
         return signPolicy;
     }
 
     /**
-     * ����signPolicy���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆signPolicy.
+     *
+     * @param signPolicy 瑕佽缃殑signPolicy.
      */
-    public void setSignPolicy(String value) {
-        this.signPolicy = value;
+    public void setsignPolicy(String signPolicy) {
+        this.signPolicy = signPolicy;
     }
-
     /**
-     * ��ȡairRemark���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getAirRemark() {
+     * airRemark.
+     *
+     * @return 杩斿洖airRemark.
+     */    public String getairRemark () {
         return airRemark;
     }
 
     /**
-     * ����airRemark���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆airRemark.
+     *
+     * @param airRemark 瑕佽缃殑airRemark.
      */
-    public void setAirRemark(String value) {
-        this.airRemark = value;
+    public void setairRemark(String airRemark) {
+        this.airRemark = airRemark;
     }
-
     /**
-     * ��ȡpatFlag���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getPatFlag() {
+     * patFlag.
+     *
+     * @return 杩斿洖patFlag.
+     */    public String getpatFlag () {
         return patFlag;
     }
 
     /**
-     * ����patFlag���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆patFlag.
+     *
+     * @param patFlag 瑕佽缃殑patFlag.
      */
-    public void setPatFlag(String value) {
-        this.patFlag = value;
+    public void setpatFlag(String patFlag) {
+        this.patFlag = patFlag;
     }
-
     /**
-     * ��ȡstandardPrice���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getStandardPrice() {
+     * standardPrice.
+     *
+     * @return 杩斿洖standardPrice.
+     */    public String getstandardPrice () {
         return standardPrice;
     }
 
     /**
-     * ����standardPrice���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆standardPrice.
+     *
+     * @param standardPrice 瑕佽缃殑standardPrice.
      */
-    public void setStandardPrice(String value) {
-        this.standardPrice = value;
+    public void setstandardPrice(String standardPrice) {
+        this.standardPrice = standardPrice;
     }
-
     /**
-     * ��ȡinitTicketPrice���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getInitTicketPrice() {
+     * initTicketPrice.
+     *
+     * @return 杩斿洖initTicketPrice.
+     */    public String getinitTicketPrice () {
         return initTicketPrice;
     }
 
     /**
-     * ����initTicketPrice���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆initTicketPrice.
+     *
+     * @param initTicketPrice 瑕佽缃殑initTicketPrice.
      */
-    public void setInitTicketPrice(String value) {
-        this.initTicketPrice = value;
+    public void setinitTicketPrice(String initTicketPrice) {
+        this.initTicketPrice = initTicketPrice;
     }
-
     /**
-     * ��ȡprotocolTicketPrice���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getProtocolTicketPrice() {
+     * protocolTicketPrice.
+     *
+     * @return 杩斿洖protocolTicketPrice.
+     */    public String getprotocolTicketPrice () {
         return protocolTicketPrice;
     }
 
     /**
-     * ����protocolTicketPrice���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆protocolTicketPrice.
+     *
+     * @param protocolTicketPrice 瑕佽缃殑protocolTicketPrice.
      */
-    public void setProtocolTicketPrice(String value) {
-        this.protocolTicketPrice = value;
+    public void setprotocolTicketPrice(String protocolTicketPrice) {
+        this.protocolTicketPrice = protocolTicketPrice;
     }
-
     /**
-     * ��ȡfinallyPrice���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getFinallyPrice() {
+     * finallyPrice.
+     *
+     * @return 杩斿洖finallyPrice.
+     */    public String getfinallyPrice () {
         return finallyPrice;
     }
 
     /**
-     * ����finallyPrice���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆finallyPrice.
+     *
+     * @param finallyPrice 瑕佽缃殑finallyPrice.
      */
-    public void setFinallyPrice(String value) {
-        this.finallyPrice = value;
+    public void setfinallyPrice(String finallyPrice) {
+        this.finallyPrice = finallyPrice;
     }
-
     /**
-     * ��ȡchildChangePolicy���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getChildChangePolicy() {
+     * childChangePolicy.
+     *
+     * @return 杩斿洖childChangePolicy.
+     */    public String getchildChangePolicy () {
         return childChangePolicy;
     }
 
     /**
-     * ����childChangePolicy���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆childChangePolicy.
+     *
+     * @param childChangePolicy 瑕佽缃殑childChangePolicy.
      */
-    public void setChildChangePolicy(String value) {
-        this.childChangePolicy = value;
+    public void setchildChangePolicy(String childChangePolicy) {
+        this.childChangePolicy = childChangePolicy;
     }
-
     /**
-     * ��ȡchildBackPolicy���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getChildBackPolicy() {
+     * childBackPolicy.
+     *
+     * @return 杩斿洖childBackPolicy.
+     */    public String getchildBackPolicy () {
         return childBackPolicy;
     }
 
     /**
-     * ����childBackPolicy���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆childBackPolicy.
+     *
+     * @param childBackPolicy 瑕佽缃殑childBackPolicy.
      */
-    public void setChildBackPolicy(String value) {
-        this.childBackPolicy = value;
+    public void setchildBackPolicy(String childBackPolicy) {
+        this.childBackPolicy = childBackPolicy;
     }
-
     /**
-     * ��ȡchildSignPolicy���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getChildSignPolicy() {
+     * childSignPolicy.
+     *
+     * @return 杩斿洖childSignPolicy.
+     */    public String getchildSignPolicy () {
         return childSignPolicy;
     }
 
     /**
-     * ����childSignPolicy���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆childSignPolicy.
+     *
+     * @param childSignPolicy 瑕佽缃殑childSignPolicy.
      */
-    public void setChildSignPolicy(String value) {
-        this.childSignPolicy = value;
+    public void setchildSignPolicy(String childSignPolicy) {
+        this.childSignPolicy = childSignPolicy;
     }
-
     /**
-     * ��ȡbabyChangePolicy���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getBabyChangePolicy() {
+     * babyChangePolicy.
+     *
+     * @return 杩斿洖babyChangePolicy.
+     */    public String getbabyChangePolicy () {
         return babyChangePolicy;
     }
 
     /**
-     * ����babyChangePolicy���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆babyChangePolicy.
+     *
+     * @param babyChangePolicy 瑕佽缃殑babyChangePolicy.
      */
-    public void setBabyChangePolicy(String value) {
-        this.babyChangePolicy = value;
+    public void setbabyChangePolicy(String babyChangePolicy) {
+        this.babyChangePolicy = babyChangePolicy;
     }
-
     /**
-     * ��ȡbabyBackPolicy���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getBabyBackPolicy() {
+     * babyBackPolicy.
+     *
+     * @return 杩斿洖babyBackPolicy.
+     */    public String getbabyBackPolicy () {
         return babyBackPolicy;
     }
 
     /**
-     * ����babyBackPolicy���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆babyBackPolicy.
+     *
+     * @param babyBackPolicy 瑕佽缃殑babyBackPolicy.
      */
-    public void setBabyBackPolicy(String value) {
-        this.babyBackPolicy = value;
+    public void setbabyBackPolicy(String babyBackPolicy) {
+        this.babyBackPolicy = babyBackPolicy;
     }
-
     /**
-     * ��ȡbabySignPolicy���Ե�ֵ��
-     * 
-     * @return possible object is {@link String }
-     * 
-     */
-    public String getBabySignPolicy() {
+     * babySignPolicy.
+     *
+     * @return 杩斿洖babySignPolicy.
+     */    public String getbabySignPolicy () {
         return babySignPolicy;
     }
 
     /**
-     * ����babySignPolicy���Ե�ֵ��
-     * 
-     * @param value
-     *            allowed object is {@link String }
-     * 
+     * 璁剧疆babySignPolicy.
+     *
+     * @param babySignPolicy 瑕佽缃殑babySignPolicy.
      */
-    public void setBabySignPolicy(String value) {
-        this.babySignPolicy = value;
-    }
-
-    /**
-     * Gets the value of the extInfo property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be present inside the JAXB object. This is why there is
-     * not a <CODE>set</CODE> method for the extInfo property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * 
-     * <pre>
-     * getExtInfo().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list {@link MapString }
-     * 
-     * 
-     */
-    public Map<String, String> getExtInfo() {
-        if (extInfo == null) {
-            extInfo = new HashMap<String, String>();
-        }
-
-        return this.extInfo;
-    }
-
-    /**
-     * 获取extInfo.
-     * 
-     * @param extInfo
-     *            要设置的extInfo.
-     */
-    public void setExtInfo(Map<String, String> extInfo) {
-        this.extInfo = extInfo;
-    }
-
+    public void setbabySignPolicy(String babySignPolicy) {
+        this.babySignPolicy = babySignPolicy;
+    } 
 }
+

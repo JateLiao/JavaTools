@@ -63,6 +63,7 @@ public class HandleCheckStyle_Comment {
                     isAnnotation = false;
                     sb.append("/**\r\n * @author tianzhong\r\n */\r\n");
                     handleAnnotations(annotations, sb);
+                    sb.append(line).append("\r\n");
                     continue;
                 }
                 if (!isPublciDone) {
@@ -73,27 +74,29 @@ public class HandleCheckStyle_Comment {
                 }
                 if (isCommentLine(line)) { // 注释行
                     continue;   
-                }
+                } 
                 if (isAnnotationLine(line)) { // 注解行
                     isAnnotation = true;
                 }
+                if (isPublciDone && isFuncLine(line)) {
+                    sb.append(funcSb).append("}\r\n\r\n"); // 字段和方法合并
+                    break;
+                }
 
-                if (isFiledOrFunc(line) && isPublciDone) { // 字段行或者方法行
+                if (isFieldLine(line) && isPublciDone) { // 字段行或者方法行
                     isAnnotation = false;
                 }
-                
                 if (isAnnotation) {
                     annotations.add(line);
                     continue;
                 } else {
                     handleFieldComment(line, sb);
-                    handleGetterAndSetter(line, funcSb);
                     handleAnnotations(annotations, sb);
+                    sb.append(line).append("\r\n");
+                    
+                    handleGetterAndSetter(line, funcSb);
                 }
-                
-                sb.append(line).append("\r\n");
             }
-            sb.append(funcSb); // 字段和方法合并
             writeBackToFile(f, sb);
             reader.close();
             
@@ -170,8 +173,25 @@ public class HandleCheckStyle_Comment {
      * @param line
      * @return
      */
-    private static boolean isFiledOrFunc(String line) {
+    private static boolean isFieldLine(String line) {
         Pattern p = Pattern.compile("^\\s*private|^\\s*protected|^\\s*public");
+        Matcher match = p.matcher(line);
+        if (match.find()) {
+            return true;
+        }
+        
+        return false;
+    
+    }
+
+    /**
+     * TODO 添加方法注释.
+     * 
+     * @param line
+     * @return
+     */
+    private static boolean isFuncLine(String line) {
+        Pattern p = Pattern.compile("^\\s*public");
         Matcher match = p.matcher(line);
         if (match.find()) {
             return true;
