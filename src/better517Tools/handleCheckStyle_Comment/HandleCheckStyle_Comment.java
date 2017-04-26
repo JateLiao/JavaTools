@@ -110,7 +110,13 @@ public class HandleCheckStyle_Comment {
         // protected String cabin;
         line = line.trim();
         String[] arr = line.split(" ");
-        funcSb.append("");
+        
+        // getter
+        funcSb.append("    /**\r\n").append("     * ").append(arr[2]).append(".\r\n").append("     *\r\n").append("     * ");
+        funcSb.append("@return 返回").append(arr[2]).append(".\r\n").append("     */");
+        
+        // setter
+        
     }
 
     /**
