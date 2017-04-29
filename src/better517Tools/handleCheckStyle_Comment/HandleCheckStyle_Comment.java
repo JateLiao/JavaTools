@@ -136,7 +136,12 @@ public class HandleCheckStyle_Comment {
      * @param sb
      */
     private static void handleFieldComment(String line, StringBuffer sb) {
-        // 添加默认字段注释
+        line = line.trim();
+        // 添加默认字段注释为字段名.
+        if (line.contains("<")) { // 有泛型
+            String[] arr = getGenericTypeArr(line);
+        }
+        
         sb.append("    /**").append("\r\n").append("     * ");
         
         Pattern p = Pattern.compile("\\s{1}\\S+;");
@@ -148,6 +153,17 @@ public class HandleCheckStyle_Comment {
         }
 
         sb.append("\r\n").append("     */").append("\r\n");
+    }
+
+    /**
+     * TODO 泛型类型字段处理.
+     * 
+     * @param line
+     * @return
+     */
+    private static String[] getGenericTypeArr(String line) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     /**
