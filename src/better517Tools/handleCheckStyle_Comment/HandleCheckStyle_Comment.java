@@ -136,22 +136,21 @@ public class HandleCheckStyle_Comment {
      * @param sb
      */
     private static void handleFieldComment(String line, StringBuffer sb) {
-        line = line.trim();
-        // 添加默认字段注释为字段名.
-        if (line.contains("<")) { // 有泛型
-            String[] arr = getGenericTypeArr(line);
-        }
-        
+        // 添加默认字段注释为字段名
         sb.append("    /**").append("\r\n").append("     * ");
-        
-        Pattern p = Pattern.compile("\\s{1}\\S+;");
-        Matcher m = p.matcher(line);
-        if (m.find()) {
-            sb.append(m.group(0).substring(1, m.group(0).length() - 1) + ".");
+        if (line.contains("<")) { // 有泛型
+            line = line.trim();
+            String[] arr = getGenericTypeArr(line);
+            sb.append(arr[2]).append(".");
         } else {
-            sb.append("添加字段注释.");
-        }
-
+            Pattern p = Pattern.compile("\\s{1}\\S+;");
+            Matcher m = p.matcher(line);
+            if (m.find()) {
+                sb.append(m.group(0).substring(1, m.group(0).length() - 1) + ".");
+            } else {
+                sb.append("添加字段注释.");
+            }
+        } 
         sb.append("\r\n").append("     */").append("\r\n");
     }
 
