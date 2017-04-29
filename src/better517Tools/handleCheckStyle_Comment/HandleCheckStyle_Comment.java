@@ -28,9 +28,6 @@ import util.StringUtil;
  * 
  * 比如同目录下的 CabinInfo.java文件
  * 
- * <pre>
- * </pre>
- * 
  * @author tianzhong
  */
 public class HandleCheckStyle_Comment {
