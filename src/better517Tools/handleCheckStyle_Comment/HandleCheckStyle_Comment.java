@@ -139,7 +139,6 @@ public class HandleCheckStyle_Comment {
         // 添加默认字段注释为字段名
         sb.append("    /**").append("\r\n").append("     * ");
         if (line.contains("<")) { // 有泛型
-            line = line.trim();
             String[] arr = getGenericTypeArr(line);
             sb.append(arr[2]).append(".");
         } else {
@@ -161,8 +160,20 @@ public class HandleCheckStyle_Comment {
      * @return
      */
     private static String[] getGenericTypeArr(String line) {
-        // TODO Auto-generated method stub
-        return null;
+        line = line.trim().replaceAll(";", "");
+        String[] arr = new String[3];
+        String[] tmpArr = line.split(" ");
+        arr[0] = tmpArr[0];
+        arr[2] = tmpArr[tmpArr.length - 1];
+        // protected Map<String, String> extInfo;
+        String tmp = tmpArr[1];
+        if (tmpArr.length >= 3) {
+            for (int i = 2; i < tmpArr.length - 1; i++) {
+                tmp += (" " + tmpArr[i]);
+            }
+        }
+        arr[1] = tmp;
+        return arr;
     }
 
     /**
