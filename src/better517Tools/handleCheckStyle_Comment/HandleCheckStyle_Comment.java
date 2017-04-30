@@ -33,69 +33,82 @@ import util.StringUtil;
 public class HandleCheckStyle_Comment {
 
     public static void main(String[] args) throws Exception {
-        handleCheckStyle_Comment("D://Test//ticket");
+        handleCheckStyle_Comment("D://Test//ticket - backup");
     }
 
     public static void handleCheckStyle_Comment(String path) throws Exception {
         File file = new File(path);
         File[] files = file.listFiles();
         for (File f : files) {
-            BufferedReader reader = new BufferedReader(new FileReader(f));
-            StringBuffer sb = new StringBuffer();
-            StringBuffer funcSb = new StringBuffer();
-            List<String> annotations = new ArrayList<>();
+            BufferedReader reader = null;
+            try { // 当期文件处理失败，不影响下一个文件被处理
+                reader = new BufferedReader(new FileReader(f));
+                StringBuffer sb = new StringBuffer();
+                StringBuffer funcSb = new StringBuffer();
+                List<String> annotations = new ArrayList<>();
 
-            handleHeadComment(f, sb); // 头部注释
-            
-            String line = null;
-            boolean isAnnotation = false; // 是否是注解行
-            boolean isPublciDone = false; // public class XXX之前是否处理完毕
-            while ((line = reader.readLine()) != null) {
-                if ("".equals(line)) {
-                    sb.append(line).append("\r\n");
-                    continue;
-                }
-                if (isPublicClassLine(line, f)) { // public class XXX
-                    isPublciDone = true;
-                    isAnnotation = false;
-                    sb.append("/**\r\n * @author tianzhong\r\n */\r\n");
-                    handleAnnotations(annotations, sb);
-                    sb.append(line).append("\r\n");
-                    continue;
-                }
-                if (!isPublciDone) {
-                    if (isImportOrPackageLine(line)) { // import package
+                handleHeadComment(f, sb); // 头部注释
+                
+                String line = null;
+                boolean isAnnotation = false; // 是否是注解行
+                boolean isPublciDone = false; // public class XXX之前是否处理完毕
+                while ((line = reader.readLine()) != null) {
+                    if ("".equals(line)) {
                         sb.append(line).append("\r\n");
                         continue;
+                    }
+                    if (isPublicClassLine(line, f)) { // public class XXX
+                        isPublciDone = true;
+                        isAnnotation = false;
+                        sb.append("/**\r\n * @author tianzhong\r\n */\r\n");
+                        handleAnnotations(annotations, sb);
+                        sb.append(line).append("\r\n");
+                        continue;
+                    }
+                    if (!isPublciDone) {
+                        if (isImportOrPackageLine(line)) { // import package
+                            sb.append(line).append("\r\n");
+                            continue;
+                        } 
+                    }
+                    if (isCommentLine(line)) { // 注释行
+                        continue;   
                     } 
-                }
-                if (isCommentLine(line)) { // 注释行
-                    continue;   
-                } 
-                if (isAnnotationLine(line)) { // 注解行
-                    isAnnotation = true;
-                }
-                if (isPublciDone && isFuncLine(line)) {
-                    sb.append(funcSb).append("}\r\n\r\n"); // 字段和方法合并
-                    break;
-                }
+                    if (isAnnotationLine(line)) { // 注解行
+                        isAnnotation = true;
+                    }
+                    if (isPublciDone && isFuncLine(line)) {
+                        sb.append(funcSb).append("}\r\n\r\n"); // 字段和方法合并
+                        break;
+                    }
 
-                if (isFieldLine(line) && isPublciDone) { // 字段行或者方法行
-                    isAnnotation = false;
+                    if (isFieldLine(line) && isPublciDone) { // 字段行或者方法行
+                        isAnnotation = false;
+                    }
+                    if (isAnnotation) {
+                        annotations.add(line);
+                        continue;
+                    } else {
+                        handleFieldComment(line, sb);
+                        handleAnnotations(annotations, sb);
+                        sb.append(line).append("\r\n");
+                        
+                        handleGetterAndSetter(line, funcSb);
+                    }
                 }
-                if (isAnnotation) {
-                    annotations.add(line);
-                    continue;
-                } else {
-                    handleFieldComment(line, sb);
-                    handleAnnotations(annotations, sb);
-                    sb.append(line).append("\r\n");
-                    
-                    handleGetterAndSetter(line, funcSb);
+                writeBackToFile(f, sb);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println(f.getName() + "处理失败，请关注特殊情况的处理!!!!");
+            } finally {
+                try {
+                    if (null != reader) {
+                        reader.close();
+                    }
+                } catch (Exception e2) {
+                    e2.printStackTrace();
                 }
             }
-            writeBackToFile(f, sb);
-            reader.close();
             
             System.out.println(f.getName() + "处理完成！");
         }
