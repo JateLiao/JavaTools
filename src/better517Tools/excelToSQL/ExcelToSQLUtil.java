@@ -28,6 +28,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import util.CommonCheckUtils;
 import util.DateUtils;
 
 /**
@@ -136,6 +137,9 @@ public class ExcelToSQLUtil {
                                 default:
                                     val = cell.getStringCellValue();
                                     break;
+                            }
+                            if (CommonCheckUtils.isNotEmpty(val)) {
+                                val = val.trim();
                             }
                             
                             if (isCharType) {
