@@ -6,7 +6,7 @@
  * 修改时间：2017年3月7日
  * 修改内容：新增
  */
-package excelToSQL;
+package better517Tools.excelToSQL;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -51,10 +52,10 @@ public class ExcelToSQLUtil {
      */
     @SuppressWarnings("unused")
     public static String toInsertSql(String path) {
-        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-02-13-华住账号托管/内网EBooking升库sql/华住托管SQL导表 - 副本.xlsx"; 
+        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-02-酒店会员托管/基础数据调研/调研记录.xlsx"; 
         // 华住托管SQL导表    差旅壹号 华住托管SQL导表 - 副本
         String basePathName = "D:/Test/insert/";
-        String targetSheet = "Hotel"; // 要处理的表格，该变量指定值之后就只处理该表格
+        String targetSheet = "HotelBrand"; // 要处理的表格，该变量指定值之后就只处理该表格
         
         FileInputStream in = null;
         BufferedWriter out = null;
@@ -119,10 +120,23 @@ public class ExcelToSQLUtil {
                             if (type.contains("char") || type.contains("text") || type.contains("date") || type.contains("time")) { // 常用类型
                                 isCharType = true;
                             }
+                            
+                            String val = "";
+                            switch (cell.getCellType()) {
+                                case HSSFCell.CELL_TYPE_NUMERIC:
+                                    val = String.valueOf(Double.valueOf(String.valueOf(cell.getNumericCellValue())).intValue());
+                                    break;
+
+                                default:
+                                    val = cell.getStringCellValue();
+                                    // val = cell.getStringCellValue();
+                                    break;
+                            }
+                            
                             if (isCharType) {
-                                sb.append("'" + cell.getStringCellValue() + "',");
+                                sb.append("'" + val + "',");
                             } else {
-                                sb.append(cell.getStringCellValue() + ",");
+                                sb.append(val + ",");
                             }
                             // System.out.println(cell.getStringCellValue());
                             
