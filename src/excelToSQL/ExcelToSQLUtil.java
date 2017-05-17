@@ -51,7 +51,8 @@ public class ExcelToSQLUtil {
      */
     @SuppressWarnings("unused")
     public static String toInsertSql(String path) {
-        path = "D:/Test/华住托管SQL导表 - 副本.xlsx"; // 华住托管SQL导表    差旅壹号 华住托管SQL导表 - 副本
+        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-02-13-华住账号托管/内网EBooking升库sql/华住托管SQL导表 - 副本.xlsx"; 
+        // 华住托管SQL导表    差旅壹号 华住托管SQL导表 - 副本
         String basePathName = "D:/Test/insert/";
         String targetSheet = "Hotel"; // 要处理的表格，该变量指定值之后就只处理该表格
         
