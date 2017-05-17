@@ -121,7 +121,6 @@ public class ExcelToSQLUtil {
                             if (null == cell) {
                                 continue;
                             }
-                            // System.out.println("\t\t单元格值: " + cell.getStringCellValue());
                             String type = fieldTypeMap.get(fieldIndexMap.get(k)).toLowerCase();
                             boolean isCharType = false;
                             if (type.contains("char") || type.contains("text") || type.contains("date") || type.contains("time")) { // 常用类型
@@ -136,7 +135,6 @@ public class ExcelToSQLUtil {
 
                                 default:
                                     val = cell.getStringCellValue();
-                                    // val = cell.getStringCellValue();
                                     break;
                             }
                             
@@ -146,17 +144,6 @@ public class ExcelToSQLUtil {
                                 sb.append(val + ",");
                             }
                             // System.out.println(cell.getStringCellValue());
-                            
-                            /*
-                             * switch (cell.getCellType()) { case HSSFCell.CELL_TYPE_NUMERIC: short format = cell.getCellStyle().getDataFormat(); if(format == 14 || format == 31 || format == 57 ||
-                             * format == 58){ //excel中的时间格式 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); double value = cell.getNumericCellValue(); Date date =
-                             * DateUtil.getJavaDate(value); sb.append("'" + sdf.format(date) + "',"); } else if (HSSFDateUtil.isCellDateFormatted(cell)) { //判断当前的cell是否为Date
-                             * //先注释日期类型的转换，在实际测试中发现HSSFDateUtil.isCellDateFormatted(cell)只识别2014/02/02这种格式。 // 如果是Date类型则，取得该Cell的Date值 // 对2014-02-02格式识别不出是日期格式 Date date = cell.getDateCellValue();
-                             * DateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); sb.append("'" + formater.format(date) + "',"); } else { ///如果是纯数字 //取得当前Cell的数值
-                             * sb.append(NumberToTextConverter.toText(cell.getNumericCellValue()) + ","); } break; case HSSFCell.CELL_TYPE_STRING: sb.append("'" + cell.getStringCellValue() + "',");
-                             * break; case HSSFCell.CELL_TYPE_BLANK: sb.append(isCharType ? "''," : "0,");// 数字类型默认0，char类类型默认'' break; default: break; }
-                             */
-                            
                         }
                         if (sb.toString().endsWith(",")) {
                             sb.setLength(sb.length() - 1);
