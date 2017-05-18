@@ -51,6 +51,9 @@ public class ExcelToSQLUtil {
      * excel格式，首行字段，第二行类型，第三行开始是数据(见模板).
      * excel单元格格式需要设置为文本
      * 
+     * 2017.5.18:
+     *  尽量兼容更多格式，可以一次指定需要处理的多个Sheet
+     * 
      * @param path
      * @return
      */
