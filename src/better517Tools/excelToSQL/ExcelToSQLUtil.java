@@ -138,9 +138,7 @@ public class ExcelToSQLUtil {
                                     val = cell.getStringCellValue();
                                     break;
                             }
-                            if (CommonCheckUtils.isNotEmpty(val)) {
-                                val = val.trim();
-                            }
+                            val = CommonCheckUtils.isNotEmpty(val) ? val.trim() : null;
                             
                             if (isCharType) {
                                 sb.append("'" + val + "',");
