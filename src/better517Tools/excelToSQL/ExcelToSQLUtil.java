@@ -147,7 +147,11 @@ public class ExcelToSQLUtil {
                                     val = cell.getStringCellValue();
                                     break;
                             }
-                            val = CommonCheckUtils.isNotEmpty(val) ? val.trim() : null;
+                            val = CommonCheckUtils.isNotEmpty(val) ? val.trim() : "";
+                            // if (val.contains("'")) {
+                            // System.out.println(val.replaceAll("'", "\\\\'"));
+                            // }
+                            val = val.replaceAll("'", "\\\\'").replaceAll("###", "");
                             
                             if (isCharType) {
                                 sb.append("'" + val + "',");
