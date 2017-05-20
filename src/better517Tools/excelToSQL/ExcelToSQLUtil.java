@@ -56,8 +56,9 @@ public class ExcelToSQLUtil {
      */
     @SuppressWarnings("unused")
     public static String toInsertSql(String path) {
-        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-02-酒店会员托管/基础数据调研/调研记录.xlsx"; 
-        String targetSheet = "HotelBrand"; // 要处理的表格，该变量指定值之后就只处理该表格
+        long start = System.currentTimeMillis();
+        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据.xlsx"; 
+        String targetSheet = "HotelBaseCN0"; // 要处理的表格，该变量指定值之后就只处理该表格
         String basePathName = "D:/Test/sql/" + DateUtils.format(new Date(), "");
 
         File file = new File(basePathName);
@@ -133,7 +134,12 @@ public class ExcelToSQLUtil {
                                 case HSSFCell.CELL_TYPE_NUMERIC:
                                     val = String.valueOf(Double.valueOf(String.valueOf(cell.getNumericCellValue())).intValue());
                                     break;
-
+                                case HSSFCell.CELL_TYPE_STRING:
+                                    val = cell.getStringCellValue();
+                                    break;
+                                case HSSFCell.CELL_TYPE_FORMULA:
+                                    val = cell.getCellFormula();
+                                    break;
                                 default:
                                     val = cell.getStringCellValue();
                                     break;
@@ -176,7 +182,7 @@ public class ExcelToSQLUtil {
                 e.printStackTrace();
             }
         }
-        
+        System.out.println("总耗时：" + (System.currentTimeMillis() - start));
         return "true";
     }
     
