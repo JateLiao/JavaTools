@@ -151,7 +151,7 @@ public class ExcelToSQLUtil {
                             // if (val.contains("'")) {
                             // System.out.println(val.replaceAll("'", "\\\\'"));
                             // }
-                            val = val.replaceAll("'", "\\\\'").replaceAll("###", "");
+                            val = val.replaceAll("'", "\\\\'").replaceAll("###", "").replace("\r\n", "");
                             
                             if (isCharType) {
                                 sb.append("'" + val + "',");
