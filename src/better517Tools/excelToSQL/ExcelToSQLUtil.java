@@ -57,7 +57,8 @@ public class ExcelToSQLUtil {
      * 2017.5.21:
      *  为了便面数据量太大造成内存溢出，下一步：
      *      1.逐句打印不存文件；
-     *      2.当积累一定量后就追加写入，然后继续处理，及时释放内存。
+     *      2.当积累一定量后就追加写入，然后继续处理，及时释放内存;
+     *      3.一定量后就先存储进一个文件。
      * 
      * @param path
      * @return
@@ -101,21 +102,22 @@ public class ExcelToSQLUtil {
                     continue;
                 }
                 System.out.println("当前处理Sheet: " + tableName);
-                String baseInsert = "";
+                // String baseInsert = "";
                 out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(basePathName + tableName + ".txt", false)));
                 Row firstRow = null; // 首行字段
                 Row secondRow = null; //sheet.getRow(1); // 次行类型
                 int rows = sheet.getPhysicalNumberOfRows(); // 获取所有行数
                 int index = 0;
-                StringBuffer sb = new StringBuffer("INSERT INTO " + tableName + "(");
+                StringBuffer sb = new StringBuffer();
                 for (int j = 0; j < rows; j++) {
+                    sb.setLength(0); // 清空
                     Row row = sheet.getRow(j); // 行
                     if (row != null) {
                         if (firstRow == null) { // 第一个非空行作为首行
                             firstRow = row;
                             secondRow = sheet.getRow(j + 1);
                             index = handleFieldMaps(firstRow, secondRow, fieldTypeMap, fieldIndexMap, sb);
-                            baseInsert = sb.toString();
+                            // baseInsert = sb.toString();
                             sb.setLength(0);
                             tmp++;
                             continue;
@@ -124,7 +126,8 @@ public class ExcelToSQLUtil {
                             continue;
                         }
                         allCount++;
-                        sb.append(baseInsert);
+                        sb.append("INSERT INTO " + tableName + "(");
+                        // sb.append(baseInsert);
                         int columns = firstRow.getPhysicalNumberOfCells(); // 总列数
                         for (int k = index; k < columns + index; k++) {
                             Cell cell = row.getCell(k); // 单元格
