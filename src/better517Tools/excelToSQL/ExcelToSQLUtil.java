@@ -171,8 +171,10 @@ public class ExcelToSQLUtil {
                         if (sb.toString().endsWith(",")) {
                             sb.setLength(sb.length() - 1);
                         }
-                        out.write(sb.append(");\r\n").toString());
-                        sb.setLength(0);
+                        
+                        System.out.println(sb.append(");").toString());
+                        // out.write(sb.append(");\r\n").toString());
+                        // sb.setLength(0);
                     }
                 }
                 fieldIndexMap.clear();
