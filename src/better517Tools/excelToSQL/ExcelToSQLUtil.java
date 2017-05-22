@@ -14,11 +14,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -63,11 +62,10 @@ public class ExcelToSQLUtil {
      * @param path
      * @return
      */
-    @SuppressWarnings("unused")
     public static String toInsertSql(String path) {
         long start = System.currentTimeMillis();
-        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据.xlsx"; 
-        String targetSheet = "HotelBaseCN0"; // 要处理的表格，该变量指定值之后就只处理该表格
+        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据2.xlsx"; 
+        String targetSheet = "HotelRoomCN0"; // 要处理的表格，该变量指定值之后就只处理该表格
         String basePathName = "D:/Test/sql/" + DateUtils.format(new Date(), "");
 
         File file = new File(basePathName);
@@ -78,7 +76,7 @@ public class ExcelToSQLUtil {
         FileInputStream in = null;
         BufferedWriter out = null;
         Workbook book = null;
-        List<String> vals = new ArrayList<>(5000);  
+        // List<String> vals = new ArrayList<>(5000);  
         Map<String, String> fieldTypeMap = new HashMap<>(50); // 字段对应类型map
         Map<Integer, String> fieldIndexMap = new HashMap<>(50); // 字段对应在第一行的列位置map
         
@@ -94,7 +92,7 @@ public class ExcelToSQLUtil {
             
             int sheets = book.getNumberOfSheets();
             for (int i = 0; i < sheets; i++) {
-                int allCount = 0;
+                long allCount = 0;
                 int tmp = 0;
                 Sheet sheet = book.getSheetAt(i); // 表格
                 String tableName = sheet.getSheetName(); // 表格名作为插表名
@@ -175,6 +173,13 @@ public class ExcelToSQLUtil {
                         System.out.println(sb.append(");").toString());
                         // out.write(sb.append(");\r\n").toString());
                         // sb.setLength(0);
+                        
+                        if (allCount != 0 && allCount % 10000 == 0) { // 每处理10000条数据休眠一定时间，给JVM空闲一定时间做GC
+                            System.err.println("开始休眠，希望JVM在这段时间做做GC...");
+                            System.gc();
+                            Thread.sleep(TimeUnit.SECONDS.toMillis(60));
+                            System.err.println("休眠结束!");
+                        }
                     }
                 }
                 fieldIndexMap.clear();
@@ -221,7 +226,7 @@ public class ExcelToSQLUtil {
             Cell typeCell = secondRow.getCell(i);
             fieldIndexMap.put(i, fieldCell.getStringCellValue());
             try {
-                System.out.println(fieldCell.getStringCellValue());
+                // System.out.println(fieldCell.getStringCellValue());
                 fieldTypeMap.put(fieldCell.getStringCellValue(), typeCell.getStringCellValue());
             } catch (Exception e) {
                 e.printStackTrace();
