@@ -107,6 +107,7 @@ public class ExcelToSQLUtil {
                 int rows = sheet.getPhysicalNumberOfRows(); // 获取所有行数
                 int index = 0;
                 StringBuffer sb = new StringBuffer();
+                StringBuffer fdsSb = new StringBuffer();
                 for (int j = 0; j < rows; j++) {
                     sb.setLength(0); // 清空
                     Row row = sheet.getRow(j); // 行
@@ -114,7 +115,7 @@ public class ExcelToSQLUtil {
                         if (firstRow == null) { // 第一个非空行作为首行
                             firstRow = row;
                             secondRow = sheet.getRow(j + 1);
-                            index = handleFieldMaps(firstRow, secondRow, fieldTypeMap, fieldIndexMap, sb);
+                            index = handleFieldMaps(firstRow, secondRow, fieldTypeMap, fieldIndexMap, fdsSb);
                             // baseInsert = sb.toString();
                             sb.setLength(0);
                             tmp++;
@@ -124,7 +125,7 @@ public class ExcelToSQLUtil {
                             continue;
                         }
                         allCount++;
-                        sb.append("INSERT INTO " + tableName + "(");
+                        sb.append("INSERT INTO " + tableName + "(").append(fdsSb);
                         // sb.append(baseInsert);
                         int columns = firstRow.getPhysicalNumberOfCells(); // 总列数
                         for (int k = index; k < columns + index; k++) {
@@ -154,9 +155,6 @@ public class ExcelToSQLUtil {
                                     break;
                             }
                             val = CommonCheckUtils.isNotEmpty(val) ? val.trim() : "";
-                            // if (val.contains("'")) {
-                            // System.out.println(val.replaceAll("'", "\\\\'"));
-                            // }
                             val = val.replaceAll("'", "\\\\'").replaceAll("###", "").replace("\r\n", "");
                             
                             if (isCharType) {
@@ -173,11 +171,10 @@ public class ExcelToSQLUtil {
                         System.out.println(sb.append(");").toString());
                         // out.write(sb.append(");\r\n").toString());
                         // sb.setLength(0);
-                        
-                        if (allCount != 0 && allCount % 10000 == 0) { // 每处理10000条数据休眠一定时间，给JVM空闲一定时间做GC
+                        if (allCount != 0 && allCount % 30000 == 0) { // 每处理10000条数据休眠一定时间，给JVM空闲一定时间做GC
                             System.err.println("开始休眠，希望JVM在这段时间做做GC...");
-                            System.gc();
-                            Thread.sleep(TimeUnit.SECONDS.toMillis(60));
+                            // System.gc();
+                            Thread.sleep(TimeUnit.SECONDS.toMillis(300));
                             System.err.println("休眠结束!");
                         }
                     }
