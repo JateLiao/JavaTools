@@ -64,7 +64,8 @@ public class ExcelToSQLUtil {
      */
     public static String toInsertSql(String path) {
         long start = System.currentTimeMillis();
-        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据2.xlsx"; 
+        // path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据2.xlsx"; 
+        path = "D:/Test/导数据.xlsx"; 
         String targetSheet = "HotelRoomCN0"; // 要处理的表格，该变量指定值之后就只处理该表格
         String basePathName = "D:/Test/sql/" + DateUtils.format(new Date(), "");
 
@@ -174,7 +175,7 @@ public class ExcelToSQLUtil {
                         if (allCount != 0 && allCount % 30000 == 0) { // 每处理10000条数据休眠一定时间，给JVM空闲一定时间做GC
                             System.err.println("开始休眠，希望JVM在这段时间做做GC...");
                             // System.gc();
-                            Thread.sleep(TimeUnit.SECONDS.toMillis(300));
+                            Thread.sleep(TimeUnit.SECONDS.toMillis(30));
                             System.err.println("休眠结束!");
                         }
                     }
