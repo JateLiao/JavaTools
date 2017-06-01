@@ -49,6 +49,7 @@ public class ExcelToSQLUtil {
      * 
      * excel格式，首行字段，第二行类型，第三行开始是数据(见模板).
      * excel单元格格式需要设置为文本
+     * excel单元格空值用###替代
      * 
      * 2017.5.18:
      *  尽量兼容更多格式，可以一次指定需要处理的多个Sheet
@@ -156,7 +157,7 @@ public class ExcelToSQLUtil {
                                     break;
                             }
                             val = CommonCheckUtils.isNotEmpty(val) ? val.trim() : "";
-                            val = val.replaceAll("'", "\\\\'").replaceAll("###", "").replace("\r\n", "");
+                            val = val.replaceAll("'", "\\\\'").replaceAll("###", "").replace("\r\n", ""); // 空值特殊处理（空值用###替代）
                             
                             if (isCharType) {
                                 sb.append("'" + val + "',");
