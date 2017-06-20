@@ -67,7 +67,7 @@ public class ExcelToSQLUtil {
         long start = System.currentTimeMillis();
         // path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据2.xlsx"; 
         path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-02-酒店会员托管/升库sql/锦江/jinjiang.xlsx"; 
-        String targetSheet = "HotelChannelInfo"; // 要处理的表格，该变量指定值之后就只处理该表格
+        String targetSheet = "FacilitiesRelation"; // 要处理的表格，该变量指定值之后就只处理该表格
         String basePathName = "D:/Test/sql/" + DateUtils.format(new Date(), "yyyyMMdd");
 
         File file = new File(basePathName);
@@ -185,6 +185,16 @@ public class ExcelToSQLUtil {
                 fieldTypeMap.clear();
                 System.err.println("表格" + tableName + "共生成INSERT SQL条数：" + allCount);
                 // break;
+                
+                // 跳转文件夹
+
+                String[] cmd = new String[5];
+                cmd[0] = "cmd";
+                cmd[1] = "/c";
+                cmd[2] = "start";
+                cmd[3] = " ";
+                cmd[4] = basePathName;
+                Runtime.getRuntime().exec(cmd);
             }
         } catch (Exception e) {
             e.printStackTrace();
