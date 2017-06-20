@@ -103,7 +103,7 @@ public class ExcelToSQLUtil {
                 }
                 System.out.println("当前处理Sheet: " + tableName);
                 // String baseInsert = "";
-                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(basePathName + tableName + ".txt", false)));
+                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(basePathName + "/" + tableName + ".txt", false)));
                 Row firstRow = null; // 首行字段
                 Row secondRow = null; //sheet.getRow(1); // 次行类型
                 int rows = sheet.getPhysicalNumberOfRows(); // 获取所有行数
@@ -170,9 +170,9 @@ public class ExcelToSQLUtil {
                             sb.setLength(sb.length() - 1);
                         }
                         
-                        System.out.println(sb.append(");").toString());
-                        // out.write(sb.append(");\r\n").toString());
-                        // sb.setLength(0);
+                        out.write(sb.append(");\r\n").toString());
+                        System.out.println(sb.toString());
+                        sb.setLength(0);
                         if (allCount != 0 && allCount % 30000 == 0) { // 每处理10000条数据休眠一定时间，给JVM空闲一定时间做GC
                             System.err.println("开始休眠，希望JVM在这段时间做做GC...");
                             // System.gc();
