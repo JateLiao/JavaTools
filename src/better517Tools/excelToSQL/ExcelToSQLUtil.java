@@ -66,7 +66,8 @@ public class ExcelToSQLUtil {
     public static String toInsertSql(String path) {
         long start = System.currentTimeMillis();
         // path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据2.xlsx"; 
-        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-02-酒店会员托管/升库sql/锦江/jinjiang.xlsx"; 
+        // E:\tianzhong(田仲)\工作文档\09.本地工作文档\酒店\2017-06-14-V7570铂涛对接\升库sql
+        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-06-14-V7570铂涛对接/升库sql/铂涛直连新.xlsx"; 
         String targetSheet = "FacilitiesRelation"; // 要处理的表格，该变量指定值之后就只处理该表格
         String basePathName = "D:/Test/sql/" + DateUtils.format(new Date(), "yyyyMMdd");
 
