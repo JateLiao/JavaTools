@@ -12,13 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 /**
- * TODO 添加类的一句话简单描述.
- * <p>
- * TODO 详细描述
- * <p>
- * TODO 示例代码
- * <pre>
- * </pre>
+ * extract data for dossen.
  * 
  * @author     tianzhong
  */
