@@ -8,7 +8,6 @@
  */
 package better517Tools.handleCheckStyle_Comment;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
