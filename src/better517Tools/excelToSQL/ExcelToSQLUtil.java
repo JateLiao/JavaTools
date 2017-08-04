@@ -67,8 +67,8 @@ public class ExcelToSQLUtil {
         long start = System.currentTimeMillis();
         // path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据2.xlsx"; 
         // E:\tianzhong(田仲)\工作文档\09.本地工作文档\酒店\2017-06-14-V7570铂涛对接\升库sql
-        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-06-14-V7570铂涛对接/升库sql/铂涛直连新.xlsx"; 
-        String targetSheet = "FacilitiesRelation"; // 要处理的表格，该变量指定值之后就只处理该表格
+        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-08-02-锦江之星直连/SQL/设施品牌.xlsx"; 
+        String targetSheet = "HotelFacilities"; // 要处理的表格，该变量指定值之后就只处理该表格
         String basePathName = "D:/Test/sql/" + DateUtils.format(new Date(), "yyyyMMdd");
 
         File file = new File(basePathName);
