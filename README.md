@@ -8,4 +8,7 @@ Some little tools by java. 一些java写的小工具。
 	extractDataToDossen：为东呈提取数据的临时demo；
 	modifyAllFiles：修改所有文件，用于提测是让所有文件成为增量。
 
-2.
+2.deleteDownloadedMoviesExtraString：电影天堂下载的电影，电影名包含乱七八糟字符的删除处理；
+
+3.rmb2CHN：数字形式的金额转汉字读写；
+
