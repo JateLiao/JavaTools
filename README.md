@@ -12,3 +12,5 @@ Some little tools by java. 一些java写的小工具。
 
 3.rmb2CHN：数字形式的金额转汉字读写；
 
+4.DeepCopyUtil：Bean的深拷贝；
+

@@ -67,8 +67,8 @@ public class ExcelToSQLUtil {
         long start = System.currentTimeMillis();
         // path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据2.xlsx"; 
         // E:\tianzhong(田仲)\工作文档\09.本地工作文档\酒店\2017-06-14-V7570铂涛对接\升库sql
-        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-08-02-锦江之星直连/SQL/设施品牌.xlsx"; 
-        String targetSheet = "HotelFacilities"; // 要处理的表格，该变量指定值之后就只处理该表格
+        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-08-28-速8会员托管/SQL/SQL数据处理.xls"; 
+        String targetSheet = ""; // 要处理的表格，该变量指定值之后就只处理该表格
         String basePathName = "D:/Test/sql/" + DateUtils.format(new Date(), "yyyyMMdd");
 
         File file = new File(basePathName);
@@ -112,7 +112,7 @@ public class ExcelToSQLUtil {
                 StringBuffer sb = new StringBuffer();
                 StringBuffer fdsSb = new StringBuffer();
                 for (int j = 0; j < rows; j++) {
-                    sb.setLength(0); // 清空
+                    sb.setLength(0); // 清空x
                     Row row = sheet.getRow(j); // 行
                     if (row != null) {
                         if (firstRow == null) { // 第一个非空行作为首行
