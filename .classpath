@@ -40,5 +40,6 @@
 	<classpathentry kind="lib" path="lib/org.springframework.web.portlet-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.web.servlet-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.web.struts-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/jsoup-1.11.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
