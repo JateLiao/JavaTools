@@ -75,6 +75,13 @@ public class CrawlerTask implements Runnable {
             boolean run = true;
             int page = 0;
             do {
+                String tmpPicPath = path + page + ".jpg";
+                File tmpFile = new File(tmpPicPath);
+                if (tmpFile.exists()) {
+                    page++;
+                    continue;
+                }
+                
                 // url:http://manhua.fzdm.com/2/700/index_55.html
                 String url = CommicStatics.COMMIC_URL + commic.getCommicNo() + "/" + index + "/index_" + page + ".html";
                 // url = "http://manhua.fzdm.com/2/700/index_88.html";
@@ -126,6 +133,12 @@ public class CrawlerTask implements Runnable {
      * @param path  path.
      */
     private void saveCommicPicToLocal(String picUrl, String path, int page) {
+        String picPath = path + page + ".jpg"; // 图片全路径名
+        File picF = new File(picPath);
+        if (picF.exists()) {
+            return;
+        }
+        
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -151,7 +164,7 @@ public class CrawlerTask implements Runnable {
             BufferedInputStream bis = new BufferedInputStream(inputStream);
             
             // 写入到文件（注意文件保存路径的后面一定要加上文件的名称）
-            fileOut = new FileOutputStream(path + page + ".jpg");
+            fileOut = new FileOutputStream(picPath);
             BufferedOutputStream bos = new BufferedOutputStream(fileOut);
 
             byte[] buf = new byte[4096];

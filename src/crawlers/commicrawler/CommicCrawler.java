@@ -52,8 +52,8 @@ public class CommicCrawler {
             COMMIC_NO_MAP.put("2", "海贼王-onepiece");
             COMMIC_NO_MAP.put("7", "死神-bleach");
 
-            COMMIC_START_END_MAP.put("2", "700-705");
-            COMMIC_START_END_MAP.put("7", "600-605");
+            COMMIC_START_END_MAP.put("2", "700-885");
+            COMMIC_START_END_MAP.put("7", "600-686");
 
             File f = new File(CommicStatics.BASE_FILE_PATH);
             if (!f.isDirectory() && !f.exists()) {
@@ -68,7 +68,7 @@ public class CommicCrawler {
      * TODO 添加方法注释.
      */
     public static void doMain() {
-        int nThreads = 5;
+        int nThreads = 10 * COMMIC_NO_MAP.size();
         ExecutorService service = new ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 
         if (CommonCheckUtils.isNotEmpty(COMMIC_NO_MAP) && CommonCheckUtils.isNotEmpty(COMMIC_START_END_MAP)) {
