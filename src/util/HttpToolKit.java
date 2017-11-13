@@ -280,6 +280,15 @@ public class HttpToolKit {
     /**
      * GET请求.
      * @param url url地址
+     * @return 结果
+     * @throws Exception 异常.
+     */
+    public String doGetThrowE(String url) throws Exception {
+        return doGetFunc(url, null, CHARSET, null, null);
+    }
+    /**
+     * GET请求.
+     * @param url url地址
      * @param params 参数
      * @return 结果
      */
@@ -412,6 +421,25 @@ public class HttpToolKit {
      * @return 页面内容
      */
     public String doGet(String url, Map<String, ?> params, String charset, String user, String pwd) {
+        String result = null;
+        try {
+            result = doGetFunc(url, params, charset, user, pwd);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return result;
+    }
+    /**
+     * HTTP Get 获取内容.
+     * @param url 请求的url地址 ?之前的地址
+     * @param params 请求的参数<name,value>
+     * @param charset 编码格式
+     * @param user 用户名
+     * @param pwd 密码
+     * @return 页面内容
+     * @throws Exception 异常.
+     */
+    private String doGetFunc(String url, Map<String, ?> params, String charset, String user, String pwd) throws Exception {
         if (StringUtils.isBlank(url)) {
             return null;
         }
@@ -463,7 +491,7 @@ public class HttpToolKit {
             response.close();
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         } finally {
             if (response != null) {
                 try {
@@ -473,7 +501,6 @@ public class HttpToolKit {
                 }
             }
         }
-        return null;
     }
     /**
      * HTTP Get 获取内容.

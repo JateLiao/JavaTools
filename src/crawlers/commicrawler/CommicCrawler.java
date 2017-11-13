@@ -17,6 +17,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import crawlers.commicrawler.common.CommicStatics;
 import crawlers.commicrawler.model.CommicVo;
 import crawlers.commicrawler.task.CrawlerTask;
 import util.CommonCheckUtils;

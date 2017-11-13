@@ -6,7 +6,7 @@
  * 修改时间：2017年11月12日
  * 修改内容：新增
  */
-package crawlers.commicrawler;
+package crawlers.commicrawler.common;
 
 /**
  * TODO 添加类的一句话简单描述.
@@ -28,6 +28,7 @@ public class CommicStatics {
 
     /**
      * 漫画图片本地存档基础地址.
+     * "F://Commics//";
      */
-    public static final String BASE_FILE_PATH = "F://Commics//";
+    public static final String BASE_FILE_PATH = "D://Commics//";
 }

@@ -19,23 +19,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
-import crawlers.commicrawler.CommicStatics;
+import crawlers.commicrawler.common.CommicStatics;
 import crawlers.commicrawler.model.CommicVo;
 import util.HttpToolKit;
 
 /**
- * TODO 添加类的一句话简单描述.
- * <p>
- * TODO 详细描述
- * <p>
- * TODO 示例代码
- * 
- * <pre>
- * </pre>
- * 
+ * TODO 漫画爬取任务线程.
  * @author KOBE
  */
 public class CrawlerTask implements Runnable {
@@ -59,7 +49,7 @@ public class CrawlerTask implements Runnable {
      * 添加字段注释.
      * eg:var mhurl1 = \".+\"
      */
-    private Pattern p2 = Pattern.compile("var mhurl1 = \".+\"");
+    private Pattern p2 = Pattern.compile("var mhurl = \".+\"");
 
     /**
      * {@inheritDoc}.
@@ -90,9 +80,14 @@ public class CrawlerTask implements Runnable {
                 // url = "http://manhua.fzdm.com/2/700/index_88.html";
                 String resource = null;
                 try {
-                    resource = http.doGet(url);
+                    resource = http.doGetThrowE(url);
+                    // System.err.println(resource);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    if (e instanceof RuntimeException && e.getMessage().startsWith("HttpClient,error status code :")) {
+                        System.out.println("【" + commic.getCommicName() + "】第 " + index + " 集爬取完成!!");
+                    } else {
+                        e.printStackTrace();
+                    }
                     run = false;
                     continue;
                 }
@@ -105,16 +100,19 @@ public class CrawlerTask implements Runnable {
                         picUrl = m1.group(0).replaceAll("img.src=\"|\"", ""); // http://p1.xiaoshidi.net/
                         Matcher m2 = p2.matcher(resource); // img.src="http://p1.xiaoshidi.net/"
                         if (m2.find()) {
-                            picUrl += m2.group(0).replaceAll("var mhurl1 = \"|\"", ""); // http://p1.xiaoshidi.net/
+                            picUrl += m2.group(0).replaceAll("var mhurl = \"|\"", ""); // http://p1.xiaoshidi.net/
                         }
                     }
                     
+                    // 获取到图片url后下载至本地
                     if (StringUtils.isNotBlank(picUrl)) {
                         saveCommicPicToLocal(picUrl, path, page);
                     }
+                } else {
+                    run = false;
                 }
                 page++;
-                run = false;
+                // run = false;
             } while (run);
         }
 
