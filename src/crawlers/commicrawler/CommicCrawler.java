@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import crawlers.commicrawler.common.CommicStatics;
 import crawlers.commicrawler.model.CommicVo;
-import crawlers.commicrawler.task.CrawlerTask;
+import crawlers.commicrawler.task.CrawlerChapterTask;
 import util.CommonCheckUtils;
 
 /**
@@ -78,7 +78,18 @@ public class CommicCrawler {
                 commic.setCommicName(entry.getValue());
                 commic.setCommicChapterNo(COMMIC_START_END_MAP.get(entry.getKey()));
 
-                service.execute(new CrawlerTask(commic));
+                // service.execute(new CrawlerTask(commic));
+
+                System.out.println("开始爬取【" + commic.getCommicName() + "】，要爬取的集数：[" + commic.getCommicChapterNo() + "]");
+                String[] noArr = commic.getCommicChapterNo().split("\\-");
+                int start = Integer.valueOf(noArr[0]);
+                int end = Integer.valueOf(noArr[1]);
+
+                // 循环处理每一集
+                for (int index = start; index <= end; index++) {
+                    commic.setCurrentChapterNo(index);
+                    service.execute(new CrawlerChapterTask(commic));
+                }
             }
         }
     }

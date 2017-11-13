@@ -38,6 +38,30 @@ public class CommicVo {
     private String commicChapterNo;
 
     /**
+     * 漫画集数.
+     */
+    private int currentChapterNo;
+
+    /**
+     * 设置currentChapterNo.
+     * 
+     * @return 返回currentChapterNo
+     */
+    public int getCurrentChapterNo() {
+        return currentChapterNo;
+    }
+
+    /**
+     * 获取currentChapterNo.
+     * 
+     * @param currentChapterNo
+     *            要设置的currentChapterNo
+     */
+    public void setCurrentChapterNo(int currentChapterNo) {
+        this.currentChapterNo = currentChapterNo;
+    }
+
+    /**
      * 设置commicNo.
      * 
      * @return 返回commicNo

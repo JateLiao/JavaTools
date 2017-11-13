@@ -26,10 +26,9 @@ import util.HttpToolKit;
 
 /**
  * TODO 漫画爬取任务线程.
- * 
  * @author KOBE
  */
-public class CrawlerTask implements Runnable {
+public class CrawlerChapterTask implements Runnable {
     /**
      * 添加字段注释.
      */
@@ -41,12 +40,14 @@ public class CrawlerTask implements Runnable {
     HttpToolKit http = HttpToolKit.build();
 
     /**
-     * 添加字段注释. eg:img.src="http://p1.xiaoshidi.net/"
+     * 添加字段注释.
+     * eg:img.src="http://p1.xiaoshidi.net/"
      */
     private Pattern p1 = Pattern.compile("img\\.src=.+\"");
 
     /**
-     * 添加字段注释. eg:var mhurl1 = \".+\"
+     * 添加字段注释.
+     * eg:var mhurl1 = \".+\"
      */
     private Pattern p2 = Pattern.compile("var mhurl = \".+\"");
 
@@ -55,83 +56,86 @@ public class CrawlerTask implements Runnable {
      */
     @Override
     public void run() {
-        System.out.println("开始爬取【" + commic.getCommicName() + "】，要爬取的集数：[" + commic.getCommicChapterNo() + "]");
-        String[] noArr = commic.getCommicChapterNo().split("\\-");
-        int start = Integer.valueOf(noArr[0]);
-        int end = Integer.valueOf(noArr[1]);
-
-        // 循环处理每一集
-        for (int index = start; index <= end; index++) {
-            System.out.println("正在爬取【" + commic.getCommicName() + "】第 " + index + " 集~");
-            String path = CommicStatics.BASE_FILE_PATH + "//" + commic.getCommicName() + "//" + index + "//";
-            File f = new File(path);
-            if (!f.exists()) {
-                f.mkdirs();
-            }
-
-            // 获取页端资源
-            boolean run = true;
-            int page = 0;
-            do {
-                String tmpPicPath = path + page + ".jpg";
-                File tmpFile = new File(tmpPicPath);
-                if (tmpFile.exists()) {
-                    page++;
-                    continue;
-                }
-
-                // url:http://manhua.fzdm.com/2/700/index_55.html
-                String url = CommicStatics.COMMIC_URL + commic.getCommicNo() + "/" + index + "/index_" + page + ".html";
-                // url = "http://manhua.fzdm.com/2/700/index_88.html";
-                String resource = null;
-                try {
-                    resource = http.doGetThrowE(url);
-                    // System.err.println(resource);
-                } catch (Exception e) {
-                    if (e instanceof RuntimeException && e.getMessage().startsWith("HttpClient,error status code :")) {
-                        System.out.println("【" + commic.getCommicName() + "】第 " + index + " 集爬取完成!!");
-                    } else {
-                        e.printStackTrace();
-                    }
-                    run = false;
-                    continue;
-                }
-                if (StringUtils.isNotBlank(resource)) {
-                    resource = resource.replaceAll("\r\n", "");
-                    String picUrl = null; // 当前页漫画的核心图片url
-                    // 解析网页资源
-                    Matcher m1 = p1.matcher(resource); // img.src="http://p1.xiaoshidi.net/"
-                    if (m1.find()) {
-                        picUrl = m1.group(0).replaceAll("img.src=\"|\"", ""); // http://p1.xiaoshidi.net/
-                        Matcher m2 = p2.matcher(resource); // img.src="http://p1.xiaoshidi.net/"
-                        if (m2.find()) {
-                            picUrl += m2.group(0).replaceAll("var mhurl = \"|\"", ""); // http://p1.xiaoshidi.net/
-                        }
-                    }
-
-                    // 获取到图片url后下载至本地
-                    if (StringUtils.isNotBlank(picUrl)) {
-                        saveCommicPicToLocal(picUrl, path, page);
-                    }
-                } else {
-                    run = false;
-                }
-                page++;
-                // run = false;
-            } while (run);
+        System.out.println("正在爬取【" + commic.getCommicName() + "】第 " + commic.getCurrentChapterNo() + " 集~");
+        String path = CommicStatics.BASE_FILE_PATH + "//" + commic.getCommicName() + "//" + commic.getCurrentChapterNo() + "//";
+        File f = new File(path);
+        if (!f.exists()) {
+            f.mkdirs();
         }
+
+        // 获取页端资源
+        boolean run = true;
+        int page = 0;
+        do {
+            String tmpPicPath = path + page + ".jpg";
+            File tmpFile = new File(tmpPicPath);
+            if (tmpFile.exists()) {
+                page++;
+                continue;
+            }
+            
+            // url:http://manhua.fzdm.com/2/700/index_55.html
+            String url = CommicStatics.COMMIC_URL + commic.getCommicNo() + "/" + commic.getCurrentChapterNo() + "/index_" + page + ".html";
+            // url = "http://manhua.fzdm.com/2/700/index_88.html";
+            String resource = null;
+            try {
+                resource = http.doGetThrowE(url);
+                // System.err.println(resource);
+            } catch (Exception e) {
+                if (e instanceof RuntimeException && e.getMessage().startsWith("HttpClient,error status code :")) {
+                    System.out.println("【" + commic.getCommicName() + "】第 " + commic.getCurrentChapterNo() + " 集爬取完成!!");
+                } else {
+                    e.printStackTrace();
+                }
+                run = false;
+                continue;
+            }
+            if (StringUtils.isNotBlank(resource)) {
+                resource = resource.replaceAll("\r\n", "");
+                String picUrl = null; // 当前页漫画的核心图片url
+                // 解析网页资源
+                Matcher m1 = p1.matcher(resource); // img.src="http://p1.xiaoshidi.net/"
+                if (m1.find()) {
+                    picUrl = m1.group(0).replaceAll("img.src=\"|\"", ""); // http://p1.xiaoshidi.net/
+                    Matcher m2 = p2.matcher(resource); // img.src="http://p1.xiaoshidi.net/"
+                    if (m2.find()) {
+                        picUrl += m2.group(0).replaceAll("var mhurl = \"|\"", ""); // http://p1.xiaoshidi.net/
+                    }
+                }
+                
+                // 获取到图片url后下载至本地
+                if (StringUtils.isNotBlank(picUrl)) {
+                    saveCommicPicToLocal(picUrl, path, page);
+                }
+            } else {
+                run = false;
+            }
+            page++;
+            // run = false;
+        } while (run);
+    
 
     }
     
+    class XXX implements Runnable {
+
+        /** 
+         * {@inheritDoc}.
+         */
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            
+        }
+        
+    }
+
     /**
      * TODO 下载图片至本地.
      * 
-     * @param picUrl
-     *            url.
-     * @param page
-     *            page.
-     * @param path
-     *            path.
+     * @param picUrl url.
+     * @param page page.
+     * @param path  path.
      */
     private void saveCommicPicToLocal(String picUrl, String path, int page) {
         String picPath = path + page + ".jpg"; // 图片全路径名
@@ -139,7 +143,7 @@ public class CrawlerTask implements Runnable {
         if (picF.exists()) {
             return;
         }
-
+        
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -163,7 +167,7 @@ public class CrawlerTask implements Runnable {
             // 获取网络输入流
             inputStream = conn.getInputStream();
             BufferedInputStream bis = new BufferedInputStream(inputStream);
-
+            
             // 写入到文件（注意文件保存路径的后面一定要加上文件的名称）
             fileOut = new FileOutputStream(picPath);
             BufferedOutputStream bos = new BufferedOutputStream(fileOut);
@@ -199,7 +203,7 @@ public class CrawlerTask implements Runnable {
     /**
      * 构造函数.
      */
-    public CrawlerTask() {
+    public CrawlerChapterTask() {
     }
 
     /**
@@ -208,7 +212,7 @@ public class CrawlerTask implements Runnable {
      * @param vo
      *            .
      */
-    public CrawlerTask(CommicVo vo) {
+    public CrawlerChapterTask(CommicVo vo) {
         this.commic = vo;
     }
 

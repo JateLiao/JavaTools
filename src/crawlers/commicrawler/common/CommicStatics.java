@@ -30,5 +30,5 @@ public class CommicStatics {
      * 漫画图片本地存档基础地址.
      * "F://Commics//";
      */
-    public static final String BASE_FILE_PATH = "D://Commics//";
+    public static final String BASE_FILE_PATH = "F://Commics//";
 }
