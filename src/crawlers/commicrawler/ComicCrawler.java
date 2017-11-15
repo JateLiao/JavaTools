@@ -17,8 +17,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import crawlers.commicrawler.common.CommicStatics;
-import crawlers.commicrawler.model.CommicVo;
+import crawlers.commicrawler.common.ComicStatics;
+import crawlers.commicrawler.model.ComicVo;
 import crawlers.commicrawler.task.CrawlerChapterTask;
 import util.CommonCheckUtils;
 
@@ -27,7 +27,7 @@ import util.CommonCheckUtils;
  * 
  * @author KOBE
  */
-public class CommicCrawler {
+public class ComicCrawler {
 
     /**
      * TODO 添加方法注释.
@@ -40,22 +40,22 @@ public class CommicCrawler {
     /**
      * 要处理的漫画集合. key：海贼王，死神等； value：漫画对应的在该网站的序号
      */
-    public static final Map<String, String> COMMIC_NO_MAP = new HashMap<>(10);
+    public static final Map<String, String> COMIC_NO_MAP = new HashMap<>(10);
 
     /**
      * 要处理的漫画集合开始结尾集数. key：海贼王，死神等； value：漫画对应的开始结束集数，“-”分隔
      */
-    public static final Map<String, String> COMMIC_START_END_MAP = new HashMap<>(10);
+    public static final Map<String, String> COMIC_START_END_MAP = new HashMap<>(10);
 
     static {
         try {
-            COMMIC_NO_MAP.put("2", "海贼王-onepiece");
-            COMMIC_NO_MAP.put("7", "死神-bleach");
+            COMIC_NO_MAP.put("2", "海贼王-onepiece");
+            COMIC_NO_MAP.put("7", "死神-bleach");
 
-            COMMIC_START_END_MAP.put("2", "700-885");
-            COMMIC_START_END_MAP.put("7", "600-686");
+            COMIC_START_END_MAP.put("2", "700-885");
+            COMIC_START_END_MAP.put("7", "600-686");
 
-            File f = new File(CommicStatics.BASE_FILE_PATH);
+            File f = new File(ComicStatics.BASE_FILE_PATH);
             if (!f.isDirectory() && !f.exists()) {
                 f.mkdirs();
             }
@@ -68,27 +68,27 @@ public class CommicCrawler {
      * TODO 添加方法注释.
      */
     public static void doMain() {
-        int nThreads = 10 * COMMIC_NO_MAP.size();
+        int nThreads = 10 * COMIC_NO_MAP.size();
         ExecutorService service = new ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 
-        if (CommonCheckUtils.isNotEmpty(COMMIC_NO_MAP) && CommonCheckUtils.isNotEmpty(COMMIC_START_END_MAP)) {
-            for (Entry<String, String> entry : COMMIC_NO_MAP.entrySet()) {
-                CommicVo commic = new CommicVo();
-                commic.setCommicNo(entry.getKey());
-                commic.setCommicName(entry.getValue());
-                commic.setCommicChapterNo(COMMIC_START_END_MAP.get(entry.getKey()));
+        if (CommonCheckUtils.isNotEmpty(COMIC_NO_MAP) && CommonCheckUtils.isNotEmpty(COMIC_START_END_MAP)) {
+            for (Entry<String, String> entry : COMIC_NO_MAP.entrySet()) {
+                ComicVo comic = new ComicVo();
+                comic.setComicNo(entry.getKey());
+                comic.setComicName(entry.getValue());
+                comic.setComicChapterNo(COMIC_START_END_MAP.get(entry.getKey()));
 
                 // service.execute(new CrawlerTask(commic));
 
-                System.out.println("开始爬取【" + commic.getCommicName() + "】，要爬取的集数：[" + commic.getCommicChapterNo() + "]");
-                String[] noArr = commic.getCommicChapterNo().split("\\-");
+                System.out.println("开始爬取【" + comic.getComicName() + "】，要爬取的集数：[" + comic.getComicChapterNo() + "]");
+                String[] noArr = comic.getComicChapterNo().split("\\-");
                 int start = Integer.valueOf(noArr[0]);
                 int end = Integer.valueOf(noArr[1]);
 
                 // 循环处理每一集
                 for (int index = start; index <= end; index++) {
-                    commic.setCurrentChapterNo(index);
-                    service.execute(new CrawlerChapterTask(commic));
+                    comic.setCurrentChapterNo(index);
+                    service.execute(new CrawlerChapterTask(comic));
                 }
             }
         }

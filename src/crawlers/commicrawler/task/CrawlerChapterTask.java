@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
-import crawlers.commicrawler.common.CommicStatics;
-import crawlers.commicrawler.model.CommicVo;
+import crawlers.commicrawler.common.ComicStatics;
+import crawlers.commicrawler.model.ComicVo;
 import util.HttpToolKit;
 
 /**
@@ -32,7 +32,7 @@ public class CrawlerChapterTask implements Runnable {
     /**
      * 添加字段注释.
      */
-    private CommicVo commic;
+    private ComicVo commic;
 
     /**
      * 添加字段注释.
@@ -56,8 +56,8 @@ public class CrawlerChapterTask implements Runnable {
      */
     @Override
     public void run() {
-        System.out.println("正在爬取【" + commic.getCommicName() + "】第 " + commic.getCurrentChapterNo() + " 集~");
-        String path = CommicStatics.BASE_FILE_PATH + "//" + commic.getCommicName() + "//" + commic.getCurrentChapterNo() + "//";
+        System.out.println("正在爬取【" + commic.getComicName() + "】第 " + commic.getCurrentChapterNo() + " 集~");
+        String path = ComicStatics.BASE_FILE_PATH + "//" + commic.getComicName() + "//" + commic.getCurrentChapterNo() + "//";
         File f = new File(path);
         if (!f.exists()) {
             f.mkdirs();
@@ -75,7 +75,7 @@ public class CrawlerChapterTask implements Runnable {
             }
             
             // url:http://manhua.fzdm.com/2/700/index_55.html
-            String url = CommicStatics.COMMIC_URL + commic.getCommicNo() + "/" + commic.getCurrentChapterNo() + "/index_" + page + ".html";
+            String url = ComicStatics.COMIC_URL + commic.getComicNo() + "/" + commic.getCurrentChapterNo() + "/index_" + page + ".html";
             // url = "http://manhua.fzdm.com/2/700/index_88.html";
             String resource = null;
             try {
@@ -83,7 +83,7 @@ public class CrawlerChapterTask implements Runnable {
                 // System.err.println(resource);
             } catch (Exception e) {
                 if (e instanceof RuntimeException && e.getMessage().startsWith("HttpClient,error status code :")) {
-                    System.out.println("【" + commic.getCommicName() + "】第 " + commic.getCurrentChapterNo() + " 集爬取完成!!");
+                    System.out.println("【" + commic.getComicName() + "】第 " + commic.getCurrentChapterNo() + " 集爬取完成!!");
                 } else {
                     e.printStackTrace();
                 }
@@ -212,7 +212,7 @@ public class CrawlerChapterTask implements Runnable {
      * @param vo
      *            .
      */
-    public CrawlerChapterTask(CommicVo vo) {
+    public CrawlerChapterTask(ComicVo vo) {
         this.commic = vo;
     }
 
@@ -221,7 +221,7 @@ public class CrawlerChapterTask implements Runnable {
      * 
      * @return 返回commic
      */
-    public CommicVo getCommic() {
+    public ComicVo getCommic() {
         return commic;
     }
 
@@ -231,7 +231,7 @@ public class CrawlerChapterTask implements Runnable {
      * @param commic
      *            要设置的commic
      */
-    public void setCommic(CommicVo commic) {
+    public void setCommic(ComicVo commic) {
         this.commic = commic;
     }
 

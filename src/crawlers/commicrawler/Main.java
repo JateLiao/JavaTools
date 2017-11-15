@@ -19,7 +19,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        CommicCrawler.doMain();
+        ComicCrawler.doMain();
     }
 
 }

@@ -9,26 +9,20 @@
 package crawlers.commicrawler.common;
 
 /**
- * TODO 添加类的一句话简单描述.
- * <p>
- * TODO 详细描述
- * <p>
- * TODO 示例代码
- * <pre>
- * </pre>
+ * TODO 静态变量.
  * 
  * @author     KOBE
  */
-public class CommicStatics {
+public class ComicStatics {
 
     /**
      * 特别鸣谢该网站.
      */
-    public static final String COMMIC_URL = "http://manhua.fzdm.com/";
+    public static final String COMIC_URL = "http://manhua.fzdm.com/";
 
     /**
      * 漫画图片本地存档基础地址.
      * "F://Commics//";
      */
-    public static final String BASE_FILE_PATH = "F://Commics//";
+    public static final String BASE_FILE_PATH = "D://Commics//";
 }

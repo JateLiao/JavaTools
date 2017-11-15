@@ -20,22 +20,22 @@ package crawlers.commicrawler.model;
  * 
  * @author KOBE
  */
-public class CommicVo {
+public class ComicVo {
 
     /**
      * 添加字段注释.
      */
-    private String commicNo;
+    private String comicNo;
 
     /**
      * 添加字段注释.
      */
-    private String commicName;
+    private String comicName;
 
     /**
      * 漫画集数.
      */
-    private String commicChapterNo;
+    private String comicChapterNo;
 
     /**
      * 漫画集数.
@@ -66,8 +66,8 @@ public class CommicVo {
      * 
      * @return 返回commicNo
      */
-    public String getCommicNo() {
-        return commicNo;
+    public String getComicNo() {
+        return comicNo;
     }
 
     /**
@@ -75,8 +75,8 @@ public class CommicVo {
      * 
      * @return 返回commicChapterNo
      */
-    public String getCommicChapterNo() {
-        return commicChapterNo;
+    public String getComicChapterNo() {
+        return comicChapterNo;
     }
 
     /**
@@ -85,8 +85,8 @@ public class CommicVo {
      * @param commicChapterNo
      *            要设置的commicChapterNo
      */
-    public void setCommicChapterNo(String commicChapterNo) {
-        this.commicChapterNo = commicChapterNo;
+    public void setComicChapterNo(String commicChapterNo) {
+        this.comicChapterNo = commicChapterNo;
     }
 
     /**
@@ -95,8 +95,8 @@ public class CommicVo {
      * @param commicNo
      *            要设置的commicNo
      */
-    public void setCommicNo(String commicNo) {
-        this.commicNo = commicNo;
+    public void setComicNo(String commicNo) {
+        this.comicNo = commicNo;
     }
 
     /**
@@ -104,8 +104,8 @@ public class CommicVo {
      * 
      * @return 返回commicName
      */
-    public String getCommicName() {
-        return commicName;
+    public String getComicName() {
+        return comicName;
     }
 
     /**
@@ -114,8 +114,8 @@ public class CommicVo {
      * @param commicName
      *            要设置的commicName
      */
-    public void setCommicName(String commicName) {
-        this.commicName = commicName;
+    public void setComicName(String commicName) {
+        this.comicName = commicName;
     }
 
 }
