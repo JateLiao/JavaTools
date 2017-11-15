@@ -69,24 +69,33 @@ public class ComicCrawler {
      */
     public static void doMain() {
         int nThreads = 10 * COMIC_NO_MAP.size();
+        int counter = 0;
         ExecutorService service = new ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 
         if (CommonCheckUtils.isNotEmpty(COMIC_NO_MAP) && CommonCheckUtils.isNotEmpty(COMIC_START_END_MAP)) {
             for (Entry<String, String> entry : COMIC_NO_MAP.entrySet()) {
-                ComicVo comic = new ComicVo();
-                comic.setComicNo(entry.getKey());
-                comic.setComicName(entry.getValue());
-                comic.setComicChapterNo(COMIC_START_END_MAP.get(entry.getKey()));
 
                 // service.execute(new CrawlerTask(commic));
 
-                System.out.println("开始爬取【" + comic.getComicName() + "】，要爬取的集数：[" + comic.getComicChapterNo() + "]");
-                String[] noArr = comic.getComicChapterNo().split("\\-");
+                System.out.println("开始爬取【" + entry.getValue() + "】，要爬取的集数：[" + COMIC_START_END_MAP.get(entry.getKey()) + "]");
+                String[] noArr = COMIC_START_END_MAP.get(entry.getKey()).split("\\-");
                 int start = Integer.valueOf(noArr[0]);
                 int end = Integer.valueOf(noArr[1]);
 
                 // 循环处理每一集
                 for (int index = start; index <= end; index++) {
+                    counter++;
+                    if (counter % 20 == 0) {
+                        try {
+                            Thread.sleep(TimeUnit.SECONDS.toMillis(10));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    ComicVo comic = new ComicVo();
+                    comic.setComicNo(entry.getKey());
+                    comic.setComicName(entry.getValue());
+                    comic.setComicChapterNo(COMIC_START_END_MAP.get(entry.getKey()));
                     comic.setCurrentChapterNo(index);
                     service.execute(new CrawlerChapterTask(comic));
                 }
