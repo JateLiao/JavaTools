@@ -76,6 +76,7 @@ public class CrawlerChapterTask implements Runnable {
             
             // url:http://manhua.fzdm.com/2/700/index_55.html
             String url = ComicStatics.COMIC_URL + commic.getComicNo() + "/" + commic.getCurrentChapterNo() + "/index_" + page + ".html";
+            System.out.println("       " + url);
             // url = "http://manhua.fzdm.com/2/700/index_88.html";
             String resource = null;
             try {

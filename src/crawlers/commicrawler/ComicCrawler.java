@@ -9,6 +9,7 @@
 package crawlers.commicrawler;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -52,7 +53,7 @@ public class ComicCrawler {
             COMIC_NO_MAP.put("2", "海贼王-onepiece");
             COMIC_NO_MAP.put("7", "死神-bleach");
 
-            COMIC_START_END_MAP.put("2", "700-885");
+            COMIC_START_END_MAP.put("2", "700-890");
             COMIC_START_END_MAP.put("7", "600-686");
 
             File f = new File(ComicStatics.BASE_FILE_PATH);
@@ -100,6 +101,32 @@ public class ComicCrawler {
                     service.execute(new CrawlerChapterTask(comic));
                 }
             }
+        }
+        
+        
+        service.shutdown();
+        while (!service.isTerminated()) {
+            try {
+                System.out.println("     *******小爬虫正在努力爬取中，客官请稍等...");
+                Thread.sleep(TimeUnit.SECONDS.toMillis(30));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        System.out.println("所有漫画爬完啦，客官请移步到弹出的目录下细细阅读!!!"); 
+        
+        // 跳转文件夹
+        String[] cmd = new String[5];
+        cmd[0] = "cmd";
+        cmd[1] = "/c";
+        cmd[2] = "start";
+        cmd[3] = " ";
+        cmd[4] = ComicStatics.BASE_FILE_PATH;
+        try {
+            Runtime.getRuntime().exec(cmd);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
