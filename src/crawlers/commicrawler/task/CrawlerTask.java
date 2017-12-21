@@ -63,7 +63,7 @@ public class CrawlerTask implements Runnable {
         // 循环处理每一集
         for (int index = start; index <= end; index++) {
             System.out.println("正在爬取【" + commic.getComicName() + "】第 " + index + " 集~");
-            String path = ComicStatics.BASE_FILE_PATH + "//" + commic.getComicName() + "//" + index + "//";
+            String path = ComicStatics.BASE_FILE_PATH + ComicStatics.SEPRATOR + commic.getComicName() + ComicStatics.SEPRATOR + index + ComicStatics.SEPRATOR;
             File f = new File(path);
             if (!f.exists()) {
                 f.mkdirs();

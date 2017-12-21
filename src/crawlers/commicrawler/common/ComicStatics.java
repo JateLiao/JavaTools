@@ -8,6 +8,8 @@
  */
 package crawlers.commicrawler.common;
 
+import java.io.File;
+
 /**
  * TODO 静态变量.
  * 
@@ -25,4 +27,10 @@ public class ComicStatics {
      * "F://Commics//";
      */
     public static final String BASE_FILE_PATH = "D://Commics//";
+
+    /**
+     * 漫画图片本地存档基础地址.
+     * "F://Commics//";
+     */
+    public static final String SEPRATOR = File.separator;
 }

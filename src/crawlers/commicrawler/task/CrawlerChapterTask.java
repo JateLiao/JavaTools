@@ -57,7 +57,7 @@ public class CrawlerChapterTask implements Runnable {
     @Override
     public void run() {
         System.out.println("正在爬取【" + commic.getComicName() + "】第 " + commic.getCurrentChapterNo() + " 集~");
-        String path = ComicStatics.BASE_FILE_PATH + "//" + commic.getComicName() + "//" + commic.getCurrentChapterNo() + "//";
+        String path = ComicStatics.BASE_FILE_PATH + ComicStatics.SEPRATOR + commic.getComicName() + ComicStatics.SEPRATOR + commic.getCurrentChapterNo() + ComicStatics.SEPRATOR;
         File f = new File(path);
         if (!f.exists()) {
             f.mkdirs();
