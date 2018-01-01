@@ -1,6 +1,6 @@
 ﻿/*
  * 文件名：Money2CHN.java
- * 版权：Copyright 2007-2016 KOBE Tech. Co. Ltd. All Rights Reserved. 
+ * 版权：Copyright 2007-2016 KOBE Tech. Co. Ltd. All Rights Reserved.
  * 描述： Money2CHN.java
  * 修改人：KOBE
  * 修改时间：2016年11月8日
@@ -13,13 +13,13 @@ import java.util.Arrays;
 
 /**
  * 金额转汉字大写，没错，我就希望我满身铜臭味。。。
- * 
+ *
  * @author KOBE
  */
 public class RMB2CHN {
 
     public static void main(String[] args) throws Exception {
-        String monry = "00101020200.1238";
+        String monry = "8745136548546.1238";
         System.out.println("转换前：" + monry);
         System.err.println("转换后：" + rmb2CHN(monry));
     }
@@ -32,11 +32,11 @@ public class RMB2CHN {
 
     /**
      * 金钱转汉字大写，比如10240.521 --> 壹万零贰佰肆拾圆伍角贰分壹厘
-     * 
+     *
      * 精确到小数点后三位，也就是精确到“厘”，反正一般都够用了
-     * 
+     *
      * 处理要点：依然是0的个数对读法的影响额处理，当0的时候，转化后是会出现“零”的，当不同个数的0连续出现后，读法也是不一样的。。。
-     * 
+     *
      * 壹贰叁肆伍陆柒捌玖拾零，亿，万，佰，元，角，分，厘
      */
     public static String rmb2CHN(String rmb) throws Exception {
@@ -53,7 +53,7 @@ public class RMB2CHN {
 
     /**
      * TODO 构造小数点左边整数部分.
-     * 
+     *
      * 每个四位中间出现了0，则在结果里会出现“零”；
      * 下一个四位以0开头，结果会出现0；
      */
@@ -88,7 +88,7 @@ public class RMB2CHN {
                 }
                 sb.append((j < mLen - 1) ? singleArr[mLen - j - 2] : "");
             }
-            
+
             if (sb.toString().lastIndexOf("零") == sb.length() - 1) {
                 sb.setLength(sb.length() - 1);
             }

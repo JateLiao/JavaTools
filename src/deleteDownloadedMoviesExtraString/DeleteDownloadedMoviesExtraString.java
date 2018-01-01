@@ -1,6 +1,6 @@
 ﻿/*
  * 文件名：DeleteDownloadedMoviesExtraString.java
- * 版权：Copyright 2007-2016 KOBE Tech. Co. Ltd. All Rights Reserved. 
+ * 版权：Copyright 2007-2016 KOBE Tech. Co. Ltd. All Rights Reserved.
  * 描述： DeleteDownloadedMoviesExtraString.java
  * 修改人：KOBE
  * 修改时间：2016年9月10日
@@ -8,20 +8,22 @@
  */
 package deleteDownloadedMoviesExtraString;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.File;
 import java.util.LinkedList;
 
 /**
  * TODO 把下载的电影的多余的前缀去掉，类似[电影天堂www.dy2018.com]彗星来的那一夜BD中英双字.rmvb 则 去掉"[电影天堂www.dy2018.com]" 和 "BD中英双字"，
- * 
+ *
  * 彗星来的那一夜.rmvb.
- * 
+ *
  * @author KOBE
  */
 public class DeleteDownloadedMoviesExtraString {
     /**
      * TODO 添加方法注释.
-     * 
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -30,7 +32,7 @@ public class DeleteDownloadedMoviesExtraString {
 
     /**
      * TODO 添加方法注释.
-     * 
+     *
      */
     private static void deleteDownloadedMoviesExtraString() {
 
@@ -76,7 +78,7 @@ public class DeleteDownloadedMoviesExtraString {
 
     /**
      * TODO 文件处理.
-     * 
+     *
      * @param f
      *            f.
      */
@@ -103,12 +105,14 @@ public class DeleteDownloadedMoviesExtraString {
 
     /**
      * TODO getExtName.
-     * 
-     * @param s .
-     * @param split .
+     *
+     * @param fileName .
      * @return .
      */
     private static String getExtName(String fileName) {
+        if(StringUtils.isBlank (fileName)){
+            return null;
+        }
         String[] arr = fileName.split("\\.");
         if (arr.length > 0) {
             return arr[arr.length - 1];
