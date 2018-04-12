@@ -1,4 +1,4 @@
-﻿/*
+/*
  * 文件名：DeleteDownloadedMoviesExtraString.java
  * 版权：Copyright 2007-2016 KOBE Tech. Co. Ltd. All Rights Reserved.
  * 描述： DeleteDownloadedMoviesExtraString.java
@@ -46,27 +46,13 @@ public class DeleteDownloadedMoviesExtraString {
 
                 LinkedList<File> folderList = new LinkedList<>(); // 文件夹list
                 File[] files = file.listFiles();
-                for (File f : files) {
-                    if (f.isDirectory()) {
-                        System.out.println("目录：" + f.getName());
-                        folderList.add(f);
-                    } else {
-                        handleFileName(f, count);
-                    }
-                }
+                handleFiles(files, folderList, count);
 
                 File tmpFile = null;
                 while (!folderList.isEmpty()) {
                     tmpFile = folderList.removeFirst();
                     files = tmpFile.listFiles();
-                    for (File f : files) {
-                        if (f.isDirectory()) {
-                            System.out.println("目录：" + f.getName());
-                            folderList.add(f);
-                        } else {
-                            handleFileName(f, count);
-                        }
-                    }
+                    handleFiles(files, folderList, count);
                 }
             }
         } catch (Exception e) {
@@ -75,7 +61,24 @@ public class DeleteDownloadedMoviesExtraString {
 
         System.out.println("处理完毕，本次共处理数量：" + count);
     }
-
+    
+    /**
+     * TODO handleFiles.
+     * @param files files.
+     * @param folderList folderList.
+     * @param count count.
+     */
+    private static void handleFiles(File[] files, LinkedList<File> folderList, Integer count) {
+        for (File f : files) {
+            if (f.isDirectory()) {
+                System.out.println("目录：" + f.getName());
+                folderList.add(f);
+            } else {
+                handleFileName(f, count);
+            }
+        }
+    }
+    
     /**
      * TODO 文件处理.
      *

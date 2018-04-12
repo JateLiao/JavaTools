@@ -1,4 +1,4 @@
-﻿/*
+/*
  * 文件名：Test.java
  * 版权：Copyright 2007-2016 KOBE Tech. Co. Ltd. All Rights Reserved.
  * 描述： Test.java
