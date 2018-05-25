@@ -3,14 +3,22 @@ package better517Tools.fawOrdersPushMQ;
 import com.better517na.javaMessageQueueHelper.messageQueueHelper.MessageQueueHelper;
 import com.better517na.javaMessageQueueHelper.model.ContentType;
 import com.better517na.javaMessageQueueHelper.model.Message;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
+import util.DateUtils;
 import util.GsonUtil;
+import util.HttpToolKit;
+import util.MQUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.MessageFormat;
+import java.util.*;
+import java.util.concurrent.TimeoutException;
 
 /**
  * @Desc FAWOrdersPushMQ
@@ -29,7 +37,7 @@ public class FAWOrdersPushMQ {
      *
      */
     public static void main(String[] args) {
-        fawPushOrders();
+        fawPushOrders ();
     }
     
     /**
@@ -42,69 +50,95 @@ public class FAWOrdersPushMQ {
      */
     private static final int HOTEL_TYPE = 1;
     private static final int AIR_TICKET_TYPE = 2;
+    private static ConnectionFactory connectionFactory;
     
     /**
      * CHAR_SET.
      */
     private static final String CHAR_SET = "utf-8";
     
-    private static String host = "utf-8";
-    private static String vhost = "utf-8";
-    private static String exchangeNameHotel = "utf-8";
-    private static String routingKeyHotel = "utf-8";
-    private static String exchangeNameAir = "utf-8";
-    private static String routingKeyAir = "utf-8";
+    /**
+     * MQ
+     */
+    private static String host = "172.21.21.5";
+    private static String vhost = "cl-putting";
+    private static String user = "guest";
+    private static String password = "guest";
+    private static int port = 5672;
     
     /**
-     * 价格下架队列.
+     * Hotel
      */
-    private static MessageQueueHelper mqh = MessageQueueHelper.getInstance(); // 参数为交换机名称
+    private static String exchangeNameHotel = "OrderDataExchange";
+    private static String routingKeyHotel = "OrderDataHotelRKey";
+    private static String queueHotel = "OrderDataHotelQueueFAW";
+    
+    /**
+     * Air
+     */
+    private static String exchangeNameAir = "OrderDataExchange";
+    private static String routingKeyAir = "OrderDataAirTicketRKey";
+    private static String queueAir = "OrderDataAirTicketQueueFAW";
+    
+    /**
+     * http post
+     */
+    private static HttpToolKit httpToolKit = HttpToolKit.build ();
+    private static String url = "http://syq1.mq.517na.com/api/exchanges/{1}/amq.default/publish";
     
     /**
      * fawPushOrders.
      */
     public static void fawPushOrders() {
         try {
-            List<String> pushOrders = loadOrders();
+            List<String> pushOrders = loadOrders ();
             if (CollectionUtils.isEmpty (pushOrders)) {
-                System.out.println("任务量为空了，还搞个蛋啊~~~");
+                System.out.println ("任务量为空了，还搞个蛋啊~~~");
                 return;
             }
             
-            System.out.println("任务量：" + pushOrders.size ());
-    
-            for (String orderInfo: pushOrders) {
+            System.out.println ("任务量：" + pushOrders.size ());
+            String mqurl = MessageFormat.format (url, vhost);
+            for (String orderInfo : pushOrders) {
                 OrderVo vo = GsonUtil.getGson ().fromJson (orderInfo, OrderVo.class);
                 if (vo.getOrderType () == HOTEL_TYPE) {
-                    pushToMQ (orderInfo, exchangeNameHotel, routingKeyHotel);
+                    
+                    // httpToolKit.doSimplePost (url, , CHAR_SET);
+                    // MQUtils.pushToMQOri (orderInfo, exchangeNameHotel, routingKeyHotel, queueHotel);
                 } else if (vo.getOrderType () == AIR_TICKET_TYPE) {
-                    pushToMQ (orderInfo, exchangeNameAir, routingKeyAir);                }
+                    // MQUtils.pushToMQOri (orderInfo, exchangeNameAir, routingKeyAir, queueAir);
+                }
             }
-            
         } catch (Exception e) {
             e.printStackTrace ();
         }
+        
+        System.out.println ("全部推送完成！！！");
     }
+    
     /**
-     * TODO 添加方法注释.
-     * @param info  .
-     * @return boolean.
+     * port.
+     * @param msg msg.
+     * @param vhost vhost.
+     * @param routingkey routingkey.
      */
-    private static boolean pushToMQ(String info, String exchangeName, String routingKey) {
-        Message message = new Message();
-        // 需要封装消息体类型 参数为枚举（支持xml、json、二进制流、protobuf、文本）
-        // message.setContentType(ContentType.MESSAGE_CONTENTTYPE_JSON);
-        message.setBody(info.getBytes(Charset.forName(CHAR_SET)));
-        message.setContentType(ContentType.MESSAGE_CONTENTTYPE_TEXT);
-        // 发布消息 参数为消息对象和routingKey
-        try {
-            mqh.publish(exchangeName, message, routingKey);
-            // mqhDl.ack(0L);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace ();
-        }
-        return false;
+    private static void postToMQ(String msg, String vhost, String routingkey) {
+        Date date = new Date ();
+        String sent_time = DateUtils.format (date);
+        
+        Map<String, Object> param = new HashMap<> ();
+        param.put ("delivery_mode", "1");
+        param.put ("name", "amq.default");
+        param.put ("payload_encoding", "string");
+    
+        param.put ("sent_time", sent_time);
+        param.put ("payload", msg);
+        param.put ("routing_key", routingkey);
+        param.put ("vhost", vhost);
+    
+        Map<String, Object> headers = new HashMap<> ();
+        headers.put ("sent_time", sent_time);
+        param.put ("headers", headers);
     }
     
     /**
