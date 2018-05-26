@@ -1,5 +1,7 @@
 package better517Tools.fawOrdersPushMQ;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * @Desc OrderVo
  * @ProjectName JavaTools
@@ -12,16 +14,19 @@ public class OrderVo {
     /**
      * OrderID.
      */
+    @SerializedName ("OrderID")
     private String orderID;
     
     /**
      * OrderStatus.
      */
-    private Integer orderStatus;
+    @SerializedName ("OrderStatus")
+    private String orderStatus;
     /**
      * orderType.
      */
-    private Integer orderType;
+    @SerializedName ("OrderType")
+    private String orderType;
     
     public String getOrderID() {
         return orderID;
@@ -31,19 +36,19 @@ public class OrderVo {
         this.orderID = orderID;
     }
     
-    public Integer getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
     
-    public void setOrderStatus(Integer orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
     
-    public Integer getOrderType() {
+    public String getOrderType() {
         return orderType;
     }
     
-    public void setOrderType(Integer orderType) {
+    public void setOrderType(String orderType) {
         this.orderType = orderType;
     }
 }
