@@ -29,13 +29,11 @@ public class MQUtils {
     /**
      * MQ
      */
-    private static String host = "172.21.21.5";
-    private static String vhost = "cl-putting-test";
-    private static String user = "guest";
-    private static String password = "guest";
-    private static int port = 5672;
-    
-    
+    private static String host;
+    private static String vhost;
+    private static String user;
+    private static String password;
+    private static int port;
     
     /**
      * TODO 添加方法注释.
@@ -114,5 +112,45 @@ public class MQUtils {
             }
         }
         return connectionFactory.newConnection ();
+    }
+    
+    public static String getHost() {
+        return host;
+    }
+    
+    public static void setHost(String host) {
+        MQUtils.host = host;
+    }
+    
+    public static String getVhost() {
+        return vhost;
+    }
+    
+    public static void setVhost(String vhost) {
+        MQUtils.vhost = vhost;
+    }
+    
+    public static String getUser() {
+        return user;
+    }
+    
+    public static void setUser(String user) {
+        MQUtils.user = user;
+    }
+    
+    public static String getPassword() {
+        return password;
+    }
+    
+    public static void setPassword(String password) {
+        MQUtils.password = password;
+    }
+    
+    public static int getPort() {
+        return port;
+    }
+    
+    public static void setPort(int port) {
+        MQUtils.port = port;
     }
 }
