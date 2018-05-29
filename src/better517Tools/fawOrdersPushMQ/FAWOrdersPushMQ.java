@@ -2,11 +2,13 @@ package better517Tools.fawOrdersPushMQ;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import util.GsonUtil;
 import util.MQUtils;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Desc FAWOrdersPushMQ
@@ -29,40 +31,17 @@ public class FAWOrdersPushMQ {
     }
     
     /**
-     * filePath.
-     */
-    private static String filePath;
-    
-    /**
      * Business Type.
      */
-    private static final String HOTEL_TYPE = "1";
-    private static final String AIR_TICKET_TYPE = "2";
-    
-    /**
-     * CHAR_SET.
-     */
-    // private static final String CHAR_SET = "utf-8";
-    
-    /**
-     * Hotel
-     */
-    private static String exchangeNameHotel;
-    private static String routingKeyHotel;
-    private static String queueHotel;
-
-    /**
-     * Air
-     */
-    private static String exchangeNameAir;
-    private static String routingKeyAir;
-    private static String queueAir;
+    public static final String HOTEL_TYPE = "1";
+    public static final String AIR_TICKET_TYPE = "2";
+    public static final String CAR_TYPE = "4";
     
     /**
      * http post
      */
-//    private static HttpToolKit httpToolKit = HttpToolKit.build ();
-//    private static String url = "http://syq1.mq.517na.com/api/exchanges/{0}/amq.default/publish";
+    //    private static HttpToolKit httpToolKit = HttpToolKit.build ();
+    //    private static String url = "http://syq1.mq.517na.com/api/exchanges/{0}/amq.default/publish";
     // "Request URL: http://192.168.1.34:15672/api/exchanges/{0}/amq.default/publish";
     // http://syq1.mq.517na.com/api/exchanges/{0}/amq.default/publish";
     
@@ -71,7 +50,7 @@ public class FAWOrdersPushMQ {
      */
     public static void fawPushOrders() {
         try {
-            loadProperties (); // 加载配置文件
+            ConfigParams.initConfigs (); // 加载配置文件
             List<String> pushOrders = loadOrders ();
             if (CollectionUtils.isEmpty (pushOrders)) {
                 System.out.println ("任务量为空了，还搞个蛋啊~~~");
@@ -79,14 +58,26 @@ public class FAWOrdersPushMQ {
             }
             
             System.out.println ("任务量：" + pushOrders.size ());
+            int count = 0;
             // String mqurl = MessageFormat.format (url, vhost);
             for (String orderInfo : pushOrders) {
+                if (StringUtils.isEmpty (orderInfo)) {
+                    continue;
+                }
+                
                 OrderVo vo = GsonUtil.getGson ().fromJson (orderInfo, OrderVo.class);
                 if (HOTEL_TYPE.equals (vo.getOrderType ())) {
                     // postToMQ (mqurl, orderInfo, vhost, routingKeyHotel);
-                    MQUtils.pushToMQOri (orderInfo, exchangeNameHotel, routingKeyHotel, queueHotel);
+                    MQUtils.pushToMQOri (orderInfo, ConfigParams.exchangeNameHotel, ConfigParams.routingKeyHotel, ConfigParams.queueHotel);
                 } else if (AIR_TICKET_TYPE.equals (vo.getOrderType ())) {
-                    MQUtils.pushToMQOri (orderInfo, exchangeNameAir, routingKeyAir, queueAir);
+                    MQUtils.pushToMQOri (orderInfo, ConfigParams.exchangeNameAir, ConfigParams.routingKeyAir, ConfigParams.queueAir);
+                } else if (CAR_TYPE.equals (vo.getOrderType ())) {
+                    MQUtils.pushToMQOri (orderInfo, ConfigParams.exchangeNameCar, ConfigParams.routingKeyCar, ConfigParams.queueCar);
+                }
+                
+                if ((50 & (++count - 1)) == 0) { // 位运算取模
+                    System.out.println("**************** 已推20条，休眠1s: " + count);
+                    Thread.sleep (TimeUnit.SECONDS.toMillis (1));
                 }
             }
         } catch (Exception e) {
@@ -95,63 +86,6 @@ public class FAWOrdersPushMQ {
         
         System.out.println ("全部推送完成！！！");
         System.exit (0);
-    }
-    
-    private static void loadProperties(){
-        Properties properties = new Properties ();
-        InputStream inputStream = null;
-        try {
-            String absPath = FAWOrdersPushMQ.class.getProtectionDomain ().getCodeSource ().getLocation ().getPath ();
-            // absPath = absPath.substring (1, absPath.length ()); // linux 下此行无用
-            absPath = absPath.substring (0, absPath.lastIndexOf ("/"));
-            StringBuilder filePathSb = new StringBuilder (absPath);
-            filePathSb.append (File.separator);
-            filePathSb.append ("config").append (File.separator);
-            filePathSb.append ("param.properties");
-            String propFilePath = filePathSb.toString ();
-            System.out.println("配置文件路径：" + propFilePath);
-            
-            inputStream = new BufferedInputStream (new FileInputStream (new File (propFilePath)));
-            properties.load (inputStream);
-    
-            /**
-             * MQ
-             */
-            MQUtils.setHost (properties.getProperty ("host"));
-            MQUtils.setVhost (properties.getProperty ("vhost"));
-            MQUtils.setUser (properties.getProperty ("user"));
-            MQUtils.setPassword (properties.getProperty ("password"));
-            MQUtils.setPort (Integer.valueOf (properties.getProperty ("port", "5672")));
-            
-            filePath = properties.getProperty ("filePath");
-    
-            /**
-             * Hotel
-             */
-            exchangeNameHotel = properties.getProperty ("exchangeNameHotel");
-            routingKeyHotel = properties.getProperty ("routingKeyHotel");
-            queueHotel = properties.getProperty ("queueHotel");
-    
-            /**
-             * AirTicket
-             */
-            exchangeNameAir = properties.getProperty ("exchangeNameAir");
-            routingKeyAir = properties.getProperty ("routingKeyAir");
-            queueAir = properties.getProperty ("queueAir");
-        } catch (IOException e) {
-            System.out.println("配置文件加载异常");
-            e.printStackTrace ();
-        } finally {
-            if (null != inputStream) {
-                try {
-                    inputStream.close ();
-                } catch (IOException e) {
-                    e.printStackTrace ();
-                }
-            }
-        }
-        
-        System.out.println("配置文件加载完成!!!");
     }
     
     /**
@@ -198,7 +132,7 @@ public class FAWOrdersPushMQ {
      * @return List<String>.
      */
     private static List<String> loadOrders() throws Exception {
-        System.out.println("订单推送文件路径：" + filePath);
-        return FileUtils.readLines (new File (filePath));
+        System.out.println("订单推送文件路径：" + ConfigParams.filePath);
+        return FileUtils.readLines (new File (ConfigParams.filePath));
     }
 }
