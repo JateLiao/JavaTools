@@ -38,6 +38,11 @@ public class FAWOrdersPushMQ {
     public static final String CAR_TYPE = "4";
     
     /**
+     * SLEEP_THRESHOLD:休眠阈值，每推送50就休眠1s
+     */
+    private static final int SLEEP_THRESHOLD = 50;
+    
+    /**
      * http post
      */
     //    private static HttpToolKit httpToolKit = HttpToolKit.build ();
@@ -75,8 +80,8 @@ public class FAWOrdersPushMQ {
                     MQUtils.pushToMQOri (orderInfo, ConfigParams.exchangeNameCar, ConfigParams.routingKeyCar, ConfigParams.queueCar);
                 }
                 
-                if ((50 & (++count - 1)) == 0) { // 位运算取模
-                    System.out.println("**************** 已推20条，休眠1s: " + count);
+                if (((++count) & (SLEEP_THRESHOLD - 1)) == 0) { // 位运算取模
+                    System.out.println("**************** 已推[ " + SLEEP_THRESHOLD +" ]条，休眠1s: " + count);
                     Thread.sleep (TimeUnit.SECONDS.toMillis (1));
                 }
             }
