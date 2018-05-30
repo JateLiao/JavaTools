@@ -80,7 +80,7 @@ public class FAWOrdersPushMQ {
                     MQUtils.pushToMQOri (orderInfo, ConfigParams.exchangeNameCar, ConfigParams.routingKeyCar, ConfigParams.queueCar);
                 }
                 
-                if (((++count) & (SLEEP_THRESHOLD - 1)) == 0) { // 位运算取模
+                if (++count % SLEEP_THRESHOLD == 0) { // 位运算取模
                     System.out.println("**************** 已推[ " + SLEEP_THRESHOLD +" ]条，休眠1s: " + count);
                     Thread.sleep (TimeUnit.SECONDS.toMillis (1));
                 }
