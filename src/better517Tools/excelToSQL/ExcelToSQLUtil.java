@@ -67,8 +67,8 @@ public class ExcelToSQLUtil {
         long start = System.currentTimeMillis();
         // path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-05-19-国际酒店/导数据/导数据2.xlsx"; 
         // E:\tianzhong(田仲)\工作文档\09.本地工作文档\酒店\2017-06-14-V7570铂涛对接\升库sql
-        path = "E:/tianzhong(田仲)/工作文档/09.本地工作文档/酒店/2017-10-11-V7675盾安新增城市线设置/逸柏城市对应表关系(1).xls"; 
-        String targetSheet = ""; // 要处理的表格，该变量指定值之后就只处理该表格 GeographyZoneRalation
+        path = "H:\\tianzhong\\工作文档\\999本地\\酒店\\2018-08-06-V799999999-基础数组处理\\Huazhu.xlsx";
+        String targetSheet = "HotelPrimePriceUsedChina"; // 要处理的表格，该变量指定值之后就只处理该表格 GeographyZoneRalation
         String basePathName = "D:/Test/sql/" + DateUtils.format(new Date(), "yyyyMMdd");
 
         File file = new File(basePathName);
@@ -159,6 +159,7 @@ public class ExcelToSQLUtil {
                             }
                             val = CommonCheckUtils.isNotEmpty(val) ? val.trim() : "";
                             val = val.replaceAll("'", "\\\\'").replaceAll("###", "").replace("\r\n", ""); // 空值特殊处理（空值用###替代）
+                            val = val.length() >= 512 ? val.substring(0, 500) : val;
                             
                             if (isCharType) {
                                 sb.append("'" + val + "',");
