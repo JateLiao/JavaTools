@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="better517tools" />
+        <module name="common" />
+        <module name="littletools" />
+        <module name="tinman" />
+        <module name="crawlers" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="better517tools" target="1.8" />
+      <module name="common" target="1.8" />
+      <module name="crawlers" target="1.8" />
+      <module name="JavaTools" target="1.8" />
+      <module name="littletools" target="1.8" />
+      <module name="tinman" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
