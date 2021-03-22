@@ -3,8 +3,10 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/better517tools/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/better517tools/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/crawlers/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tinman/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tinman/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

@@ -25,10 +25,10 @@ public class GZHSendMessage_Image {
      * main method.
      **/
     public static void main(String[] args) {
-        String mediaId_Cover = "k5CgoXrKmVdwsZWxrpzeEen5Ogej_RVccvlKbkMymShNDcTGdu4AB-8Y5qjLDGyK";
+        String mediaId_Cover = "k5CgoXrKmVdwsZWxrpzeEen5Ogej_RVccvlKbkMymShNDcTGdu4AB-8Y5qjLDGyK--0";
         String mediaId_Detail = "vIQIwHvOQd0bVsy_ja-aezxgu2JdZSFrIGwqTFeU5Dgs75dNlMwKUvwvym-m_VE2";
 
-        String appId = "wx2c13dbfbd2921e1d";
+        String appId = "wx2c13dbfbd2921e1d--0";
         String url = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=%s";
         String path = "/Users/liaoshijie/Workspace/java/JavaTools/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHMessage/OpenIds";
         String recordPath = "/Users/liaoshijie/Workspace/tinman/pc/wechat-manage-service/wechat-manage-service-web/src/main/java/cn/tinman/sharedservices/wms/web/wechat_tool/GZHMessage/record.txt";
