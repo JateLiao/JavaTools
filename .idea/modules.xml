@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/better517tools/better517tools.iml" filepath="$PROJECT_DIR$/better517tools/better517tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/crawlers/crawlers.iml" filepath="$PROJECT_DIR$/crawlers/crawlers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/littletests/littletests.iml" filepath="$PROJECT_DIR$/littletests/littletests.iml" />
       <module fileurl="file://$PROJECT_DIR$/littletools/littletools.iml" filepath="$PROJECT_DIR$/littletools/littletools.iml" />
       <module fileurl="file://$PROJECT_DIR$/tinman/tinman.iml" filepath="$PROJECT_DIR$/tinman/tinman.iml" />
     </modules>

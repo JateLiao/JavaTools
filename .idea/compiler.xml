@@ -7,11 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="better517tools" />
-        <module name="common" />
         <module name="littletools" />
-        <module name="tinman" />
         <module name="crawlers" />
+        <module name="common" />
+        <module name="littletests" />
+        <module name="better517tools" />
+        <module name="tinman" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +20,7 @@
       <module name="common" target="1.8" />
       <module name="crawlers" target="1.8" />
       <module name="JavaTools" target="1.8" />
+      <module name="littletests" target="1.8" />
       <module name="littletools" target="1.8" />
       <module name="tinman" target="1.8" />
     </bytecodeTargetLevel>
