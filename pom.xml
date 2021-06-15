@@ -15,6 +15,7 @@
         <module>tinman</module>
         <module>littletools</module>
         <module>littletests</module>
+        <module>jdkstudy</module>
     </modules>
 
 

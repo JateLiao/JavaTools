@@ -8,6 +8,10 @@
  */
 package com.liaoshijie.tools.crawler;
 
+import com.liaoshijie.tools.common.utils.HttpUtils;
+
+import static com.liaoshijie.tools.common.utils.HttpUtils.HEADER_DEFAULT;
+
 /**
  * TODO 添加类的一句话简单描述.
  * @author     tianzhong
@@ -19,7 +23,10 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        ComicCrawler.doMain();
+        //ComicCrawler.doMain();
+        String resource = HttpUtils.get("https://manhua.fzdm.com/2/1010/index_1.html", HEADER_DEFAULT);
+        System.out.println(resource);
     }
+
 
 }

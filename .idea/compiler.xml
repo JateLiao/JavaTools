@@ -12,6 +12,7 @@
         <module name="common" />
         <module name="littletests" />
         <module name="better517tools" />
+        <module name="jdkstudy" />
         <module name="tinman" />
       </profile>
     </annotationProcessing>
@@ -20,6 +21,7 @@
       <module name="common" target="1.8" />
       <module name="crawlers" target="1.8" />
       <module name="JavaTools" target="1.8" />
+      <module name="jdkstudy" target="1.8" />
       <module name="littletests" target="1.8" />
       <module name="littletools" target="1.8" />
       <module name="tinman" target="1.8" />

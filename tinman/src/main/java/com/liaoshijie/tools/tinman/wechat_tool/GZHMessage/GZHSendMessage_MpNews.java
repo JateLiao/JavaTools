@@ -27,7 +27,7 @@ public class GZHSendMessage_MpNews {
      * main method.
      **/
     public static void main(String[] args) {
-        String mediaId = "xRV6k8xtG5eALuGDWQAfHmWRkOQ15DMuGZWkKNEvetE";
+        String mediaId = "xRV6k8xtG5eALuGDWQAfHl_b8szBlIQd25GYjNal_AY";
         String appId = "wx2c13dbfbd2921e1d";
         String url = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=%s";
         String path = "/Users/liaoshijie/Workspace/java/JavaTools/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHMessage/OpenIds";
