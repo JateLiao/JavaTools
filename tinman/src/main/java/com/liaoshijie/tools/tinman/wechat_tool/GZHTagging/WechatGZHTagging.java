@@ -29,10 +29,10 @@ public class WechatGZHTagging {
      * main method.
      **/
     public static void main(String[] args) throws IOException {
-        String appId = "wx4b9acdc93e1a5d5a";
+        String appId = "wx666aebb8536ccb68";
         String url = "https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=%s";
-        String path = "/Users/liaoshijie/Workspace/tinman/pc/wechat-manage-service/wechat-manage-service-web/src/main/java/cn/tinman/sharedservices/wms/web/wechat_tool/GZHTagging/未购年课.txt";
-        Integer tagId = 134;
+        String path = "/Users/liaoshijie/Workspace/java/JavaTools/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHTagging/未购年课.txt";
+        Integer tagId = 182;
 
         File file = new File(path);
         List<String> openIds = FileUtils.readLines(file, "UTF-8");
