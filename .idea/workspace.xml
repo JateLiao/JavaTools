@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="44297ec2-5370-4c36-a503-37b03ab8c9df" name="Default" comment="测试字符串split">
-      <change afterPath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/luban/UserMatchModify.java" afterDir="false" />
+    <list default="true" id="44297ec2-5370-4c36-a503-37b03ab8c9df" name="Default" comment="增加批次um修正处理">
+      <change afterPath="$PROJECT_DIR$/jdkstudy/src/main/java/com/liaoshijie/tools/jdkstudy/function/BiConsumerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jdkstudy/src/main/java/com/liaoshijie/tools/jdkstudy/function/ConsumerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jdkstudy/src/main/java/com/liaoshijie/tools/jdkstudy/function/FunctionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jdkstudy/src/main/java/com/liaoshijie/tools/jdkstudy/function/SupplierTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/luban/FindRepeatString.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/luban/ids" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHTagging/WechatGZHTagging.java" beforeDir="false" afterPath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHTagging/WechatGZHTagging.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHTagging/从未领课.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHTagging/从未领课.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHTagging/已购年课.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHTagging/已购年课.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHTagging/未购年课.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/wechat_tool/GZHTagging/未购年课.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/luban/UserMatchModify.java" beforeDir="false" afterPath="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/luban/UserMatchModify.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +23,9 @@
       </map>
     </option>
   </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -29,14 +34,11 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <dirStrings>
-      <dir>E:\workspace\TianZhong\JavaTools\src\rmb2CHN</dir>
-      <dir>E:\workspace\TianZhong\JavaTools</dir>
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JRebelWorkspace">
+    <option name="jrebelEnabledAutocompile" value="true" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -68,9 +70,15 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/luban" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
@@ -84,20 +92,20 @@
       <recent name="$PROJECT_DIR$/common/src/main/java/com/liaoshijie/tools/common/utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UserMatchModify">
+  <component name="RunManager" selected="Application.FunctionTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
     </configuration>
-    <configuration name="GZHSendMessage_MpNews" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.tinman.wechat_tool.GZHMessage.GZHSendMessage_MpNews" />
-      <module name="tinman" />
+    <configuration name="BiConsumerTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.jdkstudy.function.BiConsumerTest" />
+      <module name="jdkstudy" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.liaoshijie.tools.tinman.wechat_tool.GZHMessage.*" />
+          <option name="PATTERN" value="com.liaoshijie.tools.jdkstudy.function.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -105,13 +113,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.crawler.Main" />
-      <module name="crawlers" />
+    <configuration name="ConsumerTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.jdkstudy.function.ConsumerTest" />
+      <module name="jdkstudy" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.liaoshijie.tools.crawler.*" />
+          <option name="PATTERN" value="com.liaoshijie.tools.jdkstudy.function.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -119,22 +127,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StringTests" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.littletests.StringTests" />
-      <module name="littletests" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.liaoshijie.tools.littletests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserMatchModify" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.tinman.luban.UserMatchModify" />
+    <configuration name="FindRepeatString (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.tinman.luban.FindRepeatString" />
       <module name="tinman" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -147,13 +141,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WechatGZHTagging" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.tinman.wechat_tool.GZHTagging.WechatGZHTagging" />
-      <module name="tinman" />
+    <configuration name="FunctionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.jdkstudy.function.FunctionTest" />
+      <module name="jdkstudy" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.liaoshijie.tools.tinman.wechat_tool.GZHTagging.*" />
+          <option name="PATTERN" value="com.liaoshijie.tools.jdkstudy.function.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SupplierTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.liaoshijie.tools.jdkstudy.function.SupplierTest" />
+      <module name="jdkstudy" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.liaoshijie.tools.jdkstudy.function.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -194,11 +202,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.UserMatchModify" />
-        <item itemvalue="Application.WechatGZHTagging" />
-        <item itemvalue="Application.StringTests" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.GZHSendMessage_MpNews" />
+        <item itemvalue="Application.FunctionTest" />
+        <item itemvalue="Application.ConsumerTest" />
+        <item itemvalue="Application.SupplierTest" />
+        <item itemvalue="Application.BiConsumerTest" />
+        <item itemvalue="Application.FindRepeatString (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -236,7 +244,11 @@
       <workItem from="1622619035870" duration="1493000" />
       <workItem from="1623378568828" duration="3501000" />
       <workItem from="1623833418388" duration="4323000" />
-      <workItem from="1624291212474" duration="1314000" />
+      <workItem from="1624291212474" duration="7462000" />
+      <workItem from="1624605809554" duration="9786000" />
+      <workItem from="1625139983197" duration="419000" />
+      <workItem from="1625140441815" duration="4586000" />
+      <workItem from="1625719307294" duration="7275000" />
     </task>
     <task id="LOCAL-00001" summary="1. 改造为maven项目，初步改造，细节调整后面再做；&#10;2. 移除无用代码；&#10;3. 加入tinman工具：公众号相关工具；">
       <created>1616297921034</created>
@@ -266,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623739863612</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="增加批次um修正处理">
+      <created>1624522126356</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1624522126356</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,34 +298,22 @@
     <MESSAGE value="处理pom版本问题" />
     <MESSAGE value="4-9公众号消息推送" />
     <MESSAGE value="测试字符串split" />
-    <option name="LAST_COMMIT_MESSAGE" value="测试字符串split" />
+    <MESSAGE value="增加批次um修正处理" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加批次um修正处理" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="583" y="351" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617933597591">
+    <state x="583" y="351" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1624611278186">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="583" y="351" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1617933597591" />
+    <state x="583" y="351" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1624611278186" />
     <state x="601" y="469" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1618302326779">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="601" y="469" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1618302326779" />
-    <state x="677" y="450" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.25.1792.1016@0.25.1792.1016" timestamp="1616257780144" />
-    <state x="632" y="414" width="528" height="304" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1616293749075">
+    <state x="198" y="80" key="CommitChangelistDialog2" timestamp="1626147452298">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="632" y="414" width="528" height="304" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1792.1120@0.0.1792.1120" timestamp="1616293749075" />
-    <state x="632" y="428" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1616296273137">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="632" y="428" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1792.1120@0.0.1792.1120" timestamp="1616296273137" />
-    <state x="568" y="253" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1616296035803">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="568" y="253" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1616296035803" />
-    <state x="198" y="80" key="CommitChangelistDialog2" timestamp="1624522079796">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="198" y="80" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1624522079796" />
+    <state x="198" y="80" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1626147452298" />
     <state width="524" height="641" key="DebuggerActiveHint" timestamp="1624521919150">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -316,64 +323,62 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="0" y="98" key="DiffContextDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1618147707827" />
-    <state width="1740" height="365" key="GridCell.Tab.0.bottom" timestamp="1624521901591">
+    <state width="1740" height="208" key="GridCell.Tab.0.bottom" timestamp="1626586201666">
+      <screen x="0" y="25" width="1792" height="1018" />
+    </state>
+    <state width="1740" height="208" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1626586100708" />
+    <state width="1740" height="208" key="GridCell.Tab.0.bottom/0.25.1792.1018@0.25.1792.1018" timestamp="1626586201666" />
+    <state width="1740" height="208" key="GridCell.Tab.0.center" timestamp="1626586201662">
+      <screen x="0" y="25" width="1792" height="1018" />
+    </state>
+    <state width="1740" height="208" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1626586100706" />
+    <state width="1740" height="208" key="GridCell.Tab.0.center/0.25.1792.1018@0.25.1792.1018" timestamp="1626586201662" />
+    <state width="1740" height="208" key="GridCell.Tab.0.left" timestamp="1626586201660">
+      <screen x="0" y="25" width="1792" height="1018" />
+    </state>
+    <state width="1740" height="208" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1626586100705" />
+    <state width="1740" height="208" key="GridCell.Tab.0.left/0.25.1792.1018@0.25.1792.1018" timestamp="1626586201660" />
+    <state width="1740" height="208" key="GridCell.Tab.0.right" timestamp="1626586201665">
+      <screen x="0" y="25" width="1792" height="1018" />
+    </state>
+    <state width="1740" height="208" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1626586100707" />
+    <state width="1740" height="208" key="GridCell.Tab.0.right/0.25.1792.1018@0.25.1792.1018" timestamp="1626586201665" />
+    <state width="1740" height="365" key="GridCell.Tab.1.bottom" timestamp="1625139957256">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1740" height="365" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1624521901591" />
-    <state width="1740" height="365" key="GridCell.Tab.0.bottom/0.25.1792.1018@0.25.1792.1018" timestamp="1624521657077" />
-    <state width="1740" height="365" key="GridCell.Tab.0.center" timestamp="1624521901590">
+    <state width="1740" height="365" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1625139957256" />
+    <state width="1740" height="365" key="GridCell.Tab.1.bottom/0.25.1792.1018@0.25.1792.1018" timestamp="1625125826859" />
+    <state width="1740" height="365" key="GridCell.Tab.1.center" timestamp="1625139957255">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1740" height="365" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1624521901590" />
-    <state width="1740" height="365" key="GridCell.Tab.0.center/0.25.1792.1018@0.25.1792.1018" timestamp="1624521657075" />
-    <state width="1740" height="365" key="GridCell.Tab.0.left" timestamp="1624521901589">
+    <state width="1740" height="365" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1625139957255" />
+    <state width="1740" height="365" key="GridCell.Tab.1.center/0.25.1792.1018@0.25.1792.1018" timestamp="1625125826853" />
+    <state width="1740" height="365" key="GridCell.Tab.1.left" timestamp="1625139957254">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1740" height="365" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1624521901589" />
-    <state width="1740" height="365" key="GridCell.Tab.0.left/0.25.1792.1018@0.25.1792.1018" timestamp="1624521657074" />
-    <state width="1740" height="365" key="GridCell.Tab.0.right" timestamp="1624521901591">
+    <state width="1740" height="365" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1625139957254" />
+    <state width="1740" height="365" key="GridCell.Tab.1.left/0.25.1792.1018@0.25.1792.1018" timestamp="1625125826852" />
+    <state width="1740" height="365" key="GridCell.Tab.1.right" timestamp="1625139957256">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1740" height="365" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1624521901591" />
-    <state width="1740" height="365" key="GridCell.Tab.0.right/0.25.1792.1018@0.25.1792.1018" timestamp="1624521657076" />
-    <state width="1740" height="365" key="GridCell.Tab.1.bottom" timestamp="1624521894461">
+    <state width="1740" height="365" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1625139957256" />
+    <state width="1740" height="365" key="GridCell.Tab.1.right/0.25.1792.1018@0.25.1792.1018" timestamp="1625125826858" />
+    <state x="288" y="62" key="SettingsEditor" timestamp="1625052615385">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1740" height="365" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1624521894461" />
-    <state width="1740" height="365" key="GridCell.Tab.1.bottom/0.25.1792.1018@0.25.1792.1018" timestamp="1624521657151" />
-    <state width="1740" height="365" key="GridCell.Tab.1.center" timestamp="1624521894460">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state width="1740" height="365" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1624521894460" />
-    <state width="1740" height="365" key="GridCell.Tab.1.center/0.25.1792.1018@0.25.1792.1018" timestamp="1624521657149" />
-    <state width="1740" height="365" key="GridCell.Tab.1.left" timestamp="1624521894459">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state width="1740" height="365" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1624521894459" />
-    <state width="1740" height="365" key="GridCell.Tab.1.left/0.25.1792.1018@0.25.1792.1018" timestamp="1624521657148" />
-    <state width="1740" height="365" key="GridCell.Tab.1.right" timestamp="1624521894460">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state width="1740" height="365" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1624521894460" />
-    <state width="1740" height="365" key="GridCell.Tab.1.right/0.25.1792.1018@0.25.1792.1018" timestamp="1624521657150" />
-    <state x="288" y="62" key="SettingsEditor" timestamp="1618325660624">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="288" y="62" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1618325660624" />
-    <state x="288" y="81" key="SettingsEditor/0.25.1792.1016@0.25.1792.1016" timestamp="1616293627922" />
+    <state x="288" y="62" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1625052615385" />
     <state x="558" y="261" width="675" height="655" key="StructurePopup" timestamp="1619341606652">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="558" y="261" width="675" height="655" key="StructurePopup/0.0.1792.1120@0.0.1792.1120" timestamp="1619341606652" />
-    <state x="396" y="5" key="Vcs.Push.Dialog.v2" timestamp="1623739865603">
+    <state x="396" y="5" key="Vcs.Push.Dialog.v2" timestamp="1624522128601">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="396" y="5" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1623739865603" />
+    <state x="396" y="5" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1624522128601" />
     <state x="181" y="204" key="new project wizard" timestamp="1619321452763">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="181" y="204" key="new project wizard/0.0.1792.1120@0.0.1792.1120" timestamp="1619321452763" />
-    <state x="181" y="210" key="new project wizard/0.25.1792.1016@0.25.1792.1016" timestamp="1616257703907" />
     <state x="477" y="88" width="838" height="1032" key="search.everywhere.popup" timestamp="1619341614819">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -416,11 +421,6 @@
           <url>file://$PROJECT_DIR$/crawlers/src/main/java/com/liaoshijie/tools/crawler/task/CrawlerChapterTask.java</url>
           <line>90</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tinman/src/main/java/com/liaoshijie/tools/tinman/luban/UserMatchModify.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
